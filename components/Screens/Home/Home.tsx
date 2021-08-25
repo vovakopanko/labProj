@@ -1,7 +1,6 @@
 import React from 'react';
 import {Image} from 'native-base';
 import {StyleSheet, SafeAreaView, ScrollView, View, Text} from 'react-native';
-import {Ionicons} from '@expo/vector-icons';
 
 // type ArrayInfoType = {
 //   id: number;
@@ -49,7 +48,6 @@ export default function HomeScreen() {
                   <View style={styles.payments_Items__right}>
                     <Text style={styles.payments_Items__right}>
                       ${info.cash.toFixed(2)}
-                      <Ionicons name="chevron-forward-outline" color="tomato" />
                     </Text>
                   </View>
                 </View>
@@ -59,21 +57,21 @@ export default function HomeScreen() {
           <View style={styles.content_givingImpact}>
             <View style={styles.givingImpact_block}>
               <View style={styles.givingImpact_block__left}>
-                <Image
+                {/* <Image
                   alt="avatar"
                   source={require('./../../../assets/projectImages/avatar.png')}
                   style={styles.iconImg}
-                />
+                /> */}
               </View>
               <View style={styles.givingImpact_block__right}>
                 <Text>Your Giving Impact {'\n'} St Jude * 4 hrs ago</Text>
               </View>
             </View>
-            <Image
+            {/* <Image
               alt="proto"
               source={require('./../../../assets/projectImages/rectangle2.png')}
               style={styles.iconImg}
-            />
+            /> */}
             <Text style={styles.givingImpact_description}>
               Danny, Your donatio helped 5 amazing kids get much needed cancer
               surgery, thanks fo being...
