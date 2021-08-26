@@ -9,6 +9,7 @@ import AccountsScreen from './components/Screens/Accounts/Accounts';
 import GivingScreen from './components/Screens/Giving/Giving';
 import PaymentsScreen from './components/Screens/Payments/Payments';
 import CardsScreen from './components/Screens/Cards/Cards';
+import GoodnessScreen from './components/Screens/Goodness/Goodness';
 
 function MyTabs() {
   return (
@@ -150,17 +151,44 @@ const DrawerTab = createDrawerNavigator();
 
 function MyStack() {
   return (
-    <Stack.Navigator screenOptions={{headerShown: false}}>
-      <Stack.Screen name="Home" component={DrawerNavigation} />
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+        cardStyle: {backgroundColor: 'lightgrey'},
+      }}>
+      <Stack.Screen name=" " component={DrawerNavigation} />
       <Stack.Screen
         name="Checking"
         component={CheckingScreen}
-        options={{headerShown: true}}
+        options={{
+          headerShown: true,
+          headerTintColor: 'white',
+          headerStyle: {
+            backgroundColor: 'mediumvioletred',
+          },
+        }}
       />
       <Stack.Screen
         name="Saving"
         component={SavingScreen}
-        options={{headerShown: true}}
+        options={{
+          headerShown: true,
+          headerTintColor: 'white',
+          headerStyle: {
+            backgroundColor: 'mediumvioletred',
+          },
+        }}
+      />
+      <Stack.Screen
+        name="Goodness"
+        component={GoodnessScreen}
+        options={{
+          headerShown: true,
+          headerTintColor: 'white',
+          headerStyle: {
+            backgroundColor: 'mediumvioletred',
+          },
+        }}
       />
     </Stack.Navigator>
   );
@@ -168,8 +196,8 @@ function MyStack() {
 
 const styles = StyleSheet.create({
   userLogo: {
-    width: 40,
-    height: 40,
+    width: 30,
+    height: 30,
     marginRight: 20,
   },
   iconBottomBar: {

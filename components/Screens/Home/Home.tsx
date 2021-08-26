@@ -1,157 +1,191 @@
 import * as React from 'react';
 import {
   StyleSheet,
-  SafeAreaView,
-  ScrollView,
-  Button,
+  // SafeAreaView,
+  // ScrollView,
+  // Button,
   View,
   Text,
+  TouchableHighlight,
+  Image,
 } from 'react-native';
+import {ScrollView} from 'react-native-gesture-handler';
 
 const arrayInfo = [
   {id: 1, name: 'Checking', cash: 1500.2, info: 'Main account (...0353)'},
-  {id: 2, name: 'Savings', cash: 5000.2, info: 'Buy a house (...4044)'},
+  {id: 2, name: 'Saving', cash: 5000.2, info: 'Buy a house (...4044)'},
   {id: 3, name: 'Goodness', cash: 500.4, info: 'Cash Rewards'},
 ];
 
+const ActionsUser = ({name, info, cash, navigation}: any) => {
+  return (
+    <TouchableHighlight
+      activeOpacity={0.3}
+      underlayColor="lightgrey"
+      onPress={() => navigation.navigate(`${name}`)}>
+      <View style={styles.overView_actionsUser}>
+        <View style={styles.actionsUser_Info}>
+          <Text style={styles.actionsUser_name}>{name}</Text>
+          <Text style={styles.actionsUser_card}>{info}</Text>
+        </View>
+        <View style={styles.overView_providedCash}>
+          <Text style={styles.providedCash_count}>${cash.toFixed(2)}</Text>
+          {/* <Image
+            source={require('./../../../assets/projectImages/back.png')}
+            style={{width: 10, height: 10, backgroundColor: 'red'}}
+          /> */}
+        </View>
+      </View>
+    </TouchableHighlight>
+  );
+};
+
 function HomeScreen({navigation}: any) {
   return (
-    <View style={styles.home}>
-      <View style={styles.homeBlock}>
-        <Text style={styles.homeBlock_dataStyle}>
-          Good Morning Danny | Jul 12, 2020
-        </Text>
-        <SafeAreaView>
-          <Button
-            title="Go Checking Screen"
-            onPress={() => navigation.navigate('Checking')}
-          />
-          <Button
-            title="Go Saving Screen"
-            onPress={() => navigation.navigate('Saving')}
-          />
-          <ScrollView style={styles.homeBlock_content}>
-            <View style={styles.content_accountData}>
-              <Text style={styles.accountData_title}>Account Overview </Text>
-              <Text style={styles.accountData_amountDeposited}>$7,000.80</Text>
-              <Text style={styles.accountData_titleInfo}>
-                Total Avaliable cash
-              </Text>
-              <View style={styles.accountData_payments}>
-                {arrayInfo.map(info => (
-                  <View style={styles.payments_Items}>
-                    <View style={styles.payments_Items__left}>
-                      <Text>
-                        {info.name} {'\n'}
-                        <Text style={styles.payments_Items__weight}>
-                          {info.info}
-                        </Text>
-                      </Text>
-                    </View>
-                    <View style={styles.payments_Items__right}>
-                      <Text style={styles.payments_Items__right}>
-                        ${info.cash.toFixed(2)}
-                      </Text>
-                    </View>
-                  </View>
-                ))}
-              </View>
-            </View>
-            <View style={styles.content_givingImpact}>
-              <View style={styles.givingImpact_block}>
-                <View style={styles.givingImpact_block__right}>
-                  <Text>Your Giving Impact {'\n'} St Jude * 4 hrs ago</Text>
-                </View>
-              </View>
-              <Text style={styles.givingImpact_description}>
-                Danny, Your donatio helped 5 amazing kids get much needed cancer
-                surgery, thanks fo being...
-              </Text>
-            </View>
-          </ScrollView>
-        </SafeAreaView>
+    <View style={styles.homePage}>
+      <View style={styles.homePage_greetingUser}>
+        <Text>Good Morning Danny | Jul 12, 2020</Text>
       </View>
+      <View style={styles.homePage_overView}>
+        <Text style={styles.overView_title}>Account Overview </Text>
+        <Text style={styles.overView_totalCash}>$7,000.80</Text>
+        <Text style={styles.overView_subTitle}>Total Available cash</Text>
+        {arrayInfo.map(info => (
+          <ActionsUser
+            name={info.name}
+            info={info.info}
+            cash={info.cash}
+            navigation={navigation}
+          />
+        ))}
+      </View>
+      <ScrollView>
+        <View style={styles.blockGivingImpact}>
+          <View style={styles.blockGivingImpact_blockTitle}>
+            <Image
+              source={require('./../../../assets/projectImages/avatar.png')}
+              style={styles.blockTitle_avatar}
+            />
+            <View style={styles.blockTitle_infoGivingImpact}>
+              <Text style={styles.infoGivingImpact_title}>
+                Your Giving Impact
+              </Text>
+              <Text style={styles.infoGivingImpact_activity}>
+                St Jude * 4 hrs ago
+              </Text>
+            </View>
+          </View>
+          <View>
+            <Image
+              source={require('./../../../assets/projectImages/rectangle2.png')}
+              style={styles.blockGivingImpact_photo}
+            />
+          </View>
+          <View style={styles.blockGivingImpact_info}>
+            <Text>
+              Danny, Your donation helped 5 amazing kids get much needed cancer
+              surgery, thanks fo being...
+            </Text>
+          </View>
+        </View>
+      </ScrollView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  home: {
+  homePage: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    margin: 20,
   },
-  homeBlock: {
-    margin: 10,
+  homePage_greetingUser: {
+    marginBottom: 10,
+  },
+  homePage_overView: {
+    backgroundColor: 'white',
+    shadowOffset: {width: 0, height: 2},
+    shadowOpacity: 0.25,
+    marginBottom: 20,
+    // padding: 10,
+  },
+  overView_title: {
+    textAlign: 'center',
+    // fontWeight: '600',
+    fontSize: 18,
     paddingTop: 20,
   },
-  homeBlock_dataStyle: {
-    marginBottom: 10,
-  },
-  homeBlock_content: {
-    height: '100%',
-  },
-  content_accountData: {
-    backgroundColor: 'white',
-    marginBottom: 10,
-  },
-  content_givingImpact: {
-    backgroundColor: 'white',
-  },
-  givingImpact_block: {
-    flexDirection: 'row',
-    padding: 10,
-  },
-  givingImpact_block__left: {
-    alignItems: 'flex-start',
-  },
-  givingImpact_block__right: {
-    alignItems: 'flex-end',
-    justifyContent: 'center',
-    marginLeft: 5,
-  },
-  givingImpact_description: {
-    padding: 10,
-  },
-  accountData_title: {
+  overView_totalCash: {
     textAlign: 'center',
-    fontWeight: '600',
-    fontSize: 18,
-  },
-  accountData_amountDeposited: {
-    textAlign: 'center',
-    fontWeight: '300',
+    // fontWeight: '300',
     fontSize: 24,
     paddingTop: 5,
   },
-  accountData_titleInfo: {
+  overView_subTitle: {
     textAlign: 'center',
-    fontWeight: '200',
-    fontSize: 14,
+    // fontWeight: '200',
+    color: 'grey',
+    fontSize: 12,
     marginBottom: 20,
   },
-  accountData_payments: {},
-  payments_Items: {
-    borderBottomWidth: 1,
+  overView_actionsUser: {
     borderBottomColor: 'lightgrey',
+    borderBottomWidth: 1,
+    paddingTop: 10,
+    paddingBottom: 10,
     width: '100%',
+    flexDirection: 'row',
+  },
+  actionsUser_Info: {
+    alignItems: 'flex-start',
+    width: '50%',
+  },
+  actionsUser_name: {
+    fontWeight: '400',
+    paddingLeft: 10,
+  },
+  actionsUser_card: {
+    fontWeight: '400',
+    paddingLeft: 10,
+    color: 'grey',
+  },
+  overView_providedCash: {
+    alignItems: 'flex-end',
+    justifyContent: 'center',
+    width: '50%',
+    paddingRight: 20,
+    // fontWeight: '600',
+  },
+  providedCash_count: {
+    fontSize: 19,
+  },
+  blockGivingImpact: {
+    backgroundColor: 'white',
+    shadowOffset: {width: 0, height: 2},
+    shadowOpacity: 0.25,
+  },
+  blockGivingImpact_blockTitle: {
     padding: 10,
     flexDirection: 'row',
   },
-  payments_Items__left: {
-    alignItems: 'flex-start',
-    width: '50%',
-    fontWeight: '400',
+  blockTitle_infoGivingImpact: {
+    marginLeft: 10,
   },
-  payments_Items__right: {
-    alignItems: 'flex-end',
-    justifyContent: 'center',
-    width: '60%',
-    fontSize: 18,
-    fontWeight: '600',
+  infoGivingImpact_title: {
+    // fontWeight: '600',
   },
-  payments_Items__weight: {
-    fontWeight: '200',
+  infoGivingImpact_activity: {
+    fontSize: 12,
+    color: 'grey',
+  },
+  blockTitle_avatar: {
+    width: 40,
+    height: 40,
+  },
+  blockGivingImpact_photo: {
+    width: '100%',
+  },
+  blockGivingImpact_info: {
+    padding: 10,
   },
 });
 
