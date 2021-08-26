@@ -2,14 +2,13 @@ import * as React from 'react';
 import {
   StyleSheet,
   // SafeAreaView,
-  // ScrollView,
+  ScrollView,
   // Button,
   View,
   Text,
   TouchableHighlight,
   Image,
 } from 'react-native';
-import {ScrollView} from 'react-native-gesture-handler';
 
 const arrayInfo = [
   {id: 1, name: 'Checking', cash: 1500.2, info: 'Main account (...0353)'},
@@ -88,6 +87,34 @@ function HomeScreen({navigation}: any) {
             </Text>
           </View>
         </View>
+        <View style={styles.blockGivingImpact}>
+          <View style={styles.blockGivingImpact_blockTitle}>
+            <Image
+              source={require('./../../../assets/projectImages/avatar.png')}
+              style={styles.blockTitle_avatar}
+            />
+            <View style={styles.blockTitle_infoGivingImpact}>
+              <Text style={styles.infoGivingImpact_title}>
+                Your Giving Impact
+              </Text>
+              <Text style={styles.infoGivingImpact_activity}>
+                St Jude * 4 hrs ago
+              </Text>
+            </View>
+          </View>
+          <View>
+            <Image
+              source={require('./../../../assets/projectImages/rectangle2.png')}
+              style={styles.blockGivingImpact_photo}
+            />
+          </View>
+          <View style={styles.blockGivingImpact_info}>
+            <Text>
+              Danny, Your donation helped 5 amazing kids get much needed cancer
+              surgery, thanks fo being...
+            </Text>
+          </View>
+        </View>
       </ScrollView>
     </View>
   );
@@ -106,7 +133,6 @@ const styles = StyleSheet.create({
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.25,
     marginBottom: 20,
-    // padding: 10,
   },
   overView_title: {
     textAlign: 'center',

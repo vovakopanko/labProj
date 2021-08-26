@@ -11,6 +11,8 @@ import PaymentsScreen from './components/Screens/Payments/Payments';
 import CardsScreen from './components/Screens/Cards/Cards';
 import GoodnessScreen from './components/Screens/Goodness/Goodness';
 
+const isAuth = true; // if your account autorizate
+
 function MyTabs() {
   return (
     <Tab.Navigator
@@ -79,10 +81,22 @@ function MyTabs() {
           }
         },
         headerShown: false,
-        //  tabBarLabelStyle: { color: 'red'},
-        tabBarStyle: {backgroundColor: 'mediumvioletred'},
+        tabBarStyle: {
+          backgroundColor: isAuth ? 'mediumvioletred' : 'white',
+          opacity: 0.95,
+          borderTopWidth: 0,
+          position: 'absolute',
+          left: 0,
+          right: 0,
+          bottom: 0,
+        },
         tabBarActiveTintColor: 'maroon',
         tabBarInactiveTintColor: 'black',
+        tabBarOptions: {
+          showIcon: true,
+          showLabel: false,
+          lazyLoad: true,
+        },
       })}>
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Accounts" component={AccountsScreen} />
