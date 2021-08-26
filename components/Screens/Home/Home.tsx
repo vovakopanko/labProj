@@ -1,95 +1,89 @@
-import React from 'react';
-import {Image} from 'native-base';
-import {StyleSheet, SafeAreaView, ScrollView, View, Text} from 'react-native';
+import * as React from 'react';
+import {
+  StyleSheet,
+  SafeAreaView,
+  ScrollView,
+  Button,
+  View,
+  Text,
+} from 'react-native';
 
-// type ArrayInfoType = {
-//   id: number;
-//   name: string;
-//   cash: number;
-//   info: string;
-// };
+const arrayInfo = [
+  {id: 1, name: 'Checking', cash: 1500.2, info: 'Main account (...0353)'},
+  {id: 2, name: 'Savings', cash: 5000.2, info: 'Buy a house (...4044)'},
+  {id: 3, name: 'Goodness', cash: 500.4, info: 'Cash Rewards'},
+];
 
-export default function HomeScreen() {
-  const arrayInfo = [
-    {id: 1, name: 'Checking', cash: 1500.2, info: 'Main account (...0353)'},
-    {id: 2, name: 'Savings', cash: 5000.2, info: 'Buy a house (...4044)'},
-    {id: 3, name: 'Goodness', cash: 500.4, info: 'Cash Rewards'},
-  ];
-  // const [arrayInfo, setArrayInfo] = useState<Array<ArrayInfoType>>([
-  //   {id: 1, name: 'Checking', cash: 1500.2, info: 'Main account (...0353)'},
-  //   {id: 2, name: 'Savings', cash: 5000.2, info: 'Buy a house (...4044)'},
-  //   {id: 3, name: 'Goodness', cash: 500.4, info: 'Cash Rewards'},
-  // ]);
-
+function HomeScreen({navigation}: any) {
   return (
-    <View style={styles.homeBlock}>
-      <Text style={styles.homeBlock_dataStyle}>
-        Good Morning Danny | Jul 12, 2020
-      </Text>
-      <SafeAreaView>
-        <ScrollView style={styles.homeBlock_content}>
-          <View style={styles.content_accountData}>
-            <Text style={styles.accountData_title}>Account Overview </Text>
-            <Text style={styles.accountData_amountDeposited}>$7,000.80</Text>
-            <Text style={styles.accountData_titleInfo}>
-              Total Avaliable cash
-            </Text>
-            <View style={styles.accountData_payments}>
-              {arrayInfo.map(info => (
-                <View style={styles.payments_Items}>
-                  <View style={styles.payments_Items__left}>
-                    <Text>
-                      {info.name} {'\n'}
-                      <Text style={styles.payments_Items__weight}>
-                        {info.info}
+    <View style={styles.home}>
+      <View style={styles.homeBlock}>
+        <Text style={styles.homeBlock_dataStyle}>
+          Good Morning Danny | Jul 12, 2020
+        </Text>
+        <SafeAreaView>
+          <Button
+            title="Go Checking Screen"
+            onPress={() => navigation.navigate('Checking')}
+          />
+          <Button
+            title="Go Saving Screen"
+            onPress={() => navigation.navigate('Saving')}
+          />
+          <ScrollView style={styles.homeBlock_content}>
+            <View style={styles.content_accountData}>
+              <Text style={styles.accountData_title}>Account Overview </Text>
+              <Text style={styles.accountData_amountDeposited}>$7,000.80</Text>
+              <Text style={styles.accountData_titleInfo}>
+                Total Avaliable cash
+              </Text>
+              <View style={styles.accountData_payments}>
+                {arrayInfo.map(info => (
+                  <View style={styles.payments_Items}>
+                    <View style={styles.payments_Items__left}>
+                      <Text>
+                        {info.name} {'\n'}
+                        <Text style={styles.payments_Items__weight}>
+                          {info.info}
+                        </Text>
                       </Text>
-                    </Text>
+                    </View>
+                    <View style={styles.payments_Items__right}>
+                      <Text style={styles.payments_Items__right}>
+                        ${info.cash.toFixed(2)}
+                      </Text>
+                    </View>
                   </View>
-                  <View style={styles.payments_Items__right}>
-                    <Text style={styles.payments_Items__right}>
-                      ${info.cash.toFixed(2)}
-                    </Text>
-                  </View>
+                ))}
+              </View>
+            </View>
+            <View style={styles.content_givingImpact}>
+              <View style={styles.givingImpact_block}>
+                <View style={styles.givingImpact_block__right}>
+                  <Text>Your Giving Impact {'\n'} St Jude * 4 hrs ago</Text>
                 </View>
-              ))}
-            </View>
-          </View>
-          <View style={styles.content_givingImpact}>
-            <View style={styles.givingImpact_block}>
-              <View style={styles.givingImpact_block__left}>
-                {/* <Image
-                  alt="avatar"
-                  source={require('./../../../assets/projectImages/avatar.png')}
-                  style={styles.iconImg}
-                /> */}
               </View>
-              <View style={styles.givingImpact_block__right}>
-                <Text>Your Giving Impact {'\n'} St Jude * 4 hrs ago</Text>
-              </View>
+              <Text style={styles.givingImpact_description}>
+                Danny, Your donatio helped 5 amazing kids get much needed cancer
+                surgery, thanks fo being...
+              </Text>
             </View>
-            {/* <Image
-              alt="proto"
-              source={require('./../../../assets/projectImages/rectangle2.png')}
-              style={styles.iconImg}
-            /> */}
-            <Text style={styles.givingImpact_description}>
-              Danny, Your donatio helped 5 amazing kids get much needed cancer
-              surgery, thanks fo being...
-            </Text>
-          </View>
-        </ScrollView>
-      </SafeAreaView>
+          </ScrollView>
+        </SafeAreaView>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  home: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   homeBlock: {
     margin: 10,
-  },
-  iconImg: {
-    width: '100%',
-    height: 200,
+    paddingTop: 20,
   },
   homeBlock_dataStyle: {
     marginBottom: 10,
@@ -160,3 +154,5 @@ const styles = StyleSheet.create({
     fontWeight: '200',
   },
 });
+
+export default HomeScreen;

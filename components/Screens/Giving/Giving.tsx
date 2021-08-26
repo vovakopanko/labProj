@@ -4,7 +4,7 @@ import {View, Text, StyleSheet} from 'react-native';
 export default function GivingScreen() {
   return (
     <View style={styles.content}>
-      <Text>Giving!</Text>
+      <Text> Here comen soon content ! </Text>
     </View>
   );
 }

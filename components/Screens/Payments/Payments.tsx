@@ -5,7 +5,7 @@ import {View, Text, StyleSheet} from 'react-native';
 export default function PaymentsScreen() {
   return (
     <View style={styles.content}>
-      <Text>Payments!</Text>
+      <Text> Here comen soon content ! </Text>
     </View>
   );
 }

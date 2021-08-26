@@ -1,16 +1,10 @@
 import React from 'react';
-import {Button, View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 
-export default function CardsScreen({navigation}: any) {
+export default function CardsScreen() {
   return (
     <View style={styles.content}>
-      <Text>Cards!</Text>
-      <Button
-        title="Go to Home Page"
-        onPress={() => {
-          navigation.navigate('Checking');
-        }}
-      />
+      <Text> Here comen soon content ! </Text>
     </View>
   );
 }
