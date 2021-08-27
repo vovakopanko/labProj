@@ -4,7 +4,7 @@ import {View, Text, StyleSheet} from 'react-native';
 export default function ChekingScreen() {
   return (
     <View style={styles.content}>
-      <Text>Cheking!</Text>
+      <Text>Here your information about Cheking!</Text>
     </View>
   );
 }

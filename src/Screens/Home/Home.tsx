@@ -21,7 +21,7 @@ const ActionsUser = ({name, info, cash, navigation}: any) => {
     <TouchableHighlight
       activeOpacity={0.3}
       underlayColor="lightgrey"
-      onPress={() => navigation.navigate(`${name}`)}>
+      onPress={() => navigation.navigate(`${name}`, {id: 13, name: {info}})}>
       <View style={styles.overView_actionsUser}>
         <View style={styles.actionsUser_Info}>
           <Text style={styles.actionsUser_name}>{name}</Text>
@@ -51,6 +51,7 @@ function HomeScreen({navigation}: any) {
         <Text style={styles.overView_subTitle}>Total Available cash</Text>
         {arrayInfo.map(info => (
           <ActionsUser
+            key={info.id}
             name={info.name}
             info={info.info}
             cash={info.cash}
@@ -62,7 +63,7 @@ function HomeScreen({navigation}: any) {
         <View style={styles.blockGivingImpact}>
           <View style={styles.blockGivingImpact_blockTitle}>
             <Image
-              source={require('./../../../assets/projectImages/avatar.png')}
+              source={require('./../../assets/projectImages/avatar.png')}
               style={styles.blockTitle_avatar}
             />
             <View style={styles.blockTitle_infoGivingImpact}>
@@ -76,35 +77,7 @@ function HomeScreen({navigation}: any) {
           </View>
           <View>
             <Image
-              source={require('./../../../assets/projectImages/rectangle2.png')}
-              style={styles.blockGivingImpact_photo}
-            />
-          </View>
-          <View style={styles.blockGivingImpact_info}>
-            <Text>
-              Danny, Your donation helped 5 amazing kids get much needed cancer
-              surgery, thanks fo being...
-            </Text>
-          </View>
-        </View>
-        <View style={styles.blockGivingImpact}>
-          <View style={styles.blockGivingImpact_blockTitle}>
-            <Image
-              source={require('./../../../assets/projectImages/avatar.png')}
-              style={styles.blockTitle_avatar}
-            />
-            <View style={styles.blockTitle_infoGivingImpact}>
-              <Text style={styles.infoGivingImpact_title}>
-                Your Giving Impact
-              </Text>
-              <Text style={styles.infoGivingImpact_activity}>
-                St Jude * 4 hrs ago
-              </Text>
-            </View>
-          </View>
-          <View>
-            <Image
-              source={require('./../../../assets/projectImages/rectangle2.png')}
+              source={require('./../../assets/projectImages/rectangle2.png')}
               style={styles.blockGivingImpact_photo}
             />
           </View>
