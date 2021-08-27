@@ -1,13 +1,13 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 
-export default function AccountsScreen() {
+const AccountsScreen: FC = () => {
   return (
     <View style={styles.content}>
       <Text>Accounts!</Text>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   content: {
@@ -16,3 +16,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
+
+export default AccountsScreen;

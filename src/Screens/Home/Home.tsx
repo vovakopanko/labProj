@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import {
   StyleSheet,
   // SafeAreaView,
@@ -10,25 +10,45 @@ import {
   Image,
 } from 'react-native';
 
-const arrayInfo = [
+type ActionsUser = {
+  name: string;
+  info: string;
+  cash: number;
+  navigation: any;
+};
+
+type ArrayInfoType = {
+  id: number;
+  name: string;
+  info: string;
+  cash: number;
+};
+
+const arrayInfo: Array<ArrayInfoType> = [
   {id: 1, name: 'Checking', cash: 1500.2, info: 'Main account (...0353)'},
   {id: 2, name: 'Saving', cash: 5000.2, info: 'Buy a house (...4044)'},
   {id: 3, name: 'Goodness', cash: 500.4, info: 'Cash Rewards'},
 ];
 
-const ActionsUser = ({name, info, cash, navigation}: any) => {
+const ActionsUser = ({name, info, cash, navigation}: ActionsUser) => {
+  let val: Array<string> = [];
+  val = cash.toFixed(2).split('.');
+
   return (
     <TouchableHighlight
       activeOpacity={0.3}
       underlayColor="lightgrey"
-      onPress={() => navigation.navigate(`${name}`, {id: 13, name: {info}})}>
+      onPress={() => navigation.navigate(`${name}`)}>
       <View style={styles.overView_actionsUser}>
         <View style={styles.actionsUser_Info}>
           <Text style={styles.actionsUser_name}>{name}</Text>
           <Text style={styles.actionsUser_card}>{info}</Text>
         </View>
         <View style={styles.overView_providedCash}>
-          <Text style={styles.providedCash_count}>${cash.toFixed(2)}</Text>
+          <Text style={styles.providedCash_count}>
+            $<Text>{val[0]}.</Text>
+            <Text style={styles.numberAfterPoin}>{val[1]}</Text>
+          </Text>
           {/* <Image
             source={require('./../../../assets/projectImages/back.png')}
             style={{width: 10, height: 10, backgroundColor: 'red'}}
@@ -109,7 +129,6 @@ const styles = StyleSheet.create({
   },
   overView_title: {
     textAlign: 'center',
-    // fontWeight: '600',
     fontSize: 18,
     paddingTop: 20,
   },
@@ -185,6 +204,9 @@ const styles = StyleSheet.create({
   },
   blockGivingImpact_info: {
     padding: 10,
+  },
+  numberAfterPoin: {
+    fontSize: 16,
   },
 });
 

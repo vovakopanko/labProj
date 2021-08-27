@@ -1,13 +1,13 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 
-export default function CardsScreen() {
+const CardsScreen: FC = () => {
   return (
     <View style={styles.content}>
       <Text> Here comen soon content ! </Text>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   content: {
@@ -16,3 +16,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
+
+export default CardsScreen;

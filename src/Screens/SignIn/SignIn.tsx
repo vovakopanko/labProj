@@ -1,14 +1,14 @@
-import React from 'react';
+import React, {FC} from 'react';
 // import {View, Text} from 'native-base';
 import {View, Text, StyleSheet} from 'react-native';
 
-export default function SignIn() {
+const SignIn: FC = () => {
   return (
     <View style={styles.content}>
       <Text> Here your information about Saving </Text>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   content: {
@@ -17,3 +17,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
+
+export default SignIn;
