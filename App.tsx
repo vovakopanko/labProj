@@ -6,8 +6,10 @@ import ChekingScreen from './src/Screens/Checking/Checking';
 import SavingScreen from './src/Screens/Saving/Saving';
 import GoodnessScreen from './src/Screens/Goodness/Goodness';
 
+const Stack = createStackNavigator();
+
 export default function App() {
-  const Stack = createStackNavigator();
+ 
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -36,6 +38,16 @@ export default function App() {
             headerStyle: {
               backgroundColor: 'mediumvioletred',
             },
+            //   headerRight: () => (
+            //     <View>
+            //       <TouchableOpacity onPress={() => console.log('Hi')}>
+            //         <Image
+            //           source={require('./../../assets/projectImages/oval.png')}
+            //           style={styles.userLogo}
+            //         />
+            //       </TouchableOpacity>
+            //     </View>
+            //   ),
           }}
         />
         <Stack.Screen

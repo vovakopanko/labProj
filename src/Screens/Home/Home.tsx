@@ -24,7 +24,7 @@ type ArrayInfoType = {
   cash: number;
 };
 
-const arrayInfo: Array<ArrayInfoType> = [
+const arrayInfo: ArrayInfoType[] = [
   {id: 1, name: 'Checking', cash: 1500.2, info: 'Main account (...0353)'},
   {id: 2, name: 'Saving', cash: 5000.2, info: 'Buy a house (...4044)'},
   {id: 3, name: 'Goodness', cash: 500.4, info: 'Cash Rewards'},
@@ -50,7 +50,7 @@ const ActionsUser = ({name, info, cash, navigation}: ActionsUser) => {
             <Text style={styles.numberAfterPoin}>{val[1]}</Text>
           </Text>
           {/* <Image
-            source={require('./../../../assets/projectImages/back.png')}
+            source={require('../../../assets/projectImages/back.png')}
             style={{width: 10, height: 10, backgroundColor: 'red'}}
           /> */}
         </View>
@@ -102,16 +102,19 @@ function HomeScreen({navigation}: any) {
             />
           </View>
           <View style={styles.blockGivingImpact_info}>
-            <Text>
+            <Text style={styles.blockGivingImpact_info_text}>
               Danny, Your donation helped 5 amazing kids get much needed cancer
               surgery, thanks fo being...
             </Text>
           </View>
         </View>
       </ScrollView>
+      <Text>dgsdfgsfd</Text>
     </View>
   );
 }
+
+type Font = 'SFProRounded-Regular' | 'SFProRounded-Bold';
 
 const styles = StyleSheet.create({
   homePage: {
@@ -205,6 +208,9 @@ const styles = StyleSheet.create({
   blockGivingImpact_info: {
     padding: 10,
   },
+  blockGivingImpact_info_text: {
+    fontFamily: 'SFProRounded-Bold',
+  } as {fontFamily: Font},
   numberAfterPoin: {
     fontSize: 16,
   },

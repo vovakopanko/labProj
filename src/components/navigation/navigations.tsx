@@ -1,13 +1,5 @@
 import * as React from 'react';
-import {
-  StyleSheet,
-  View,
-  Image,
-  TouchableOpacity,
-  Modal,
-  Text,
-  Button,
-} from 'react-native';
+import {StyleSheet, Image} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import HomeScreen from '../../Screens/Home/Home';
@@ -15,6 +7,8 @@ import AccountsScreen from '../../Screens/Accounts/Accounts';
 import GivingScreen from '../../Screens/Giving/Giving';
 import PaymentsScreen from '../../Screens/Payments/Payments';
 import CardsScreen from '../../Screens/Cards/Cards';
+import HeaderRightBtn from './headerRightButtom';
+import HeaderLogoTitle from './headerLogoTitle';
 
 const isAuth = true; // if your account autorizate
 
@@ -112,21 +106,7 @@ function MyTabs() {
   );
 }
 
-function LogoTitle() {
-  return (
-    <View>
-      <Image source={require('./../../assets/projectImages/logo.png')} />
-    </View>
-  );
-}
-
 export default function DrawerNavigation() {
-  const [isSignOutOpen, setIsSignOutOpen] = React.useState(false);
-
-  const signOutChangeHandler = () => {
-    setIsSignOutOpen(!isSignOutOpen);
-    console.log('Hello');
-  };
   return (
     <DrawerTab.Navigator
       screenOptions={{
@@ -134,27 +114,8 @@ export default function DrawerNavigation() {
         headerStyle: {
           backgroundColor: isAuth ? 'mediumvioletred' : 'white',
         },
-        headerTitle: () => <LogoTitle />,
-        headerRight: () => (
-          <View>
-            <TouchableOpacity onPress={signOutChangeHandler}>
-              <Image
-                source={require('./../../assets/projectImages/oval.png')}
-                style={styles.userLogo}
-              />
-            </TouchableOpacity>
-            <Modal
-              animationType="fade"
-              visible={isSignOutOpen}
-              onRequestClose={signOutChangeHandler}
-              transparent={false}>
-              <View style={styles.signOutModalContainer}>
-                <Text style={styles.signOutModalText}>Sign Out</Text>
-                <Button title="Close modal" onPress={signOutChangeHandler} />
-              </View>
-            </Modal>
-          </View>
-        ),
+        headerTitle: () => <HeaderLogoTitle />,
+        headerRight: () => <HeaderRightBtn />,
       }}>
       <DrawerTab.Screen name="Spiral" component={MyTabs} />
     </DrawerTab.Navigator>
@@ -165,11 +126,6 @@ const Tab = createBottomTabNavigator();
 const DrawerTab = createDrawerNavigator();
 
 const styles = StyleSheet.create({
-  userLogo: {
-    width: 30,
-    height: 30,
-    marginRight: 20,
-  },
   iconBottomBar: {
     width: 25,
     height: 25,
@@ -182,16 +138,5 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  signOutModalContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'lightgrey',
-  },
-  signOutModalText: {
-    fontSize: 20,
-    textAlign: 'center',
-    padding: 20,
   },
 });
