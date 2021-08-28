@@ -24,11 +24,43 @@ type ArrayInfoType = {
   cash: number;
 };
 
+// type ArrayYourGivingImpactType = {
+//   id: number;
+//   title: string;
+//   subtitle: string;
+//   logo: string;
+//   photo: string;
+// };
+
+// type YourGivingImpactType = {
+//   title: string;
+//   subtitle: string;
+//   logo: string;
+//   photo: string;
+// };
+
 const arrayInfo: ArrayInfoType[] = [
   {id: 1, name: 'Checking', cash: 1500.2, info: 'Main account (...0353)'},
   {id: 2, name: 'Saving', cash: 5000.2, info: 'Buy a house (...4044)'},
   {id: 3, name: 'Goodness', cash: 500.4, info: 'Cash Rewards'},
 ];
+
+// const arrayYourGiving: ArrayYourGivingImpactType[] = [
+//   {
+//     id: 1,
+//     title: 'Your Giving Impact',
+//     subtitle: 'St Jude * 3 hrs ago',
+//     logo: './../../assets/projectImages/avatar.png',
+//     photo: './../../assets/projectImages/rectangle2.png',
+//   },
+//   {
+//     id: 2,
+//     title: 'Your Giving Impact',
+//     subtitle: 'St Jude * 12 hrs ago',
+//     logo: '../../assets/projectImages/avatar.png',
+//     photo: '../../assets/projectImages/rectangle.png',
+//   },
+// ];
 
 const ActionsUser = ({name, info, cash, navigation}: ActionsUser) => {
   let val: Array<string> = [];
@@ -64,6 +96,32 @@ const ActionsUser = ({name, info, cash, navigation}: ActionsUser) => {
   );
 };
 
+// const YourGiving = ({title, subtitle, logo, photo}: YourGivingImpactType) => {
+//   return (
+//     <View style={styles.blockGivingImpact}>
+//       <View style={styles.blockGivingImpact_blockTitle}>
+//         <Image source={require(`${logo}`)} style={styles.blockTitle_avatar} />
+//         <View style={styles.blockTitle_infoGivingImpact}>
+//           <Text style={styles.infoGivingImpact_title}>{title}</Text>
+//           <Text style={styles.infoGivingImpact_activity}>{subtitle}</Text>
+//         </View>
+//       </View>
+//       <View>
+//         <Image
+//           source={require(`${photo}`)}
+//           style={styles.blockGivingImpact_photo}
+//         />
+//       </View>
+//       <View style={styles.blockGivingImpact_info}>
+//         <Text style={styles.blockGivingImpact_info_text}>
+//           Danny, Your donation helped 1 amazing kid get much needed cancer
+//           surgery, thanks fo being...
+//         </Text>
+//       </View>
+//     </View>
+//   );
+// };
+
 function HomeScreen({navigation}: any) {
   return (
     <View style={styles.homePage}>
@@ -87,6 +145,43 @@ function HomeScreen({navigation}: any) {
         ))}
       </View>
       <ScrollView>
+        {/* {arrayYourGiving.map(post => (
+          <YourGiving
+            key={post.id}
+            title={post.title}
+            subtitle={post.subtitle}
+            logo={post.logo}
+            photo={post.photo}
+          />
+        ))} */}
+        <View style={styles.blockGivingImpact}>
+          <View style={styles.blockGivingImpact_blockTitle}>
+            <Image
+              source={require('./../../assets/projectImages/avatar.png')}
+              style={styles.blockTitle_avatar}
+            />
+            <View style={styles.blockTitle_infoGivingImpact}>
+              <Text style={styles.infoGivingImpact_title}>
+                Your Giving Impact
+              </Text>
+              <Text style={styles.infoGivingImpact_activity}>
+                St Jude * 12 hrs ago
+              </Text>
+            </View>
+          </View>
+          <View>
+            <Image
+              source={require('./../../assets/projectImages/rectangle2.png')}
+              style={styles.blockGivingImpact_photo}
+            />
+          </View>
+          <View style={styles.blockGivingImpact_info}>
+            <Text style={styles.blockGivingImpact_info_text}>
+              Danny, Your donation helped 1 amazing kid get much needed cancer
+              surgery, thanks fo being...
+            </Text>
+          </View>
+        </View>
         <View style={styles.blockGivingImpact}>
           <View style={styles.blockGivingImpact_blockTitle}>
             <Image
@@ -104,7 +199,7 @@ function HomeScreen({navigation}: any) {
           </View>
           <View>
             <Image
-              source={require('./../../assets/projectImages/rectangle2.png')}
+              source={require('./../../assets/projectImages/rectangle.png')}
               style={styles.blockGivingImpact_photo}
             />
           </View>
@@ -116,7 +211,6 @@ function HomeScreen({navigation}: any) {
           </View>
         </View>
       </ScrollView>
-      <Text>dgsdfgsfd</Text>
     </View>
   );
 }

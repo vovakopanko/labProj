@@ -20,10 +20,11 @@ export default HeaderAppTitle;
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
+    fontFamily: 'SFProRounded-Light',
   },
   title: {
     color: 'white',
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: 'bold',
   },
   subtitle: {

@@ -15,11 +15,6 @@ type RootAppStackParams = {
   ' ': undefined;
 };
 
-interface HeaderTitleType {
-  title: string;
-  subtitle: string | null;
-}
-
 const Stack = createStackNavigator<RootAppStackParams>();
 
 export default function App() {
@@ -34,7 +29,7 @@ export default function App() {
         <Stack.Screen
           name="Checking"
           component={ChekingScreen}
-          options={({route}) => ({
+          options={({route}: any) => ({
             headerShown: true,
             headerTintColor: 'white',
             headerStyle: {
@@ -52,7 +47,7 @@ export default function App() {
         <Stack.Screen
           name="Saving"
           component={SavingScreen}
-          options={({route}) => ({
+          options={({route}: any) => ({
             headerShown: true,
             headerTintColor: 'white',
             headerStyle: {
@@ -70,7 +65,7 @@ export default function App() {
         <Stack.Screen
           name="Goodness"
           component={GoodnessScreen}
-          options={({route}) => ({
+          options={({route}: any) => ({
             headerShown: true,
             headerTintColor: 'white',
             headerStyle: {
