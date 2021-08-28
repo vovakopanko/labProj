@@ -6,6 +6,7 @@ import ChekingScreen from './src/Screens/Checking/Checking';
 import SavingScreen from './src/Screens/Saving/Saving';
 import GoodnessScreen from './src/Screens/Goodness/Goodness';
 import HeaderAppTitle from './src/components/navigation/headerTitle';
+import HeaderRightBtn from './src/components/navigation/headerRightButtom';
 
 type RootAppStackParams = {
   Checking: undefined;
@@ -45,6 +46,7 @@ export default function App() {
                 subtitle={route.params.info}
               />
             ),
+            headerRight: () => <HeaderRightBtn />,
           })}
         />
         <Stack.Screen
@@ -62,6 +64,7 @@ export default function App() {
                 subtitle={route.params.info}
               />
             ),
+            headerRight: () => <HeaderRightBtn />,
           })}
         />
         <Stack.Screen
@@ -79,6 +82,7 @@ export default function App() {
                 subtitle={route.params.info}
               />
             ),
+            headerRight: () => <HeaderRightBtn />,
           })}
         />
       </Stack.Navigator>
