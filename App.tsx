@@ -5,11 +5,23 @@ import DrawerNavigation from './src/components/navigation/navigations';
 import ChekingScreen from './src/Screens/Checking/Checking';
 import SavingScreen from './src/Screens/Saving/Saving';
 import GoodnessScreen from './src/Screens/Goodness/Goodness';
+import HeaderAppTitle from './src/components/navigation/headerTitle';
 
-const Stack = createStackNavigator();
+type RootAppStackParams = {
+  Checking: undefined;
+  Saving: undefined;
+  Goodness: undefined;
+  ' ': undefined;
+};
+
+interface HeaderTitleType {
+  title: string;
+  subtitle: string | null;
+}
+
+const Stack = createStackNavigator<RootAppStackParams>();
 
 export default function App() {
- 
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -21,45 +33,53 @@ export default function App() {
         <Stack.Screen
           name="Checking"
           component={ChekingScreen}
-          options={{
+          options={({route}) => ({
             headerShown: true,
             headerTintColor: 'white',
             headerStyle: {
               backgroundColor: 'mediumvioletred',
             },
-          }}
+            headerTitle: () => (
+              <HeaderAppTitle
+                title={route.params.name}
+                subtitle={route.params.info}
+              />
+            ),
+          })}
         />
         <Stack.Screen
           name="Saving"
           component={SavingScreen}
-          options={{
+          options={({route}) => ({
             headerShown: true,
             headerTintColor: 'white',
             headerStyle: {
               backgroundColor: 'mediumvioletred',
             },
-            //   headerRight: () => (
-            //     <View>
-            //       <TouchableOpacity onPress={() => console.log('Hi')}>
-            //         <Image
-            //           source={require('./../../assets/projectImages/oval.png')}
-            //           style={styles.userLogo}
-            //         />
-            //       </TouchableOpacity>
-            //     </View>
-            //   ),
-          }}
+            headerTitle: () => (
+              <HeaderAppTitle
+                title={route.params.name}
+                subtitle={route.params.info}
+              />
+            ),
+          })}
         />
         <Stack.Screen
           name="Goodness"
           component={GoodnessScreen}
-          options={{
+          options={({route}) => ({
             headerShown: true,
             headerTintColor: 'white',
             headerStyle: {
               backgroundColor: 'mediumvioletred',
             },
-          }}
+            headerTitle: () => (
+              <HeaderAppTitle
+                title={route.params.name}
+                subtitle={route.params.info}
+              />
+            ),
+          })}
         />
       </Stack.Navigator>
     </NavigationContainer>

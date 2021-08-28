@@ -38,7 +38,12 @@ const ActionsUser = ({name, info, cash, navigation}: ActionsUser) => {
     <TouchableHighlight
       activeOpacity={0.3}
       underlayColor="lightgrey"
-      onPress={() => navigation.navigate(`${name}`)}>
+      onPress={() =>
+        navigation.navigate(`${name}`, {
+          info: info,
+          name: name,
+        })
+      }>
       <View style={styles.overView_actionsUser}>
         <View style={styles.actionsUser_Info}>
           <Text style={styles.actionsUser_name}>{name}</Text>
@@ -63,7 +68,9 @@ function HomeScreen({navigation}: any) {
   return (
     <View style={styles.homePage}>
       <View style={styles.homePage_greetingUser}>
-        <Text>Good Morning Danny | Jul 12, 2020</Text>
+        <Text style={styles.homePage_titleGreating}>
+          Good Morning Danny | Jul 12, 2020
+        </Text>
       </View>
       <View style={styles.homePage_overView}>
         <Text style={styles.overView_title}>Account Overview </Text>
@@ -114,12 +121,16 @@ function HomeScreen({navigation}: any) {
   );
 }
 
-type Font = 'SFProRounded-Regular' | 'SFProRounded-Bold';
+type Font = 'SFProRounded-Regular' | 'SFProRounded-Bold' | 'SFProRounded-Light';
 
 const styles = StyleSheet.create({
   homePage: {
     flex: 1,
     margin: 20,
+  },
+  homePage_titleGreating: {
+    fontFamily: 'SFProRounded-Regular',
+    color: 'grey',
   },
   homePage_greetingUser: {
     marginBottom: 10,
@@ -134,10 +145,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 18,
     paddingTop: 20,
+    fontFamily: 'SFProRounded-Bold',
   },
   overView_totalCash: {
     textAlign: 'center',
-    // fontWeight: '300',
+    fontFamily: 'SFProRounded-Bold',
+    fontWeight: '400',
     fontSize: 24,
     paddingTop: 5,
   },
@@ -163,18 +176,20 @@ const styles = StyleSheet.create({
   actionsUser_name: {
     fontWeight: '400',
     paddingLeft: 10,
+    fontFamily: 'SFProRounded-Bold',
   },
   actionsUser_card: {
     fontWeight: '400',
     paddingLeft: 10,
     color: 'grey',
+    fontFamily: 'SFProRounded-Light',
   },
   overView_providedCash: {
     alignItems: 'flex-end',
     justifyContent: 'center',
     width: '50%',
     paddingRight: 20,
-    // fontWeight: '600',
+    fontFamily: 'SFProRounded-Bold',
   },
   providedCash_count: {
     fontSize: 19,
@@ -183,6 +198,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.25,
+    fontFamily: 'SFProRounded-Bold',
   },
   blockGivingImpact_blockTitle: {
     padding: 10,
@@ -195,8 +211,9 @@ const styles = StyleSheet.create({
     // fontWeight: '600',
   },
   infoGivingImpact_activity: {
-    fontSize: 12,
+    // fontSize: 12,
     color: 'grey',
+    fontFamily: 'SFProRounded-Light',
   },
   blockTitle_avatar: {
     width: 40,
@@ -209,7 +226,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   blockGivingImpact_info_text: {
-    fontFamily: 'SFProRounded-Bold',
+    fontFamily: 'SFProRounded-Light',
   } as {fontFamily: Font},
   numberAfterPoin: {
     fontSize: 16,
