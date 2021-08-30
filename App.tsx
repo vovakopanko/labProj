@@ -7,6 +7,7 @@ import SavingScreen from './src/Screens/Saving/Saving';
 import GoodnessScreen from './src/Screens/Goodness/Goodness';
 import HeaderAppTitle from './src/components/navigation/headerTitle';
 import HeaderRightBtn from './src/components/navigation/headerRightButtom';
+import LoginScreen from './src/Screens/Login/Login';
 
 type RootAppStackParams = {
   Checking: undefined;
@@ -15,9 +16,15 @@ type RootAppStackParams = {
   ' ': undefined;
 };
 
+const isUserAuthorized = false;
+
 const Stack = createStackNavigator<RootAppStackParams>();
 
 export default function App() {
+  if (!isUserAuthorized) {
+    return <LoginScreen />;
+  }
+
   return (
     <NavigationContainer>
       <Stack.Navigator
