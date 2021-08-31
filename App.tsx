@@ -8,20 +8,39 @@ import GoodnessScreen from './src/Screens/Goodness/Goodness';
 import HeaderAppTitle from './src/components/navigation/headerTitle';
 import HeaderRightBtn from './src/components/navigation/headerRightButtom';
 import LoginScreen from './src/Screens/Login/Login';
+// import {ActivityIndicator, View} from 'react-native';
+// import {useEffect} from 'react';
+// import {StyleSheet} from 'react-native';
 
 type RootAppStackParams = {
   Checking: undefined;
   Saving: undefined;
   Goodness: undefined;
-  ' ': undefined;
+  DrawScreen: undefined;
 };
 
-const isUserAuthorized = false;
+const userToken = 'iTechArt2021';
 
 const Stack = createStackNavigator<RootAppStackParams>();
 
 export default function App() {
-  if (!isUserAuthorized) {
+  // const [isLoading, setIsLoading] = React.useState(true);
+
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setIsLoading(false);
+  //   }, 1000);
+  // }, []);
+
+  // if (isLoading) {
+  //   return (
+  //     <View style={styles.isLoading}>
+  //       <ActivityIndicator size="large" />
+  //     </View>
+  //   );
+  // }
+
+  if (userToken === 'iTechArt2021') {
     return <LoginScreen />;
   }
 
@@ -32,7 +51,7 @@ export default function App() {
           headerShown: false,
           cardStyle: {backgroundColor: 'lightgrey'},
         }}>
-        <Stack.Screen name=" " component={DrawerNavigation} />
+        <Stack.Screen name="DrawScreen" component={DrawerNavigation} />
         <Stack.Screen
           name="Checking"
           component={ChekingScreen}
@@ -91,3 +110,7 @@ export default function App() {
     </NavigationContainer>
   );
 }
+
+// const styles = StyleSheet.create({
+//   isLoading: {flex: 1, justifyContent: 'center', alignItems: 'center'},
+// });

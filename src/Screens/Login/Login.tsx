@@ -19,9 +19,10 @@ const LoginScreen: FC = () => {
   const [emailActive, setEmailActive] = useState(false);
   const [passwordActive, setPasswordActive] = useState(false);
   const [loginData, setLoginData] = useState<loginDataType>({
-    login: null,
-    password: null,
+    token: null,
+    userId: null,
   });
+  const [counterInput, setCounterInput] = useState(3);
 
   const inputHandler = (text: string, name: string) => {
     setLoginData({...loginData, [name]: text});
@@ -73,9 +74,18 @@ const LoginScreen: FC = () => {
         <KeyboardAvoidingView
           behavior="padding"
           style={styles.loginPage__loginBtn}>
-          <TouchableOpacity style={styles.loginBtn}>
-            <Text style={styles.loginPage__BtnText}>LOGIN</Text>
-          </TouchableOpacity>
+          {counterInput === 0 ? (
+            <TouchableOpacity style={styles.loginBtn_Dissabled} disabled={true}>
+              <Text style={styles.loginPage__BtnText}>CAPTCHA</Text>
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity
+              style={styles.loginBtn}
+              onPress={() => setCounterInput(prev => prev - 1)}>
+              <Text style={styles.loginPage__BtnText}>LOGIN</Text>
+            </TouchableOpacity>
+          )}
+          <Text>You have {counterInput} login attempts</Text>
         </KeyboardAvoidingView>
         <View style={styles.loginPage__numberAttemps}>
           <Text style={styles.numberAttemps__text}>
@@ -186,6 +196,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 10,
   },
+  loginBtn_Dissabled: {
+    width: '90%',
+    borderRadius: 20,
+    height: 40,
+    backgroundColor: 'grey',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
   loginPage__BtnText: {
     fontSize: 15,
     color: '#fff',
@@ -218,6 +237,7 @@ const styles = StyleSheet.create({
   touchId__BtnIcon: {
     width: 20,
     height: 20,
+    left: 10,
   },
   userDefinitionBtn__faceId: {
     width: 0.4 * screenWidth,
@@ -241,5 +261,6 @@ const styles = StyleSheet.create({
   faceId__BtnIcon: {
     width: 22,
     height: 20,
+    left: 15,
   },
 });
