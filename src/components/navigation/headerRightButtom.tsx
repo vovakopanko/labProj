@@ -8,13 +8,18 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import {useAuth} from '../../hook/authHook';
 
 const HeaderRightBtn: FC = () => {
   const [isSignOutOpen, setIsSignOutOpen] = React.useState(false);
+  const {logout} = useAuth();
 
   const signOutChangeHandler = () => {
     setIsSignOutOpen(!isSignOutOpen);
-    console.log('Hello');
+  };
+
+  const signOutLog = () => {
+    logout();
   };
 
   return (
@@ -32,7 +37,7 @@ const HeaderRightBtn: FC = () => {
         transparent={false}>
         <View style={styles.signOutModalContainer}>
           <Text style={styles.signOutModalText}>Sign Out</Text>
-          <Button title="Close modal" onPress={signOutChangeHandler} />
+          <Button title="Close modal" onPress={signOutLog} />
         </View>
       </Modal>
     </View>

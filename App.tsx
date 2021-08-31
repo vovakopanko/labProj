@@ -8,9 +8,11 @@ import GoodnessScreen from './src/Screens/Goodness/Goodness';
 import HeaderAppTitle from './src/components/navigation/headerTitle';
 import HeaderRightBtn from './src/components/navigation/headerRightButtom';
 import LoginScreen from './src/Screens/Login/Login';
-// import {ActivityIndicator, View} from 'react-native';
-// import {useEffect} from 'react';
-// import {StyleSheet} from 'react-native';
+import {ActivityIndicator, View} from 'react-native';
+import {useEffect} from 'react';
+import {StyleSheet} from 'react-native';
+import {useAuth} from './src/hook/authHook';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type RootAppStackParams = {
   Checking: undefined;
@@ -19,28 +21,34 @@ type RootAppStackParams = {
   DrawScreen: undefined;
 };
 
-const userToken = 'iTechArt2021';
-
 const Stack = createStackNavigator<RootAppStackParams>();
 
 export default function App() {
   // const [isLoading, setIsLoading] = React.useState(true);
+  const {userToken, isLoading, retriveUserToken} = useAuth();
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setIsLoading(false);
-  //   }, 1000);
-  // }, []);
+  useEffect(() => {
+    setTimeout(async () => {
+      let userToken;
+      userToken = null;
+      try {
+        userToken = await AsyncStorage.getItem('userToken');
+      } catch (e) {
+        console.log(e);
+      }
+      retriveUserToken(userToken);
+    }, 1000);
+  }, [retriveUserToken]);
 
-  // if (isLoading) {
-  //   return (
-  //     <View style={styles.isLoading}>
-  //       <ActivityIndicator size="large" />
-  //     </View>
-  //   );
-  // }
+  if (isLoading) {
+    return (
+      <View style={styles.isLoading}>
+        <ActivityIndicator size="large" />
+      </View>
+    );
+  }
 
-  if (userToken === 'iTechArt2021') {
+  if (userToken !== 'iTechArt2021') {
     return <LoginScreen />;
   }
 
@@ -111,6 +119,6 @@ export default function App() {
   );
 }
 
-// const styles = StyleSheet.create({
-//   isLoading: {flex: 1, justifyContent: 'center', alignItems: 'center'},
-// });
+const styles = StyleSheet.create({
+  isLoading: {flex: 1, justifyContent: 'center', alignItems: 'center'},
+});

@@ -1,5 +1,7 @@
 import {AppStateType} from './../reduxStore';
-import {userType} from './authReducer';
 
-export const getUserSelector = (state: AppStateType): userType | null =>
-  state.auth.user;
+export const getUserTokenSelector = (state: AppStateType) =>
+  state.auth.userToken;
+
+export const getIsLoadingSelector = (state: AppStateType) =>
+  state.auth.isLoading;

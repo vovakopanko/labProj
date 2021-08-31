@@ -1,4 +1,5 @@
 import React, {FC, useState} from 'react';
+// import {Alert} from 'react-native';
 import {
   Dimensions,
   KeyboardAvoidingView,
@@ -10,6 +11,8 @@ import {
   SafeAreaView,
   Image,
 } from 'react-native';
+import {useAuth} from '../../hook/authHook';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
@@ -19,15 +22,30 @@ const LoginScreen: FC = () => {
   const [emailActive, setEmailActive] = useState(false);
   const [passwordActive, setPasswordActive] = useState(false);
   const [loginData, setLoginData] = useState<loginDataType>({
-    token: null,
-    userId: null,
+    userName: ' ',
+    password: null,
   });
-  const [counterInput, setCounterInput] = useState(3);
+  // const [counterInput, setCounterInput] = useState(3);
+  const {login} = useAuth();
 
   const inputHandler = (text: string, name: string) => {
     setLoginData({...loginData, [name]: text});
-    console.log(loginData.login);
-    console.log(loginData.password);
+  };
+
+  const loginHandler = async (
+    userName: string | null,
+    password: string | null,
+  ) => {
+    let userToken = null;
+    if (userName === 'User' && password === '12345') {
+      try {
+        userToken = 'iTechArt2021';
+        await AsyncStorage.setItem('userToken', userToken);
+      } catch (e) {
+        console.log(e);
+      }
+    }
+    login(userToken, userName);
   };
 
   return (
@@ -41,7 +59,7 @@ const LoginScreen: FC = () => {
           <TextInput
             style={!emailActive ? styles.input : styles.inputActive}
             placeholder="Your email address"
-            onChangeText={email => inputHandler(email, 'login')}
+            onChangeText={userName => inputHandler(userName, 'userName')}
             onFocus={() => {
               setEmailActive(true);
             }}
@@ -74,18 +92,29 @@ const LoginScreen: FC = () => {
         <KeyboardAvoidingView
           behavior="padding"
           style={styles.loginPage__loginBtn}>
-          {counterInput === 0 ? (
+          {/* {counterInput === 0 ? (
             <TouchableOpacity style={styles.loginBtn_Dissabled} disabled={true}>
               <Text style={styles.loginPage__BtnText}>CAPTCHA</Text>
             </TouchableOpacity>
           ) : (
             <TouchableOpacity
               style={styles.loginBtn}
-              onPress={() => setCounterInput(prev => prev - 1)}>
+              // onPress={() => setCounterInput(prev => prev - 1)}
+              onPress={(): any =>
+                loginHandler(loginData.userName, loginData.password)
+              }>
               <Text style={styles.loginPage__BtnText}>LOGIN</Text>
             </TouchableOpacity>
           )}
-          <Text>You have {counterInput} login attempts</Text>
+          <Text>You have {counterInput} login attempts</Text> */}
+          <TouchableOpacity
+            style={styles.loginBtn}
+            // onPress={() => setCounterInput(prev => prev - 1)}
+            onPress={(): any =>
+              loginHandler(loginData.userName, loginData.password)
+            }>
+            <Text style={styles.loginPage__BtnText}>LOGIN</Text>
+          </TouchableOpacity>
         </KeyboardAvoidingView>
         <View style={styles.loginPage__numberAttemps}>
           <Text style={styles.numberAttemps__text}>
