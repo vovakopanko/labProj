@@ -14,8 +14,8 @@ export const useAuth = (): any => {
   const userToken = useSelector(getUserTokenSelector);
   const isLoading = useSelector(getIsLoadingSelector);
 
-  const login = useCallback(async (userToken: string, userName: string) => {
-    dispatch(authActions.SignIn(userToken, userName));
+  const login = useCallback(async (userTokens: string, userName: string) => {
+    dispatch(authActions.SignIn(userTokens, userName));
     // await AsyncStorage.setItem('auth', JSON.stringify(userToken, userName));
   }, []);
 
@@ -24,8 +24,8 @@ export const useAuth = (): any => {
     await AsyncStorage.removeItem('userToken');
   }, []);
 
-  const retriveUserToken = useCallback(async (userToken: string) => {
-    dispatch(authActions.RetrieveToken(userToken));
+  const retriveUserToken = useCallback(async (userTokens: string) => {
+    dispatch(authActions.RetrieveToken(userTokens));
   }, []);
 
   return {

@@ -25,7 +25,7 @@ const LoginScreen: FC = () => {
     userName: ' ',
     password: null,
   });
-  // const [counterInput, setCounterInput] = useState(3);
+  const [counterInput, setCounterInput] = useState(3);
   const {login} = useAuth();
 
   const inputHandler = (text: string, name: string) => {
@@ -46,6 +46,11 @@ const LoginScreen: FC = () => {
       }
     }
     login(userToken, userName);
+  };
+
+  const LoginCounter = () => {
+    setCounterInput(prev => prev - 1);
+    loginHandler(loginData.userName, loginData.password);
   };
 
   return (
@@ -89,32 +94,21 @@ const LoginScreen: FC = () => {
             <Text style={styles.forgotBtn__text}>FORGOT PASSWORD</Text>
           </TouchableOpacity>
         </View>
+        <Text style={styles.info}>Login: User , Pass: 12345</Text>
         <KeyboardAvoidingView
           behavior="padding"
           style={styles.loginPage__loginBtn}>
-          {/* {counterInput === 0 ? (
+          {counterInput === 0 ? (
             <TouchableOpacity style={styles.loginBtn_Dissabled} disabled={true}>
               <Text style={styles.loginPage__BtnText}>CAPTCHA</Text>
             </TouchableOpacity>
           ) : (
-            <TouchableOpacity
-              style={styles.loginBtn}
-              // onPress={() => setCounterInput(prev => prev - 1)}
-              onPress={(): any =>
-                loginHandler(loginData.userName, loginData.password)
-              }>
+            <TouchableOpacity style={styles.loginBtn} onPress={LoginCounter}>
               <Text style={styles.loginPage__BtnText}>LOGIN</Text>
             </TouchableOpacity>
           )}
-          <Text>You have {counterInput} login attempts</Text> */}
-          <TouchableOpacity
-            style={styles.loginBtn}
-            // onPress={() => setCounterInput(prev => prev - 1)}
-            onPress={(): any =>
-              loginHandler(loginData.userName, loginData.password)
-            }>
-            <Text style={styles.loginPage__BtnText}>LOGIN</Text>
-          </TouchableOpacity>
+
+          <Text>You have {counterInput} login attempts</Text>
         </KeyboardAvoidingView>
         <View style={styles.loginPage__numberAttemps}>
           <Text style={styles.numberAttemps__text}>
@@ -291,5 +285,11 @@ const styles = StyleSheet.create({
     width: 22,
     height: 20,
     left: 15,
+  },
+  info: {
+    fontSize: 12,
+    color: 'grey',
+    marginTop: 450,
+    alignSelf: 'center',
   },
 });

@@ -18,7 +18,10 @@ const HeaderRightBtn: FC = () => {
     setIsSignOutOpen(!isSignOutOpen);
   };
 
+  console.log();
+
   const signOutLog = () => {
+    signOutChangeHandler();
     logout();
   };
 
@@ -37,7 +40,8 @@ const HeaderRightBtn: FC = () => {
         transparent={false}>
         <View style={styles.signOutModalContainer}>
           <Text style={styles.signOutModalText}>Sign Out</Text>
-          <Button title="Close modal" onPress={signOutLog} />
+          <Button title="Close modal" onPress={signOutChangeHandler} />
+          <Button title="Exit" onPress={signOutLog} />
         </View>
       </Modal>
     </View>
