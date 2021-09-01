@@ -13,8 +13,9 @@ import {useEffect} from 'react';
 import {StyleSheet} from 'react-native';
 import {useAuth} from './src/hook/authHook';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import HeaderLeftBtn from './src/components/navigation/headerLeftBtn';
 
-type RootAppStackParams = {
+export type RootAppStackParams = {
   Checking: undefined;
   Saving: undefined;
   Goodness: undefined;
@@ -24,7 +25,6 @@ type RootAppStackParams = {
 const Stack = createStackNavigator<RootAppStackParams>();
 
 export default function App() {
-  // const [isLoading, setIsLoading] = React.useState(true);
   const {userToken, isLoading, retriveUserToken} = useAuth();
 
   useEffect(() => {
@@ -63,7 +63,7 @@ export default function App() {
         <Stack.Screen
           name="Checking"
           component={ChekingScreen}
-          options={({route}: any) => ({
+          options={({route, navigation}: any) => ({
             headerShown: true,
             headerTintColor: 'white',
             headerStyle: {
@@ -76,12 +76,13 @@ export default function App() {
               />
             ),
             headerRight: () => <HeaderRightBtn />,
+            headerLeft: () => <HeaderLeftBtn navigation={navigation} />,
           })}
         />
         <Stack.Screen
           name="Saving"
           component={SavingScreen}
-          options={({route}: any) => ({
+          options={({route, navigation}: any) => ({
             headerShown: true,
             headerTintColor: 'white',
             headerStyle: {
@@ -94,12 +95,13 @@ export default function App() {
               />
             ),
             headerRight: () => <HeaderRightBtn />,
+            headerLeft: () => <HeaderLeftBtn navigation={navigation} />,
           })}
         />
         <Stack.Screen
           name="Goodness"
           component={GoodnessScreen}
-          options={({route}: any) => ({
+          options={({route, navigation}: any) => ({
             headerShown: true,
             headerTintColor: 'white',
             headerStyle: {
@@ -112,6 +114,7 @@ export default function App() {
               />
             ),
             headerRight: () => <HeaderRightBtn />,
+            headerLeft: () => <HeaderLeftBtn navigation={navigation} />,
           })}
         />
       </Stack.Navigator>

@@ -8,6 +8,7 @@ import {
   Text,
   TouchableHighlight,
   Image,
+  ImageSourcePropType,
 } from 'react-native';
 
 type ActionsUser = {
@@ -24,20 +25,20 @@ type ArrayInfoType = {
   cash: number;
 };
 
-// type ArrayYourGivingImpactType = {
-//   id: number;
-//   title: string;
-//   subtitle: string;
-//   logo: string;
-//   photo: string;
-// };
+type ArrayYourGivingImpactType = {
+  id: number;
+  title: string;
+  subtitle: string;
+  logo: ImageSourcePropType;
+  photo: ImageSourcePropType;
+};
 
-// type YourGivingImpactType = {
-//   title: string;
-//   subtitle: string;
-//   logo: string;
-//   photo: string;
-// };
+type YourGivingImpactType = {
+  title: string;
+  subtitle: string;
+  logo: ImageSourcePropType;
+  photo: ImageSourcePropType;
+};
 
 const arrayInfo: ArrayInfoType[] = [
   {id: 1, name: 'Checking', cash: 1500.2, info: 'Main account (...0353)'},
@@ -45,27 +46,26 @@ const arrayInfo: ArrayInfoType[] = [
   {id: 3, name: 'Goodness', cash: 500.4, info: 'Cash Rewards'},
 ];
 
-// const arrayYourGiving: ArrayYourGivingImpactType[] = [
-//   {
-//     id: 1,
-//     title: 'Your Giving Impact',
-//     subtitle: 'St Jude * 3 hrs ago',
-//     logo: './../../assets/projectImages/avatar.png',
-//     photo: './../../assets/projectImages/rectangle2.png',
-//   },
-//   {
-//     id: 2,
-//     title: 'Your Giving Impact',
-//     subtitle: 'St Jude * 12 hrs ago',
-//     logo: '../../assets/projectImages/avatar.png',
-//     photo: '../../assets/projectImages/rectangle.png',
-//   },
-// ];
+const arrayYourGiving: ArrayYourGivingImpactType[] = [
+  {
+    id: 1,
+    title: 'Your Giving Impact',
+    subtitle: 'St Jude * 3 hrs ago',
+    logo: require('./../../assets/projectImages/avatar.png'),
+    photo: require('./../../assets/projectImages/rectangle2.png'),
+  },
+  {
+    id: 2,
+    title: 'Your Giving Impact',
+    subtitle: 'St Jude * 12 hrs ago',
+    logo: require('../../assets/projectImages/avatar.png'),
+    photo: require('../../assets/projectImages/rectangle.png'),
+  },
+];
 
 const ActionsUser = ({name, info, cash, navigation}: ActionsUser) => {
   let val: Array<string> = [];
   val = cash.toFixed(2).split('.');
-
   return (
     <TouchableHighlight
       activeOpacity={0.3}
@@ -96,33 +96,33 @@ const ActionsUser = ({name, info, cash, navigation}: ActionsUser) => {
   );
 };
 
-// const YourGiving = ({title, subtitle, logo, photo}: YourGivingImpactType) => {
-//   return (
-//     <View style={styles.blockGivingImpact}>
-//       <View style={styles.blockGivingImpact_blockTitle}>
-//         <Image source={require(`${logo}`)} style={styles.blockTitle_avatar} />
-//         <View style={styles.blockTitle_infoGivingImpact}>
-//           <Text style={styles.infoGivingImpact_title}>{title}</Text>
-//           <Text style={styles.infoGivingImpact_activity}>{subtitle}</Text>
-//         </View>
-//       </View>
-//       <View>
-//         <Image
-//           source={require(`${photo}`)}
-//           style={styles.blockGivingImpact_photo}
-//         />
-//       </View>
-//       <View style={styles.blockGivingImpact_info}>
-//         <Text style={styles.blockGivingImpact_info_text}>
-//           Danny, Your donation helped 1 amazing kid get much needed cancer
-//           surgery, thanks fo being...
-//         </Text>
-//       </View>
-//     </View>
-//   );
-// };
+const YourGiving = ({title, subtitle, logo, photo}: YourGivingImpactType) => {
+  return (
+    <View style={styles.blockGivingImpact}>
+      <View style={styles.blockGivingImpact_blockTitle}>
+        <Image source={logo} style={styles.blockTitle_avatar} />
+        <View style={styles.blockTitle_infoGivingImpact}>
+          <Text style={styles.infoGivingImpact_title}>{title}</Text>
+          <Text style={styles.infoGivingImpact_activity}>{subtitle}</Text>
+        </View>
+      </View>
+      <View>
+        <Image source={photo} style={styles.blockGivingImpact_photo} />
+      </View>
+      <View style={styles.blockGivingImpact_info}>
+        <Text style={styles.blockGivingImpact_info_text}>
+          Danny, Your donation helped 1 amazing kid get much needed cancer
+          surgery, thanks fo being...
+        </Text>
+      </View>
+    </View>
+  );
+};
 
 function HomeScreen({navigation}: any) {
+  let total = arrayInfo
+    .map(s => s.cash)
+    .reduce((sum, current) => sum + current);
   return (
     <View style={styles.homePage}>
       <View style={styles.homePage_greetingUser}>
@@ -132,7 +132,7 @@ function HomeScreen({navigation}: any) {
       </View>
       <View style={styles.homePage_overView}>
         <Text style={styles.overView_title}>Account Overview </Text>
-        <Text style={styles.overView_totalCash}>$7,000.80</Text>
+        <Text style={styles.overView_totalCash}>{total.toFixed(2)}</Text>
         <Text style={styles.overView_subTitle}>Total Available cash</Text>
         {arrayInfo.map(info => (
           <ActionsUser
@@ -145,7 +145,7 @@ function HomeScreen({navigation}: any) {
         ))}
       </View>
       <ScrollView>
-        {/* {arrayYourGiving.map(post => (
+        {arrayYourGiving.map(post => (
           <YourGiving
             key={post.id}
             title={post.title}
@@ -153,63 +153,7 @@ function HomeScreen({navigation}: any) {
             logo={post.logo}
             photo={post.photo}
           />
-        ))} */}
-        <View style={styles.blockGivingImpact}>
-          <View style={styles.blockGivingImpact_blockTitle}>
-            <Image
-              source={require('./../../assets/projectImages/avatar.png')}
-              style={styles.blockTitle_avatar}
-            />
-            <View style={styles.blockTitle_infoGivingImpact}>
-              <Text style={styles.infoGivingImpact_title}>
-                Your Giving Impact
-              </Text>
-              <Text style={styles.infoGivingImpact_activity}>
-                St Jude * 12 hrs ago
-              </Text>
-            </View>
-          </View>
-          <View>
-            <Image
-              source={require('./../../assets/projectImages/rectangle2.png')}
-              style={styles.blockGivingImpact_photo}
-            />
-          </View>
-          <View style={styles.blockGivingImpact_info}>
-            <Text style={styles.blockGivingImpact_info_text}>
-              Danny, Your donation helped 1 amazing kid get much needed cancer
-              surgery, thanks fo being...
-            </Text>
-          </View>
-        </View>
-        <View style={styles.blockGivingImpact}>
-          <View style={styles.blockGivingImpact_blockTitle}>
-            <Image
-              source={require('./../../assets/projectImages/avatar.png')}
-              style={styles.blockTitle_avatar}
-            />
-            <View style={styles.blockTitle_infoGivingImpact}>
-              <Text style={styles.infoGivingImpact_title}>
-                Your Giving Impact
-              </Text>
-              <Text style={styles.infoGivingImpact_activity}>
-                St Jude * 4 hrs ago
-              </Text>
-            </View>
-          </View>
-          <View>
-            <Image
-              source={require('./../../assets/projectImages/rectangle.png')}
-              style={styles.blockGivingImpact_photo}
-            />
-          </View>
-          <View style={styles.blockGivingImpact_info}>
-            <Text style={styles.blockGivingImpact_info_text}>
-              Danny, Your donation helped 5 amazing kids get much needed cancer
-              surgery, thanks fo being...
-            </Text>
-          </View>
-        </View>
+        ))}
       </ScrollView>
     </View>
   );

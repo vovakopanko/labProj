@@ -16,7 +16,6 @@ export const useAuth = (): any => {
 
   const login = useCallback(async (userTokens: string, userName: string) => {
     dispatch(authActions.SignIn(userTokens, userName));
-    // await AsyncStorage.setItem('auth', JSON.stringify(userToken, userName));
   }, []);
 
   const logout = useCallback(async () => {

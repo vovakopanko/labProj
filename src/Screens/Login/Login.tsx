@@ -1,5 +1,4 @@
 import React, {FC, useState} from 'react';
-// import {Alert} from 'react-native';
 import {
   Dimensions,
   KeyboardAvoidingView,
@@ -10,9 +9,11 @@ import {
   View,
   SafeAreaView,
   Image,
+  ScrollView,
 } from 'react-native';
 import {useAuth} from '../../hook/authHook';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+// import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
@@ -49,89 +50,102 @@ const LoginScreen: FC = () => {
   };
 
   const LoginCounter = () => {
-    setCounterInput(prev => prev - 1);
     loginHandler(loginData.userName, loginData.password);
+    setTimeout(() => {
+      setCounterInput(prev => prev - 1);
+    }, 1000);
   };
 
   return (
     <SafeAreaView>
-      <View style={styles.loginPage}>
-        <View style={styles.loginPage__loginText}>
-          <Text style={styles.loginText}>Login</Text>
-        </View>
-        <View style={styles.loginPage__emailInput}>
-          <Text style={styles.emailInput__title}>Email</Text>
-          <TextInput
-            style={!emailActive ? styles.input : styles.inputActive}
-            placeholder="Your email address"
-            onChangeText={userName => inputHandler(userName, 'userName')}
-            onFocus={() => {
-              setEmailActive(true);
-            }}
-            onBlur={() => {
-              setEmailActive(false);
-            }}
-            maxLength={50}
-            clearTextOnFocus={true}
-            keyboardType="email-address"
-          />
-        </View>
-        <View style={styles.loginPage__passwordInput}>
-          <Text style={styles.passwordInput__title}>Password</Text>
-          <TextInput
-            secureTextEntry={true}
-            style={!passwordActive ? styles.input : styles.inputActive}
-            placeholder="Password"
-            onChangeText={password => inputHandler(password, 'password')}
-            onFocus={() => {
-              setPasswordActive(true);
-            }}
-            onBlur={() => {
-              setPasswordActive(false);
-            }}
-          />
-          <TouchableOpacity style={styles.loginPage__forgotBtn}>
-            <Text style={styles.forgotBtn__text}>FORGOT PASSWORD</Text>
-          </TouchableOpacity>
-        </View>
-        <Text style={styles.info}>Login: User , Pass: 12345</Text>
-        <KeyboardAvoidingView
-          behavior="padding"
-          style={styles.loginPage__loginBtn}>
-          {counterInput === 0 ? (
-            <TouchableOpacity style={styles.loginBtn_Dissabled} disabled={true}>
-              <Text style={styles.loginPage__BtnText}>CAPTCHA</Text>
+      <ScrollView>
+        <View style={styles.loginPage}>
+          <View style={styles.loginPage__loginText}>
+            <Text style={styles.loginText}>Login</Text>
+          </View>
+          <View style={styles.loginPage__emailInput}>
+            <Text style={styles.emailInput__title}>Email</Text>
+            <TextInput
+              style={!emailActive ? styles.input : styles.inputActive}
+              placeholder="Your email address"
+              onChangeText={userName => inputHandler(userName, 'userName')}
+              onFocus={() => {
+                setEmailActive(true);
+              }}
+              onBlur={() => {
+                setEmailActive(false);
+              }}
+              maxLength={50}
+              clearTextOnFocus={true}
+              keyboardType="email-address"
+            />
+          </View>
+          <View style={styles.loginPage__passwordInput}>
+            <Text style={styles.passwordInput__title}>Password</Text>
+            <TextInput
+              secureTextEntry={true}
+              style={!passwordActive ? styles.input : styles.inputActive}
+              placeholder="Password"
+              onChangeText={password => inputHandler(password, 'password')}
+              onFocus={() => {
+                setPasswordActive(true);
+              }}
+              onBlur={() => {
+                setPasswordActive(false);
+              }}
+              clearTextOnFocus={true}
+            />
+            <TouchableOpacity style={styles.loginPage__forgotBtn}>
+              <Text style={styles.forgotBtn__text}>FORGOT PASSWORD</Text>
             </TouchableOpacity>
-          ) : (
-            <TouchableOpacity style={styles.loginBtn} onPress={LoginCounter}>
-              <Text style={styles.loginPage__BtnText}>LOGIN</Text>
-            </TouchableOpacity>
-          )}
+          </View>
+          <Text style={styles.info}>Login: User , Pass: 12345</Text>
+          <KeyboardAvoidingView
+            behavior="padding"
+            style={styles.loginPage__loginBtn}>
+            {counterInput === 0 ? (
+              <TouchableOpacity
+                style={styles.loginBtn_Dissabled}
+                disabled={true}>
+                <Text style={styles.loginPage__BtnText}>CAPTCHA</Text>
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity style={styles.loginBtn} onPress={LoginCounter}>
+                <Text style={styles.loginPage__BtnText}>LOGIN</Text>
+              </TouchableOpacity>
+            )}
 
-          <Text>You have {counterInput} login attempts</Text>
-        </KeyboardAvoidingView>
-        <View style={styles.loginPage__numberAttemps}>
-          <Text style={styles.numberAttemps__text}>
-            Lets test 2 ways to log in
-          </Text>
+            {counterInput < 3 ? (
+              <Text style={styles.attempts}>
+                You have{' '}
+                <Text style={styles.attempts_counter}>{counterInput} </Text>
+                login attempts
+              </Text>
+            ) : null}
+          </KeyboardAvoidingView>
+          <View style={styles.loginPage__numberAttemps}>
+            <Text style={styles.numberAttemps__text}>
+              Lets test 2 ways to log in
+            </Text>
+          </View>
+          <View style={styles.loginPage__userDefinitionBtn}>
+            <TouchableOpacity style={styles.userDefinitionBtn__touchId}>
+              <Image
+                source={require('./../../assets/projectImages/touchId.png')}
+                style={styles.touchId__BtnIcon}
+              />
+              <Text style={styles.touchId__BtnText}>Touch ID</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.userDefinitionBtn__faceId}>
+              <Image
+                source={require('./../../assets/projectImages/faceId.png')}
+                style={styles.faceId__BtnIcon}
+              />
+              <Text style={styles.faceId__BtnText}>Face ID</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-        <View style={styles.loginPage__userDefinitionBtn}>
-          <TouchableOpacity style={styles.userDefinitionBtn__touchId}>
-            <Image
-              source={require('./../../assets/projectImages/touchId.png')}
-              style={styles.touchId__BtnIcon}
-            />
-            <Text style={styles.touchId__BtnText}>Touch ID</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.userDefinitionBtn__faceId}>
-            <Image
-              source={require('./../../assets/projectImages/faceId.png')}
-              style={styles.faceId__BtnIcon}
-            />
-            <Text style={styles.faceId__BtnText}>Face ID</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -291,5 +305,12 @@ const styles = StyleSheet.create({
     color: 'grey',
     marginTop: 450,
     alignSelf: 'center',
+  },
+  attempts: {
+    color: 'red',
+  },
+  attempts_counter: {
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
