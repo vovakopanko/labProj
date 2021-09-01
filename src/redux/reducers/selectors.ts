@@ -5,3 +5,5 @@ export const getUserTokenSelector = (state: AppStateType) =>
 
 export const getIsLoadingSelector = (state: AppStateType) =>
   state.auth.isLoading;
+
+export const getUserNameSelector = (state: AppStateType) => state.auth.userName;

@@ -50,10 +50,12 @@ const LoginScreen: FC = () => {
   };
 
   const LoginCounter = () => {
-    loginHandler(loginData.userName, loginData.password);
+    // setCounterInput(prev => prev - 1);
     setTimeout(() => {
       setCounterInput(prev => prev - 1);
+      //Add disabled button
     }, 1000);
+    loginHandler(loginData.userName, loginData.password);
   };
 
   return (
