@@ -1,7 +1,6 @@
-import React from 'react';
+import React, {useRef, useState} from 'react';
 import {
   StyleSheet,
-  ScrollView,
   View,
   Text,
   TouchableHighlight,
@@ -9,12 +8,20 @@ import {
   ImageSourcePropType,
   TouchableOpacity,
   Dimensions,
+  Platform,
+  Button,
+  // NativeSyntheticEvent,
+  // NativeScrollEvent,
 } from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 import {useAuth} from '../../hook/authHook';
+import Video from 'react-native-video';
 
 const screenWidth = Dimensions.get('screen').width;
-// const screenHeight = Dimensions.get('screen').height;
+
+type MyItemType = {
+  key: number;
+};
 
 type ActionsUser = {
   name: string;
@@ -38,6 +45,11 @@ type ArrayYourGivingImpactType = {
   subtitle: string;
   logo: ImageSourcePropType;
   photo: ImageSourcePropType;
+};
+
+type itemType = {
+  item: ArrayYourGivingImpactType;
+  index: string;
 };
 
 type YourGivingImpactType = {
@@ -183,93 +195,153 @@ function HomeScreen({navigation}: any) {
     'December',
   ];
   const {name} = useAuth();
-  return (
-    <ScrollView>
-      <View style={styles.homePage}>
-        <View style={styles.homePage_greetingUser}>
-          <Text style={styles.homePage_titleGreating}>
-            {currentTime.getHours() < 11
-              ? `Good Morning ${name}`
-              : currentTime.getHours() >= 11 && currentTime.getHours() < 17
-              ? `Good Afternoon ${name}`
-              : currentTime.getHours() >= 17 && currentTime.getHours() <= 22
-              ? `Good Evening ${name}`
-              : currentTime.getHours() > 22 && currentTime.getHours() <= 5
-              ? `Good Night ${name}`
-              : `Good Morning ${name}`}
-            |{' '}
-            {'Today: ' +
-              currentTime.getDate() +
-              ' ' +
-              monthNames[currentTime.getMonth()] +
-              ', ' +
-              currentTime.getUTCFullYear()}
-          </Text>
-        </View>
+  let player = useRef<Video>();
+  const [pause, setPause] = useState(true);
+  const [mute, setMute] = useState(false);
 
-        <View style={styles.homePage_overView}>
-          <Text style={styles.overView_title}>Account Overview </Text>
-          <Text style={styles.overView_totalCash}>
-            <Text>${totalCash[0]}.</Text>
-            <Text style={styles.numberAfterPoin}>{totalCash[1]}</Text>
-          </Text>
-          <Text style={styles.overView_subTitle}>Total Available cash</Text>
-          <FlatList
-            data={arrayInfo}
-            renderItem={({item}) => (
-              <ActionsUser
-                name={item.name}
-                info={item.info}
-                cash={item.cash}
-                icon={item.icon}
-                navigation={navigation}
+  const onHandlerPause = () => setPause(!pause);
+  const onHandlerMute = () => setMute(!mute);
+
+  return (
+    <View style={styles.homePage}>
+      <FlatList
+        ListHeaderComponent={
+          <View>
+            <View style={styles.homePage_greetingUser}>
+              <Text style={styles.homePage_titleGreating}>
+                {currentTime.getHours() < 11
+                  ? `Good Morning ${name}`
+                  : currentTime.getHours() >= 11 && currentTime.getHours() < 17
+                  ? `Good Afternoon ${name}`
+                  : currentTime.getHours() >= 17 && currentTime.getHours() <= 22
+                  ? `Good Evening ${name}`
+                  : currentTime.getHours() > 22 && currentTime.getHours() <= 5
+                  ? `Good Night ${name}`
+                  : `Good Morning ${name}`}
+                |{' '}
+                {'Today: ' +
+                  currentTime.getDate() +
+                  ' ' +
+                  monthNames[currentTime.getMonth()] +
+                  ', ' +
+                  currentTime.getUTCFullYear()}
+              </Text>
+            </View>
+            <View style={styles.homePage_overView}>
+              <Text style={styles.overView_title}>Account Overview </Text>
+              <Text style={styles.overView_totalCash}>
+                <Text>${totalCash[0]}.</Text>
+                <Text style={styles.numberAfterPoin}>{totalCash[1]}</Text>
+              </Text>
+              <Text style={styles.overView_subTitle}>Total Available cash</Text>
+              <FlatList
+                data={arrayInfo}
+                renderItem={({item}) => (
+                  <ActionsUser
+                    name={item.name}
+                    info={item.info}
+                    cash={item.cash}
+                    icon={item.icon}
+                    navigation={navigation}
+                  />
+                )}
               />
-            )}
-          />
-          {/* {arrayInfo.map(info => (
-            <ActionsUser
-              key={info.id}
-              name={info.name}
-              info={info.info}
-              cash={info.cash}
-              icon={info.icon}
-              navigation={navigation}
-            />
-          ))} */}
-        </View>
-        <FlatList
-          data={arrayYourGiving}
-          renderItem={({item}) => (
-            <YourGiving
-              title={item.title}
-              subtitle={item.subtitle}
-              logo={item.logo}
-              photo={item.photo}
-            />
-          )}
-        />
-        {/* {arrayYourGiving.map(post => (
-          <View style={styles.homePage_givingImpact}>
-            <YourGiving
-              key={post.id}
-              title={post.title}
-              subtitle={post.subtitle}
-              logo={post.logo}
-              photo={post.photo}
-            />
+            </View>
           </View>
-        ))} */}
-      </View>
-    </ScrollView>
+        }
+        data={arrayYourGiving}
+        initialNumToRender={3}
+        // onScroll={onHandlerPause}
+        showsVerticalScrollIndicator={false}
+        renderItem={({item}) => (
+          <YourGiving
+            key={item.id}
+            title={item.title}
+            subtitle={item.subtitle}
+            logo={item.logo}
+            photo={item.photo}
+          />
+        )}
+        keyExtractor={(item): any => item.id}
+        ListFooterComponent={
+          <View>
+            <View style={styles.blockGivingImpact}>
+              <View style={styles.blockGivingImpact_blockTitle}>
+                <Image
+                  source={require('../../assets/projectImages/avatar.png')}
+                  style={styles.blockTitle_avatar}
+                />
+                <View style={styles.blockTitle_infoGivingImpact}>
+                  <Text style={styles.infoGivingImpact_title}>
+                    {'Video from the location'}
+                  </Text>
+                  <Text style={styles.infoGivingImpact_activity}>
+                    {'Saw clip'}
+                  </Text>
+                </View>
+              </View>
+              <View>
+                <Video
+                  source={require('../../assets/video/video.mov')}
+                  repeat={true}
+                  paused={pause}
+                  muted={mute}
+                  ref={ref => {
+                    if (ref) {
+                      player.current = ref;
+                    }
+                  }}
+                  style={styles.backgroundVideo}
+                />
+              </View>
+              <View style={styles.blockGivingImpact_info}>
+                <View style={styles.btn__ClickVideo}>
+                  <Button
+                    onPress={onHandlerPause}
+                    title={pause ? 'Play' : 'Pause'}
+                    color="black"
+                  />
+                </View>
+                <View style={styles.btn__MuteVideo}>
+                  <Button
+                    onPress={onHandlerMute}
+                    title={mute ? 'UnMute' : 'Mute'}
+                    color="black"
+                  />
+                </View>
+
+                <Text style={styles.blockGivingImpact_info_text}>
+                  {name}, Your donation helped 5 amazing kid get much needed
+                  cancer surgery, thanks for being amazing!
+                </Text>
+              </View>
+              <View style={styles.blockGivingImpact__shareBtn}>
+                <TouchableOpacity
+                  style={styles.blockGivingImpact__shareBtn_dimensions}>
+                  <Image
+                    source={require('../../assets/projectImages/shareArrow.png')}
+                    style={styles.blockGivingImpact__shareBtn_icon}
+                  />
+                  <Text style={styles.blockGivingImpact__shareBtn_text}>
+                    Share to spread the word
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        }
+      />
+    </View>
   );
 }
 
-type Font = 'SFProRounded-Regular' | 'SFProRounded-Bold' | 'SFProRounded-Light';
+// type Font = 'SFProRounded-Regular' | 'SFProRounded-Bold' | 'SFProRounded-Light';
 
 const styles = StyleSheet.create({
   homePage: {
     flex: 1,
-    margin: 20,
+    marginHorizontal: 20,
+    paddingTop: 10,
   },
   homePage_titleGreating: {
     fontFamily: 'SFProRounded-Regular',
@@ -357,6 +429,7 @@ const styles = StyleSheet.create({
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.25,
     fontFamily: 'SFProRounded-Bold',
+    marginBottom: 10,
   },
   blockGivingImpact_blockTitle: {
     padding: 10,
@@ -409,6 +482,26 @@ const styles = StyleSheet.create({
   },
   blockGivingImpact__shareBtn_icon: {width: 15, height: 15, marginRight: 10},
   blockGivingImpact__shareBtn_text: {color: 'white'},
+  backgroundVideo: {
+    width: '100%',
+    height: Platform.OS === 'ios' ? 220 : '40%',
+  },
+  btn__ClickVideo: {
+    position: 'absolute',
+    bottom: 140,
+    right: 150,
+    backgroundColor: 'white',
+    opacity: 0.1,
+    borderRadius: 30,
+  },
+  btn__MuteVideo: {
+    position: 'absolute',
+    bottom: 70,
+    right: 10,
+    backgroundColor: 'grey',
+    borderRadius: 30,
+    opacity: 0.6,
+  },
 });
 
 export default HomeScreen;
