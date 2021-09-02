@@ -6,6 +6,7 @@ import {authActions} from '../redux/reducers/authReducer';
 import {
   getUserTokenSelector,
   getIsLoadingSelector,
+  getUserNameSelector,
 } from '../redux/reducers/selectors';
 
 export const useAuth = (): any => {
@@ -13,10 +14,10 @@ export const useAuth = (): any => {
 
   const userToken = useSelector(getUserTokenSelector);
   const isLoading = useSelector(getIsLoadingSelector);
+  const name = useSelector(getUserNameSelector);
 
   const login = useCallback(async (userTokens: string, userName: string) => {
     dispatch(authActions.SignIn(userTokens, userName));
-    // await AsyncStorage.setItem('auth', JSON.stringify(userToken, userName));
   }, []);
 
   const logout = useCallback(async () => {
@@ -34,5 +35,6 @@ export const useAuth = (): any => {
     retriveUserToken,
     userToken,
     isLoading,
+    name,
   };
 };
