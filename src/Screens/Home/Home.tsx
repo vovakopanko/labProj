@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   Dimensions,
 } from 'react-native';
+import {FlatList} from 'react-native-gesture-handler';
 import {useAuth} from '../../hook/authHook';
 
 const screenWidth = Dimensions.get('screen').width;
@@ -213,7 +214,19 @@ function HomeScreen({navigation}: any) {
             <Text style={styles.numberAfterPoin}>{totalCash[1]}</Text>
           </Text>
           <Text style={styles.overView_subTitle}>Total Available cash</Text>
-          {arrayInfo.map(info => (
+          <FlatList
+            data={arrayInfo}
+            renderItem={({item}) => (
+              <ActionsUser
+                name={item.name}
+                info={item.info}
+                cash={item.cash}
+                icon={item.icon}
+                navigation={navigation}
+              />
+            )}
+          />
+          {/* {arrayInfo.map(info => (
             <ActionsUser
               key={info.id}
               name={info.name}
@@ -222,10 +235,20 @@ function HomeScreen({navigation}: any) {
               icon={info.icon}
               navigation={navigation}
             />
-          ))}
+          ))} */}
         </View>
-
-        {arrayYourGiving.map(post => (
+        <FlatList
+          data={arrayYourGiving}
+          renderItem={({item}) => (
+            <YourGiving
+              title={item.title}
+              subtitle={item.subtitle}
+              logo={item.logo}
+              photo={item.photo}
+            />
+          )}
+        />
+        {/* {arrayYourGiving.map(post => (
           <View style={styles.homePage_givingImpact}>
             <YourGiving
               key={post.id}
@@ -235,7 +258,7 @@ function HomeScreen({navigation}: any) {
               photo={post.photo}
             />
           </View>
-        ))}
+        ))} */}
       </View>
     </ScrollView>
   );
