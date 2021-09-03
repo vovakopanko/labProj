@@ -9,19 +9,12 @@ import {
   TouchableOpacity,
   Dimensions,
   Platform,
-  Button,
-  // NativeSyntheticEvent,
-  // NativeScrollEvent,
 } from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 import {useAuth} from '../../hook/authHook';
 import Video from 'react-native-video';
 
 const screenWidth = Dimensions.get('screen').width;
-
-type MyItemType = {
-  key: number;
-};
 
 type ActionsUser = {
   name: string;
@@ -45,11 +38,8 @@ type ArrayYourGivingImpactType = {
   subtitle: string;
   logo: ImageSourcePropType;
   photo: ImageSourcePropType;
-};
-
-type itemType = {
-  item: ArrayYourGivingImpactType;
-  index: string;
+  desription: string;
+  videoContent: boolean;
 };
 
 type YourGivingImpactType = {
@@ -57,6 +47,9 @@ type YourGivingImpactType = {
   subtitle: string;
   logo: ImageSourcePropType;
   photo: ImageSourcePropType;
+  desription: string;
+  videoContent: boolean;
+  pause: boolean;
 };
 
 const arrayInfo: ArrayInfoType[] = [
@@ -90,13 +83,29 @@ const arrayYourGiving: ArrayYourGivingImpactType[] = [
     subtitle: 'St Jude * 3 hrs ago',
     logo: require('./../../assets/projectImages/avatar.png'),
     photo: require('./../../assets/projectImages/rectangle2.png'),
+    desription:
+      'Your donation helped 2 amazing kids get much needed cancer surgery, thanks for being amazing!',
+    videoContent: false,
   },
   {
     id: 2,
+    title: 'Your Giving Impact (Video informing)',
+    subtitle: 'St Jude * 5 hrs ago',
+    logo: require('../../assets/projectImages/avatar.png'),
+    photo: require('../../assets/video/video.mov'),
+    desription:
+      'Your donation helped group amazing kids get much needed cancer surgery, thanks for being amazing!',
+    videoContent: true,
+  },
+  {
+    id: 3,
     title: 'Your Giving Impact',
-    subtitle: 'St Jude * 12 hrs ago',
+    subtitle: 'St Jude * 2 days ago',
     logo: require('../../assets/projectImages/avatar.png'),
     photo: require('../../assets/projectImages/rectangle.png'),
+    desription:
+      'Your donation helped 5 amazing kids get much needed cancer surgery, thanks for being amazing!',
+    videoContent: false,
   },
 ];
 
@@ -138,8 +147,22 @@ const ActionsUser = ({name, info, cash, navigation, icon}: ActionsUser) => {
   );
 };
 
-const YourGiving = ({title, subtitle, logo, photo}: YourGivingImpactType) => {
+const YourGiving = ({
+  title,
+  subtitle,
+  logo,
+  photo,
+  desription,
+  videoContent,
+  pause,
+}: YourGivingImpactType) => {
+  const [mute, setMute] = useState(false);
+  const [fullScreen, setFullScreen] = useState(false);
   const {name} = useAuth();
+  const player = useRef<Video>();
+  const onHandlerMute = () => setMute(!mute);
+  const onHandlerFullScreen = () => setFullScreen(!fullScreen);
+
   return (
     <View style={styles.blockGivingImpact}>
       <View style={styles.blockGivingImpact_blockTitle}>
@@ -149,13 +172,86 @@ const YourGiving = ({title, subtitle, logo, photo}: YourGivingImpactType) => {
           <Text style={styles.infoGivingImpact_activity}>{subtitle}</Text>
         </View>
       </View>
+      {videoContent ? (
+        <View>
+          <Video
+            source={require('../../assets/video/video.mov')}
+            onTouchStart={() => setFullScreen(fullScreen!)}
+            fullscreen={fullScreen}
+            repeat={true}
+            paused={pause}
+            muted={mute}
+            ref={ref => {
+              if (ref) {
+                player.current = ref;
+              }
+            }}
+            style={styles.backgroundVideo}
+          />
+          <View>
+            <View style={styles.btn__MuteVideo}>
+              {!mute ? (
+                <TouchableOpacity onPress={onHandlerMute}>
+                  <Image
+                    source={require('../../assets/projectImages/play.png')}
+                    style={styles.btn__MuteVideo_size}
+                  />
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity onPress={onHandlerMute}>
+                  <Image
+                    source={require('../../assets/projectImages/mute.png')}
+                    style={styles.btn__MuteVideo_size}
+                  />
+                </TouchableOpacity>
+              )}
+            </View>
+            <View style={styles.btn__FullScreen}>
+              <TouchableOpacity onPress={onHandlerFullScreen}>
+                <Image
+                  source={require('../../assets/projectImages/fullscreen.png')}
+                  style={styles.btn__MuteVideo_fullscreen}
+                />
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      ) : null}
       <View>
         <Image source={photo} style={styles.blockGivingImpact_photo} />
       </View>
       <View style={styles.blockGivingImpact_info}>
+        {/* {videoContent ? (
+          <View>
+            <View style={styles.btn__MuteVideo}>
+              {!mute ? (
+                <TouchableOpacity onPress={onHandlerMute}>
+                  <Image
+                    source={require('../../assets/projectImages/play.png')}
+                    style={styles.btn__MuteVideo_size}
+                  />
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity onPress={onHandlerMute}>
+                  <Image
+                    source={require('../../assets/projectImages/mute.png')}
+                    style={styles.btn__MuteVideo_size}
+                  />
+                </TouchableOpacity>
+              )}
+            </View>
+            <View style={styles.btn__FullScreen}>
+              <TouchableOpacity onPress={onHandlerFullScreen}>
+                <Image
+                  source={require('../../assets/projectImages/fullscreen.png')}
+                  style={styles.btn__MuteVideo_fullscreen}
+                />
+              </TouchableOpacity>
+            </View>
+          </View>
+        ) : null} */}
         <Text style={styles.blockGivingImpact_info_text}>
-          {name}, Your donation helped 5 amazing kid get much needed cancer
-          surgery, thanks for being amazing!
+          {name},{desription}
         </Text>
       </View>
       <View style={styles.blockGivingImpact__shareBtn}>
@@ -174,9 +270,10 @@ const YourGiving = ({title, subtitle, logo, photo}: YourGivingImpactType) => {
 };
 
 function HomeScreen({navigation}: any) {
+  const [pause, setPause] = useState(true);
   const total = arrayInfo
     .map(s => s.cash)
-    .reduce((sum, current) => sum + current); // key for map
+    .reduce((sum, current) => sum + current);
   let totalCash: Array<string> = [];
   totalCash = total.toFixed(2).split('.');
   const currentTime = new Date();
@@ -195,13 +292,17 @@ function HomeScreen({navigation}: any) {
     'December',
   ];
   const {name} = useAuth();
-  let player = useRef<Video>();
-  const [pause, setPause] = useState(true);
-  const [mute, setMute] = useState(false);
 
-  const onHandlerPause = () => setPause(!pause);
-  const onHandlerMute = () => setMute(!mute);
-
+  const handleScroll = (event: any) => {
+    const positionY = event.nativeEvent.contentOffset.y;
+    if (positionY >= 0 && positionY < 399) {
+      setPause(true);
+    } else if (positionY >= 400 && positionY <= 600) {
+      setPause(false);
+    } else if (positionY > 601) {
+      setPause(true);
+    }
+  };
   return (
     <View style={styles.homePage}>
       <FlatList
@@ -251,7 +352,7 @@ function HomeScreen({navigation}: any) {
         }
         data={arrayYourGiving}
         initialNumToRender={3}
-        // onScroll={onHandlerPause}
+        onScroll={handleScroll}
         showsVerticalScrollIndicator={false}
         renderItem={({item}) => (
           <YourGiving
@@ -260,76 +361,12 @@ function HomeScreen({navigation}: any) {
             subtitle={item.subtitle}
             logo={item.logo}
             photo={item.photo}
+            desription={item.desription}
+            videoContent={item.videoContent}
+            pause={pause}
           />
         )}
         keyExtractor={(item): any => item.id}
-        ListFooterComponent={
-          <View>
-            <View style={styles.blockGivingImpact}>
-              <View style={styles.blockGivingImpact_blockTitle}>
-                <Image
-                  source={require('../../assets/projectImages/avatar.png')}
-                  style={styles.blockTitle_avatar}
-                />
-                <View style={styles.blockTitle_infoGivingImpact}>
-                  <Text style={styles.infoGivingImpact_title}>
-                    {'Video from the location'}
-                  </Text>
-                  <Text style={styles.infoGivingImpact_activity}>
-                    {'Saw clip'}
-                  </Text>
-                </View>
-              </View>
-              <View>
-                <Video
-                  source={require('../../assets/video/video.mov')}
-                  repeat={true}
-                  paused={pause}
-                  muted={mute}
-                  ref={ref => {
-                    if (ref) {
-                      player.current = ref;
-                    }
-                  }}
-                  style={styles.backgroundVideo}
-                />
-              </View>
-              <View style={styles.blockGivingImpact_info}>
-                <View style={styles.btn__ClickVideo}>
-                  <Button
-                    onPress={onHandlerPause}
-                    title={pause ? 'Play' : 'Pause'}
-                    color="black"
-                  />
-                </View>
-                <View style={styles.btn__MuteVideo}>
-                  <Button
-                    onPress={onHandlerMute}
-                    title={mute ? 'UnMute' : 'Mute'}
-                    color="black"
-                  />
-                </View>
-
-                <Text style={styles.blockGivingImpact_info_text}>
-                  {name}, Your donation helped 5 amazing kid get much needed
-                  cancer surgery, thanks for being amazing!
-                </Text>
-              </View>
-              <View style={styles.blockGivingImpact__shareBtn}>
-                <TouchableOpacity
-                  style={styles.blockGivingImpact__shareBtn_dimensions}>
-                  <Image
-                    source={require('../../assets/projectImages/shareArrow.png')}
-                    style={styles.blockGivingImpact__shareBtn_icon}
-                  />
-                  <Text style={styles.blockGivingImpact__shareBtn_text}>
-                    Share to spread the word
-                  </Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          </View>
-        }
       />
     </View>
   );
@@ -486,21 +523,25 @@ const styles = StyleSheet.create({
     width: '100%',
     height: Platform.OS === 'ios' ? 220 : '40%',
   },
-  btn__ClickVideo: {
-    position: 'absolute',
-    bottom: 140,
-    right: 150,
-    backgroundColor: 'white',
-    opacity: 0.1,
-    borderRadius: 30,
-  },
   btn__MuteVideo: {
     position: 'absolute',
-    bottom: 70,
-    right: 10,
-    backgroundColor: 'grey',
-    borderRadius: 30,
+    bottom: 20,
+    right: '3%',
     opacity: 0.6,
+  },
+  btn__MuteVideo_size: {
+    height: 20,
+    width: 20,
+  },
+  btn__FullScreen: {
+    position: 'absolute',
+    bottom: 20,
+    right: '90%',
+    opacity: 0.6,
+  },
+  btn__MuteVideo_fullscreen: {
+    height: 20,
+    width: 20,
   },
 });
 
