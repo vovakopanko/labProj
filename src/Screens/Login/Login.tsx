@@ -325,4 +325,5 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
+  isLoading: {flex: 1, justifyContent: 'center', alignItems: 'center'},
 });

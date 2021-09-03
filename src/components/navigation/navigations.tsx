@@ -133,7 +133,7 @@ function MyTabs() {
   );
 }
 
-export default function DrawerNavigation() {
+export default function DrawerNavigation({navigation}: any) {
   return (
     <DrawerTab.Navigator
       screenOptions={{
@@ -142,7 +142,7 @@ export default function DrawerNavigation() {
           backgroundColor: isAuth ? 'mediumvioletred' : 'white',
         },
         headerTitle: () => <HeaderLogoTitle />,
-        headerRight: () => <HeaderRightBtn />,
+        headerRight: () => <HeaderRightBtn navigation={navigation} />,
       }}>
       <DrawerTab.Screen name="Spiral" component={MyTabs} />
     </DrawerTab.Navigator>

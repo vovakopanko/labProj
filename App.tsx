@@ -14,19 +14,20 @@ import {StyleSheet} from 'react-native';
 import {useAuth} from './src/hook/authHook';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import HeaderLeftBtn from './src/components/navigation/headerLeftBtn';
+import ProfileScreen from './src/Screens/Profile/Profile';
 
 export type RootAppStackParams = {
   Checking: undefined;
   Saving: undefined;
   Goodness: undefined;
   DrawScreen: undefined;
+  Proffile: undefined;
 };
 
 const Stack = createStackNavigator<RootAppStackParams>();
 
 export default function App() {
   const {userToken, isLoading, retriveUserToken} = useAuth();
-
   useEffect(() => {
     setTimeout(async () => {
       let userToken;
@@ -37,7 +38,7 @@ export default function App() {
         console.log(e);
       }
       retriveUserToken(userToken);
-    }, 1000);
+    }, 5000);
   }, [retriveUserToken]);
 
   if (isLoading) {
@@ -75,7 +76,7 @@ export default function App() {
                 subtitle={route.params.info}
               />
             ),
-            headerRight: () => <HeaderRightBtn />,
+            headerRight: () => <HeaderRightBtn navigation={navigation} />,
             headerLeft: () => <HeaderLeftBtn navigation={navigation} />,
           })}
         />
@@ -94,7 +95,26 @@ export default function App() {
                 subtitle={route.params.info}
               />
             ),
-            headerRight: () => <HeaderRightBtn />,
+            headerRight: () => <HeaderRightBtn navigation={navigation} />,
+            headerLeft: () => <HeaderLeftBtn navigation={navigation} />,
+          })}
+        />
+        <Stack.Screen
+          name="Proffile"
+          component={ProfileScreen}
+          options={({route, navigation}: any) => ({
+            headerShown: true,
+            headerTintColor: 'white',
+            headerStyle: {
+              backgroundColor: 'mediumvioletred',
+            },
+            headerTitle: () => (
+              <HeaderAppTitle
+                title={route.params.name}
+                subtitle={route.params.info}
+              />
+            ),
+            headerRight: () => <HeaderRightBtn navigation={navigation} />,
             headerLeft: () => <HeaderLeftBtn navigation={navigation} />,
           })}
         />
@@ -113,7 +133,7 @@ export default function App() {
                 subtitle={route.params.info}
               />
             ),
-            headerRight: () => <HeaderRightBtn />,
+            headerRight: () => <HeaderRightBtn navigation={navigation} />,
             headerLeft: () => <HeaderLeftBtn navigation={navigation} />,
           })}
         />

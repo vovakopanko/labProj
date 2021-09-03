@@ -221,35 +221,6 @@ const YourGiving = ({
         <Image source={photo} style={styles.blockGivingImpact_photo} />
       </View>
       <View style={styles.blockGivingImpact_info}>
-        {/* {videoContent ? (
-          <View>
-            <View style={styles.btn__MuteVideo}>
-              {!mute ? (
-                <TouchableOpacity onPress={onHandlerMute}>
-                  <Image
-                    source={require('../../assets/projectImages/play.png')}
-                    style={styles.btn__MuteVideo_size}
-                  />
-                </TouchableOpacity>
-              ) : (
-                <TouchableOpacity onPress={onHandlerMute}>
-                  <Image
-                    source={require('../../assets/projectImages/mute.png')}
-                    style={styles.btn__MuteVideo_size}
-                  />
-                </TouchableOpacity>
-              )}
-            </View>
-            <View style={styles.btn__FullScreen}>
-              <TouchableOpacity onPress={onHandlerFullScreen}>
-                <Image
-                  source={require('../../assets/projectImages/fullscreen.png')}
-                  style={styles.btn__MuteVideo_fullscreen}
-                />
-              </TouchableOpacity>
-            </View>
-          </View>
-        ) : null} */}
         <Text style={styles.blockGivingImpact_info_text}>
           {name},{desription}
         </Text>
