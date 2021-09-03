@@ -1,7 +1,6 @@
-import React from 'react';
+import React, {useRef, useState} from 'react';
 import {
   StyleSheet,
-  ScrollView,
   View,
   Text,
   TouchableHighlight,
@@ -9,12 +8,13 @@ import {
   ImageSourcePropType,
   TouchableOpacity,
   Dimensions,
+  Platform,
 } from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 import {useAuth} from '../../hook/authHook';
+import Video from 'react-native-video';
 
 const screenWidth = Dimensions.get('screen').width;
-// const screenHeight = Dimensions.get('screen').height;
 
 type ActionsUser = {
   name: string;
@@ -38,6 +38,8 @@ type ArrayYourGivingImpactType = {
   subtitle: string;
   logo: ImageSourcePropType;
   photo: ImageSourcePropType;
+  desription: string;
+  videoContent: boolean;
 };
 
 type YourGivingImpactType = {
@@ -45,6 +47,9 @@ type YourGivingImpactType = {
   subtitle: string;
   logo: ImageSourcePropType;
   photo: ImageSourcePropType;
+  desription: string;
+  videoContent: boolean;
+  pause: boolean;
 };
 
 const arrayInfo: ArrayInfoType[] = [
@@ -78,13 +83,29 @@ const arrayYourGiving: ArrayYourGivingImpactType[] = [
     subtitle: 'St Jude * 3 hrs ago',
     logo: require('./../../assets/projectImages/avatar.png'),
     photo: require('./../../assets/projectImages/rectangle2.png'),
+    desription:
+      'Your donation helped 2 amazing kids get much needed cancer surgery, thanks for being amazing!',
+    videoContent: false,
   },
   {
     id: 2,
+    title: 'Your Giving Impact (Video informing)',
+    subtitle: 'St Jude * 5 hrs ago',
+    logo: require('../../assets/projectImages/avatar.png'),
+    photo: require('../../assets/video/video.mov'),
+    desription:
+      'Your donation helped group amazing kids get much needed cancer surgery, thanks for being amazing!',
+    videoContent: true,
+  },
+  {
+    id: 3,
     title: 'Your Giving Impact',
-    subtitle: 'St Jude * 12 hrs ago',
+    subtitle: 'St Jude * 2 days ago',
     logo: require('../../assets/projectImages/avatar.png'),
     photo: require('../../assets/projectImages/rectangle.png'),
+    desription:
+      'Your donation helped 5 amazing kids get much needed cancer surgery, thanks for being amazing!',
+    videoContent: false,
   },
 ];
 
@@ -126,8 +147,22 @@ const ActionsUser = ({name, info, cash, navigation, icon}: ActionsUser) => {
   );
 };
 
-const YourGiving = ({title, subtitle, logo, photo}: YourGivingImpactType) => {
+const YourGiving = ({
+  title,
+  subtitle,
+  logo,
+  photo,
+  desription,
+  videoContent,
+  pause,
+}: YourGivingImpactType) => {
+  const [mute, setMute] = useState(false);
+  const [fullScreen, setFullScreen] = useState(false);
   const {name} = useAuth();
+  const player = useRef<Video>();
+  const onHandlerMute = () => setMute(!mute);
+  const onHandlerFullScreen = () => setFullScreen(!fullScreen);
+
   return (
     <View style={styles.blockGivingImpact}>
       <View style={styles.blockGivingImpact_blockTitle}>
@@ -137,13 +172,86 @@ const YourGiving = ({title, subtitle, logo, photo}: YourGivingImpactType) => {
           <Text style={styles.infoGivingImpact_activity}>{subtitle}</Text>
         </View>
       </View>
+      {videoContent ? (
+        <View>
+          <Video
+            source={require('../../assets/video/video.mov')}
+            onTouchStart={() => setFullScreen(fullScreen!)}
+            fullscreen={fullScreen}
+            repeat={true}
+            paused={pause}
+            muted={mute}
+            ref={ref => {
+              if (ref) {
+                player.current = ref;
+              }
+            }}
+            style={styles.backgroundVideo}
+          />
+          <View>
+            <View style={styles.btn__MuteVideo}>
+              {!mute ? (
+                <TouchableOpacity onPress={onHandlerMute}>
+                  <Image
+                    source={require('../../assets/projectImages/play.png')}
+                    style={styles.btn__MuteVideo_size}
+                  />
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity onPress={onHandlerMute}>
+                  <Image
+                    source={require('../../assets/projectImages/mute.png')}
+                    style={styles.btn__MuteVideo_size}
+                  />
+                </TouchableOpacity>
+              )}
+            </View>
+            <View style={styles.btn__FullScreen}>
+              <TouchableOpacity onPress={onHandlerFullScreen}>
+                <Image
+                  source={require('../../assets/projectImages/fullscreen.png')}
+                  style={styles.btn__MuteVideo_fullscreen}
+                />
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      ) : null}
       <View>
         <Image source={photo} style={styles.blockGivingImpact_photo} />
       </View>
       <View style={styles.blockGivingImpact_info}>
+        {/* {videoContent ? (
+          <View>
+            <View style={styles.btn__MuteVideo}>
+              {!mute ? (
+                <TouchableOpacity onPress={onHandlerMute}>
+                  <Image
+                    source={require('../../assets/projectImages/play.png')}
+                    style={styles.btn__MuteVideo_size}
+                  />
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity onPress={onHandlerMute}>
+                  <Image
+                    source={require('../../assets/projectImages/mute.png')}
+                    style={styles.btn__MuteVideo_size}
+                  />
+                </TouchableOpacity>
+              )}
+            </View>
+            <View style={styles.btn__FullScreen}>
+              <TouchableOpacity onPress={onHandlerFullScreen}>
+                <Image
+                  source={require('../../assets/projectImages/fullscreen.png')}
+                  style={styles.btn__MuteVideo_fullscreen}
+                />
+              </TouchableOpacity>
+            </View>
+          </View>
+        ) : null} */}
         <Text style={styles.blockGivingImpact_info_text}>
-          {name}, Your donation helped 5 amazing kid get much needed cancer
-          surgery, thanks for being amazing!
+          {name},{desription}
         </Text>
       </View>
       <View style={styles.blockGivingImpact__shareBtn}>
@@ -162,9 +270,10 @@ const YourGiving = ({title, subtitle, logo, photo}: YourGivingImpactType) => {
 };
 
 function HomeScreen({navigation}: any) {
+  const [pause, setPause] = useState(true);
   const total = arrayInfo
     .map(s => s.cash)
-    .reduce((sum, current) => sum + current); // key for map
+    .reduce((sum, current) => sum + current);
   let totalCash: Array<string> = [];
   totalCash = total.toFixed(2).split('.');
   const currentTime = new Date();
@@ -183,93 +292,93 @@ function HomeScreen({navigation}: any) {
     'December',
   ];
   const {name} = useAuth();
-  return (
-    <ScrollView>
-      <View style={styles.homePage}>
-        <View style={styles.homePage_greetingUser}>
-          <Text style={styles.homePage_titleGreating}>
-            {currentTime.getHours() < 11
-              ? `Good Morning ${name}`
-              : currentTime.getHours() >= 11 && currentTime.getHours() < 17
-              ? `Good Afternoon ${name}`
-              : currentTime.getHours() >= 17 && currentTime.getHours() <= 22
-              ? `Good Evening ${name}`
-              : currentTime.getHours() > 22 && currentTime.getHours() <= 5
-              ? `Good Night ${name}`
-              : `Good Morning ${name}`}
-            |{' '}
-            {'Today: ' +
-              currentTime.getDate() +
-              ' ' +
-              monthNames[currentTime.getMonth()] +
-              ', ' +
-              currentTime.getUTCFullYear()}
-          </Text>
-        </View>
 
-        <View style={styles.homePage_overView}>
-          <Text style={styles.overView_title}>Account Overview </Text>
-          <Text style={styles.overView_totalCash}>
-            <Text>${totalCash[0]}.</Text>
-            <Text style={styles.numberAfterPoin}>{totalCash[1]}</Text>
-          </Text>
-          <Text style={styles.overView_subTitle}>Total Available cash</Text>
-          <FlatList
-            data={arrayInfo}
-            renderItem={({item}) => (
-              <ActionsUser
-                name={item.name}
-                info={item.info}
-                cash={item.cash}
-                icon={item.icon}
-                navigation={navigation}
+  const handleScroll = (event: any) => {
+    const positionY = event.nativeEvent.contentOffset.y;
+    if (positionY >= 0 && positionY < 399) {
+      setPause(true);
+    } else if (positionY >= 400 && positionY <= 600) {
+      setPause(false);
+    } else if (positionY > 601) {
+      setPause(true);
+    }
+  };
+  return (
+    <View style={styles.homePage}>
+      <FlatList
+        ListHeaderComponent={
+          <View>
+            <View style={styles.homePage_greetingUser}>
+              <Text style={styles.homePage_titleGreating}>
+                {currentTime.getHours() < 11
+                  ? `Good Morning ${name}`
+                  : currentTime.getHours() >= 11 && currentTime.getHours() < 17
+                  ? `Good Afternoon ${name}`
+                  : currentTime.getHours() >= 17 && currentTime.getHours() <= 22
+                  ? `Good Evening ${name}`
+                  : currentTime.getHours() > 22 && currentTime.getHours() <= 5
+                  ? `Good Night ${name}`
+                  : `Good Morning ${name}`}
+                |{' '}
+                {'Today: ' +
+                  currentTime.getDate() +
+                  ' ' +
+                  monthNames[currentTime.getMonth()] +
+                  ', ' +
+                  currentTime.getUTCFullYear()}
+              </Text>
+            </View>
+            <View style={styles.homePage_overView}>
+              <Text style={styles.overView_title}>Account Overview </Text>
+              <Text style={styles.overView_totalCash}>
+                <Text>${totalCash[0]}.</Text>
+                <Text style={styles.numberAfterPoin}>{totalCash[1]}</Text>
+              </Text>
+              <Text style={styles.overView_subTitle}>Total Available cash</Text>
+              <FlatList
+                data={arrayInfo}
+                renderItem={({item}) => (
+                  <ActionsUser
+                    name={item.name}
+                    info={item.info}
+                    cash={item.cash}
+                    icon={item.icon}
+                    navigation={navigation}
+                  />
+                )}
               />
-            )}
-          />
-          {/* {arrayInfo.map(info => (
-            <ActionsUser
-              key={info.id}
-              name={info.name}
-              info={info.info}
-              cash={info.cash}
-              icon={info.icon}
-              navigation={navigation}
-            />
-          ))} */}
-        </View>
-        <FlatList
-          data={arrayYourGiving}
-          renderItem={({item}) => (
-            <YourGiving
-              title={item.title}
-              subtitle={item.subtitle}
-              logo={item.logo}
-              photo={item.photo}
-            />
-          )}
-        />
-        {/* {arrayYourGiving.map(post => (
-          <View style={styles.homePage_givingImpact}>
-            <YourGiving
-              key={post.id}
-              title={post.title}
-              subtitle={post.subtitle}
-              logo={post.logo}
-              photo={post.photo}
-            />
+            </View>
           </View>
-        ))} */}
-      </View>
-    </ScrollView>
+        }
+        data={arrayYourGiving}
+        initialNumToRender={3}
+        onScroll={handleScroll}
+        showsVerticalScrollIndicator={false}
+        renderItem={({item}) => (
+          <YourGiving
+            key={item.id}
+            title={item.title}
+            subtitle={item.subtitle}
+            logo={item.logo}
+            photo={item.photo}
+            desription={item.desription}
+            videoContent={item.videoContent}
+            pause={pause}
+          />
+        )}
+        keyExtractor={(item): any => item.id}
+      />
+    </View>
   );
 }
 
-type Font = 'SFProRounded-Regular' | 'SFProRounded-Bold' | 'SFProRounded-Light';
+// type Font = 'SFProRounded-Regular' | 'SFProRounded-Bold' | 'SFProRounded-Light';
 
 const styles = StyleSheet.create({
   homePage: {
     flex: 1,
-    margin: 20,
+    marginHorizontal: 20,
+    paddingTop: 10,
   },
   homePage_titleGreating: {
     fontFamily: 'SFProRounded-Regular',
@@ -357,6 +466,7 @@ const styles = StyleSheet.create({
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.25,
     fontFamily: 'SFProRounded-Bold',
+    marginBottom: 10,
   },
   blockGivingImpact_blockTitle: {
     padding: 10,
@@ -409,6 +519,30 @@ const styles = StyleSheet.create({
   },
   blockGivingImpact__shareBtn_icon: {width: 15, height: 15, marginRight: 10},
   blockGivingImpact__shareBtn_text: {color: 'white'},
+  backgroundVideo: {
+    width: '100%',
+    height: Platform.OS === 'ios' ? 220 : '40%',
+  },
+  btn__MuteVideo: {
+    position: 'absolute',
+    bottom: 20,
+    right: '3%',
+    opacity: 0.6,
+  },
+  btn__MuteVideo_size: {
+    height: 20,
+    width: 20,
+  },
+  btn__FullScreen: {
+    position: 'absolute',
+    bottom: 20,
+    right: '90%',
+    opacity: 0.6,
+  },
+  btn__MuteVideo_fullscreen: {
+    height: 20,
+    width: 20,
+  },
 });
 
 export default HomeScreen;
