@@ -28,17 +28,18 @@ const Stack = createStackNavigator<RootAppStackParams>();
 
 export default function App() {
   const {userToken, isLoading, retriveUserToken} = useAuth();
+
   useEffect(() => {
     setTimeout(async () => {
-      let userToken;
-      userToken = null;
+      let token;
+      token = null;
       try {
-        userToken = await AsyncStorage.getItem('userToken');
+        token = await AsyncStorage.getItem('userToken');
       } catch (e) {
         console.log(e);
       }
-      retriveUserToken(userToken);
-    }, 5000);
+      retriveUserToken(token);
+    }, 1000);
   }, [retriveUserToken]);
 
   if (isLoading) {

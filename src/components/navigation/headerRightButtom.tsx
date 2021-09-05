@@ -8,16 +8,16 @@ import {
   View,
 } from 'react-native';
 import {useAuth} from '../../hook/authHook';
+import {useProfile} from '../../hook/profileHook';
 
 const HeaderRightBtn: FC = ({navigation}: any) => {
   const [isSignOutOpen, setIsSignOutOpen] = React.useState(false);
-  const {logout, name} = useAuth();
+  const {logout} = useAuth();
+  const {fullName} = useProfile();
 
   const signOutChangeHandler = () => {
     setIsSignOutOpen(!isSignOutOpen);
   };
-
-  console.log();
 
   const signOutLog = () => {
     signOutChangeHandler();
@@ -27,7 +27,7 @@ const HeaderRightBtn: FC = ({navigation}: any) => {
   const openUserProfile = () => {
     navigation.navigate('Proffile', {
       info: null,
-      name: name,
+      name: fullName,
     });
     signOutChangeHandler();
   };
@@ -51,7 +51,7 @@ const HeaderRightBtn: FC = ({navigation}: any) => {
               source={require('./../../assets/projectImages/oval.png')}
               style={styles.ignOutModal__userLogo}
             />
-            <Text style={styles.signOutModalText}>{name}</Text>
+            <Text style={styles.signOutModalText}>{fullName}</Text>
           </View>
           <TouchableOpacity
             style={styles.settingsProfile}

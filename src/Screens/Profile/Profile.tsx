@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -8,21 +8,45 @@ import {
   Image,
   TextInput,
 } from 'react-native';
-import {useAuth} from '../../hook/authHook';
+import {useProfile} from '../../hook/profileHook';
+import DatePicker from 'react-native-date-picker';
 
-// type DataType = Record<string, string | null>;
+type DataType = Record<string, string | null>;
 
 const ProfileScreen: FC = () => {
+  const {fullName, dateBirth, updateUserInfo} = useProfile();
   const [update, setUpdate] = useState(true);
-  //   const [infoUserData, setInfoUserData] = useState<DataType>({
-  //     userName: 'User',
-  //     bithdayDate: null,
-  //   });
-  const {name} = useAuth();
-
   const [nameActive, setNameActive] = useState(false);
-  const [dateActive, setDateActive] = useState(false);
+  // const [dateActive, setDateActive] = useState(false);
+  const [infoUserData, setInfoUserData] = useState<DataType>({
+    userName: fullName,
+    bithdayDate: dateBirth,
+  });
+  //clicker
+  const [date, setDate] = useState(new Date());
+  const [open, setOpen] = useState(false);
 
+  const inputHandler = (text: string | null, nameUser: string) => {
+    setInfoUserData({...infoUserData, [nameUser]: text});
+  };
+
+  const openDatePicker = () => setOpen(true);
+
+  const applyUpdateUserInfo = () => {
+    updateUserInfo(infoUserData.userName, infoUserData.bithdayDate);
+    setUpdate(!update);
+    setNameActive(false);
+    // setDateActive(false);
+  };
+  const canselUpdateUserInfo = () => {
+    setUpdate(!update);
+    setNameActive(false);
+    // setDateActive(false);
+  };
+
+  useEffect(() => {}, [infoUserData.bithdayDate]);
+
+  const dateMounth = Number(date.getMonth() + 1); // because picker don't right saw Date Mounth
   return (
     <View>
       {update ? (
@@ -38,14 +62,14 @@ const ProfileScreen: FC = () => {
             <View style={styles.userName__title}>
               <Text>YourName :</Text>
             </View>
-            <Text style={styles.userName__data}>{name}</Text>
+            <Text style={styles.userName__data}>{infoUserData.userName}</Text>
           </View>
           <View style={styles.userBirthDate__block}>
             <View style={styles.userBirthDate__title}>
               <Text>Data Bithday :</Text>
             </View>
 
-            <Text style={styles.userBirthDate__date}>9 fefrary 1994</Text>
+            <Text style={styles.userBirthDate__date}>{dateBirth}</Text>
           </View>
           <View style={styles.aboutUser__btn}>
             <TouchableOpacity
@@ -86,47 +110,59 @@ const ProfileScreen: FC = () => {
                     ? styles.inputBlock__changeName_input
                     : styles.inputBlock__changeName_inputActive
                 }
-                placeholder={'Your current name'}
+                placeholder={fullName}
                 onFocus={() => {
                   setNameActive(true);
                 }}
                 onBlur={() => {
                   setNameActive(false);
                 }}
+                onChangeText={userName => inputHandler(userName, 'userName')}
+                value={infoUserData.userName}
               />
             </View>
             <View style={styles.inputBlock__changeName}>
               <View style={styles.inputBlock__changeName_text}>
                 <Text>Date Bithday:</Text>
               </View>
-              <TextInput
-                style={
-                  dateActive
-                    ? styles.inputBlock__changeName_input
-                    : styles.inputBlock__changeName_inputActive
+              <TouchableOpacity onPress={openDatePicker}>
+                <Text>{infoUserData.bithdayDate}</Text>
+              </TouchableOpacity>
+              <DatePicker
+                onDateChange={() =>
+                  inputHandler(
+                    `${date.getDate()} / ${date.getMonth()} / ${date.getFullYear()}`,
+                    'bithdayDate',
+                  )
                 }
-                placeholder={'Your Data'}
-                onFocus={() => {
-                  setDateActive(true);
+                modal
+                open={open}
+                date={date}
+                mode="date"
+                onConfirm={date => {
+                  setOpen(false);
+                  setDate(date);
+                  inputHandler(
+                    `${date.getDate()} / ${dateMounth} / ${date.getFullYear()}`,
+                    'bithdayDate',
+                  );
                 }}
-                onBlur={() => {
-                  setDateActive(false);
+                onCancel={() => {
+                  setOpen(false);
                 }}
+                confirmText="Change Date"
               />
             </View>
           </View>
 
           <View style={styles.updateDataUser__btn}>
             <TouchableOpacity
-              onPress={() => Alert.alert('You Chamge your Profile')}
+              onPress={applyUpdateUserInfo}
               style={styles.updateDataUser__btn_design}>
-              <Text style={styles.updateDataUser__btn_text}>
-                {' '}
-                Apply Update{' '}
-              </Text>
+              <Text style={styles.updateDataUser__btn_text}>Apply Update</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => setUpdate(!update)}
+              onPress={canselUpdateUserInfo}
               style={styles.updateDataUser__btn_design}>
               <Text style={styles.updateDataUser__btn_text}> Cansel </Text>
             </TouchableOpacity>
@@ -141,7 +177,7 @@ const styles = StyleSheet.create({
   content__aboutUser: {},
   userPhoto: {
     margin: '5%',
-    width: 120,
+    width: 150,
     height: 150,
     overflow: 'hidden',
   },
@@ -194,9 +230,8 @@ const styles = StyleSheet.create({
   updateDataUser__PhotoBlock: {},
   photoBlock__userPhoto: {
     margin: '5%',
-    width: 120,
+    width: 150,
     height: 150,
-    overflow: 'hidden',
   },
   photoBlock__changeUserPhoto: {
     alignItems: 'center',
@@ -210,19 +245,19 @@ const styles = StyleSheet.create({
     fontFamily: 'SFProRounded-Light',
     color: 'white',
     fontWeight: '400',
-    paddingRight: 20,
-    paddingLeft: 20,
+    marginRight: 20,
+    marginLeft: 20,
   },
   changeUserPhoto_icon: {
     width: 20,
     height: 20,
-    marginRight: 10,
   },
   updateDataUser__inputBloc: {
     paddingTop: '20%',
   },
   inputBlock__changeName: {
     flexDirection: 'row',
+    paddingBottom: 10,
   },
   inputBlock__changeName_text: {
     width: '40%',
@@ -233,13 +268,13 @@ const styles = StyleSheet.create({
     width: '40%',
     height: 20,
     borderBottomWidth: 1,
-    borderBottomColor: 'grey',
+    borderBottomColor: 'mediumvioletred',
   },
   inputBlock__changeName_inputActive: {
     width: '40%',
     height: 20,
     borderBottomWidth: 1,
-    borderBottomColor: 'mediumvioletred',
+    borderBottomColor: 'grey',
   },
   updateDataUser__btn: {
     flexDirection: 'row',

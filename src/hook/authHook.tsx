@@ -5,7 +5,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {authActions} from '../redux/reducers/authReducer';
 import {
   getUserTokenSelector,
-  getIsLoadingSelector,
   getUserNameSelector,
 } from '../redux/reducers/selectors';
 
@@ -13,20 +12,22 @@ export const useAuth = (): any => {
   const dispatch = useDispatch();
 
   const userToken = useSelector(getUserTokenSelector);
-  const isLoading = useSelector(getIsLoadingSelector);
   const name = useSelector(getUserNameSelector);
 
-  const login = useCallback(async (userTokens: string, userName: string) => {
-    dispatch(authActions.SignIn(userTokens, userName));
-  }, []);
+  const login = useCallback(
+    async (userTokens: string | null, userName: string | null) => {
+      dispatch(authActions.SignIn(userTokens, userName));
+    },
+    [],
+  );
 
   const logout = useCallback(async () => {
     dispatch(authActions.SignOut());
     await AsyncStorage.removeItem('userToken');
   }, []);
 
-  const retriveUserToken = useCallback(async (userTokens: string) => {
-    dispatch(authActions.RetrieveToken(userTokens));
+  const retriveUserToken = useCallback(async (userCurrentToken: string) => {
+    dispatch(authActions.RetrieveToken(userCurrentToken));
   }, []);
 
   return {
@@ -34,7 +35,6 @@ export const useAuth = (): any => {
     logout,
     retriveUserToken,
     userToken,
-    isLoading,
     name,
   };
 };

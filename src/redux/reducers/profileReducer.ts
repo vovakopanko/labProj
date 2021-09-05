@@ -1,0 +1,58 @@
+import {InfernActionsType} from './../reduxStore';
+const SET_USER_INFO = 'redux_ProfileRedux_setUserInfo';
+const GET_USER_NAME = 'redux_ProfileRedux_getUserName';
+const SET_NEW_PHOTO = 'redux_ProfileRedux_setNewPhoto';
+
+let initialState = {
+  fullName: null as string | null,
+  dateBirth: null as string | null,
+  photoUser: null as string | null,
+};
+
+export type initialStateType = typeof initialState;
+type ActionType = InfernActionsType<typeof profileActions>;
+
+const profileReducer = (
+  state = initialState,
+  action: ActionType,
+): initialStateType => {
+  switch (action.type) {
+    case SET_USER_INFO:
+      return {
+        ...state,
+        fullName: action.fullName,
+        dateBirth: action.dateBirth,
+      };
+    case GET_USER_NAME:
+      return {
+        ...state,
+        fullName: action.fullName,
+      };
+    case SET_NEW_PHOTO:
+      return {
+        ...state,
+        photoUser: action.photoUser,
+      };
+    default:
+      return state;
+  }
+};
+
+//Actions
+export const profileActions = {
+  SetUserInfo: (fullName: string | null, dateBirth: string | null) =>
+    <const>{
+      type: SET_USER_INFO,
+      fullName,
+      dateBirth,
+    },
+  SetNewPhoto: (photoUser: string | null) =>
+    <const>{type: SET_NEW_PHOTO, photoUser},
+  getUserName: (fullName: string | null) =>
+    <const>{
+      type: GET_USER_NAME,
+      fullName,
+    },
+};
+
+export default profileReducer;
