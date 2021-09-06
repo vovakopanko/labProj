@@ -23,8 +23,6 @@ type RootDrawerStackParams = {
   Spiral: undefined;
 };
 
-const isAuth = true; // if your account autorizate
-
 const Tab = createBottomTabNavigator<RootTabStackParams>();
 const DrawerTab = createDrawerNavigator<RootDrawerStackParams>();
 
@@ -95,17 +93,14 @@ function MyTabs() {
             );
           }
         },
-        tabBarBackground: () =>
-          isAuth ? (
-            <BlurView
-              style={styles.blur}
-              blurType="light"
-              blurAmount={30}
-              reducedTransparencyFallbackColor="mediumvioletred"
-            />
-          ) : (
-            <BlurView style={styles.blur} blurType="dark" blurAmount={80} />
-          ),
+        tabBarBackground: () => (
+          <BlurView
+            style={styles.blur}
+            blurType="light"
+            blurAmount={30}
+            reducedTransparencyFallbackColor="mediumvioletred"
+          />
+        ),
         headerShown: false,
         // tabBarStyle: {
         //   backgroundColor: isAuth ? 'mediumvioletred' : 'white',
@@ -137,9 +132,9 @@ export default function DrawerNavigation({navigation}: any) {
   return (
     <DrawerTab.Navigator
       screenOptions={{
-        headerTintColor: isAuth ? 'white' : 'black',
+        headerTintColor: 'white',
         headerStyle: {
-          backgroundColor: isAuth ? 'mediumvioletred' : 'white',
+          backgroundColor: 'mediumvioletred',
         },
         headerTitle: () => <HeaderLogoTitle />,
         headerRight: () => <HeaderRightBtn navigation={navigation} />,

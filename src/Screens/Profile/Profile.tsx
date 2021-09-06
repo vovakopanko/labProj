@@ -1,23 +1,23 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useState} from 'react';
 import {
   View,
   Text,
   StyleSheet,
   TouchableOpacity,
-  Alert,
   Image,
   TextInput,
 } from 'react-native';
 import {useProfile} from '../../hook/profileHook';
 import DatePicker from 'react-native-date-picker';
+import ImagePicker from 'react-native-image-crop-picker';
 
-type DataType = Record<string, string | null>;
+type DataType = Record<string, string | undefined>;
 
 const ProfileScreen: FC = () => {
-  const {fullName, dateBirth, updateUserInfo} = useProfile();
+  const {fullName, dateBirth, updateUserInfo, updateUserPhoto, userPhoto} =
+    useProfile();
   const [update, setUpdate] = useState(true);
   const [nameActive, setNameActive] = useState(false);
-  // const [dateActive, setDateActive] = useState(false);
   const [infoUserData, setInfoUserData] = useState<DataType>({
     userName: fullName,
     bithdayDate: dateBirth,
@@ -25,8 +25,9 @@ const ProfileScreen: FC = () => {
   //clicker
   const [date, setDate] = useState(new Date());
   const [open, setOpen] = useState(false);
+  const [image, setImage] = useState(userPhoto);
 
-  const inputHandler = (text: string | null, nameUser: string) => {
+  const inputHandler = (text: string | undefined, nameUser: string) => {
     setInfoUserData({...infoUserData, [nameUser]: text});
   };
 
@@ -36,6 +37,7 @@ const ProfileScreen: FC = () => {
     updateUserInfo(infoUserData.userName, infoUserData.bithdayDate);
     setUpdate(!update);
     setNameActive(false);
+    updateUserPhoto(image);
     // setDateActive(false);
   };
   const canselUpdateUserInfo = () => {
@@ -44,7 +46,26 @@ const ProfileScreen: FC = () => {
     // setDateActive(false);
   };
 
-  useEffect(() => {}, [infoUserData.bithdayDate]);
+  const updatePhotoFromLibrary = () => {
+    ImagePicker.openPicker({
+      multiple: false,
+    }).then(images => {
+      console.log(images);
+      if (images.sourceURL) {
+        setImage(images.sourceURL);
+      }
+    });
+  };
+
+  const takePhotoFromCamera = () => {
+    ImagePicker.openCamera({
+      width: 300,
+      height: 400,
+      cropping: true,
+    }).then(images => {
+      console.log(images);
+    });
+  };
 
   const dateMounth = Number(date.getMonth() + 1); // because picker don't right saw Date Mounth
   return (
@@ -53,10 +74,7 @@ const ProfileScreen: FC = () => {
         // Show profile Part--------------------------------------------
         <View style={styles.content__aboutUser}>
           <View style={styles.userPhoto__block}>
-            <Image
-              source={require('./../../assets/projectImages/oval.png')}
-              style={styles.userPhoto}
-            />
+            <Image source={{uri: image}} style={styles.userPhoto} />
           </View>
           <View style={styles.userName__block}>
             <View style={styles.userName__title}>
@@ -83,16 +101,22 @@ const ProfileScreen: FC = () => {
         // Edit Part--------------------------------------------
         <View style={styles.content__updateDataUser}>
           <View style={styles.updateDataUser__PhotoBlock}>
-            <Image
-              source={require('./../../assets/projectImages/oval.png')}
-              style={styles.photoBlock__userPhoto}
-            />
+            <Image source={{uri: image}} style={styles.photoBlock__userPhoto} />
             <TouchableOpacity
-              onPress={() => Alert.alert('Change photo!')}
+              onPress={updatePhotoFromLibrary}
               style={styles.photoBlock__changeUserPhoto}>
               <Text style={styles.changeUserPhoto_text}>Update photo</Text>
               <Image
                 source={require('../../assets/projectImages/updatePhoto.png')}
+                style={styles.changeUserPhoto_icon}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={takePhotoFromCamera}
+              style={styles.photoBlock__takeUserPhoto}>
+              <Text style={styles.changeUserPhoto_text}>Take photo</Text>
+              <Image
+                source={require('../../assets/projectImages/camera.png')}
                 style={styles.changeUserPhoto_icon}
               />
             </TouchableOpacity>
@@ -139,9 +163,9 @@ const ProfileScreen: FC = () => {
                 open={open}
                 date={date}
                 mode="date"
-                onConfirm={date => {
+                onConfirm={userDate => {
                   setOpen(false);
-                  setDate(date);
+                  setDate(userDate);
                   inputHandler(
                     `${date.getDate()} / ${dateMounth} / ${date.getFullYear()}`,
                     'bithdayDate',
@@ -180,6 +204,7 @@ const styles = StyleSheet.create({
     width: 150,
     height: 150,
     overflow: 'hidden',
+    borderRadius: 100,
   },
   userPhoto__block: {
     alignItems: 'center',
@@ -232,6 +257,7 @@ const styles = StyleSheet.create({
     margin: '5%',
     width: 150,
     height: 150,
+    borderRadius: 100,
   },
   photoBlock__changeUserPhoto: {
     alignItems: 'center',
@@ -251,6 +277,15 @@ const styles = StyleSheet.create({
   changeUserPhoto_icon: {
     width: 20,
     height: 20,
+  },
+  photoBlock__takeUserPhoto: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'mediumvioletred',
+    height: 40,
+    borderRadius: 20,
+    flexDirection: 'row',
+    marginTop: 10,
   },
   updateDataUser__inputBloc: {
     paddingTop: '20%',

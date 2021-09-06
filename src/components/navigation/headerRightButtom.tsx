@@ -13,7 +13,7 @@ import {useProfile} from '../../hook/profileHook';
 const HeaderRightBtn: FC = ({navigation}: any) => {
   const [isSignOutOpen, setIsSignOutOpen] = React.useState(false);
   const {logout} = useAuth();
-  const {fullName} = useProfile();
+  const {fullName, userPhoto} = useProfile();
 
   const signOutChangeHandler = () => {
     setIsSignOutOpen(!isSignOutOpen);
@@ -35,10 +35,7 @@ const HeaderRightBtn: FC = ({navigation}: any) => {
   return (
     <View>
       <TouchableOpacity onPress={signOutChangeHandler}>
-        <Image
-          source={require('./../../assets/projectImages/oval.png')}
-          style={styles.userLogo}
-        />
+        <Image source={{uri: userPhoto}} style={styles.userLogo} />
       </TouchableOpacity>
       <Modal
         animationType="fade"
@@ -48,7 +45,7 @@ const HeaderRightBtn: FC = ({navigation}: any) => {
         <View style={styles.signOutModalContainer}>
           <View style={styles.signOut__userView}>
             <Image
-              source={require('./../../assets/projectImages/oval.png')}
+              source={{uri: userPhoto}}
               style={styles.ignOutModal__userLogo}
             />
             <Text style={styles.signOutModalText}>{fullName}</Text>
@@ -89,6 +86,7 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
     marginRight: 20,
+    borderRadius: 100,
   },
   signOutModalContainer: {
     flex: 1,
@@ -128,6 +126,7 @@ const styles = StyleSheet.create({
   ignOutModal__userLogo: {
     width: 60,
     height: 60,
+    borderRadius: 100,
   },
   signOut__actionBtn_close: {
     alignItems: 'center',

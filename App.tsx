@@ -15,6 +15,7 @@ import {useAuth} from './src/hook/authHook';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import HeaderLeftBtn from './src/components/navigation/headerLeftBtn';
 import ProfileScreen from './src/Screens/Profile/Profile';
+import {useProfile} from './src/hook/profileHook';
 
 export type RootAppStackParams = {
   Checking: undefined;
@@ -28,7 +29,7 @@ const Stack = createStackNavigator<RootAppStackParams>();
 
 export default function App() {
   const {userToken, isLoading, retriveUserToken} = useAuth();
-
+  const {fullName} = useProfile();
   useEffect(() => {
     setTimeout(async () => {
       let token;
@@ -110,10 +111,7 @@ export default function App() {
               backgroundColor: 'mediumvioletred',
             },
             headerTitle: () => (
-              <HeaderAppTitle
-                title={route.params.name}
-                subtitle={route.params.info}
-              />
+              <HeaderAppTitle title={fullName} subtitle={route.params.info} />
             ),
             headerRight: () => <HeaderRightBtn navigation={navigation} />,
             headerLeft: () => <HeaderLeftBtn navigation={navigation} />,
