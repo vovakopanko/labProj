@@ -4,9 +4,12 @@ const GET_USER_NAME = 'redux_ProfileRedux_getUserName';
 const SET_NEW_PHOTO = 'redux_ProfileRedux_setNewPhoto';
 
 let initialState = {
-  fullName: null as string | null,
-  dateBirth: null as string | null,
-  photoUser: null as string | null,
+  fullName: 'User' as string | null,
+  dateBirth: 'undefined' as string | null,
+  photoUser:
+    'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/768px-User_icon_2.svg.png' as
+      | string
+      | null,
 };
 
 export type initialStateType = typeof initialState;

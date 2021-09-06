@@ -102,15 +102,15 @@ function MyTabs() {
           />
         ),
         headerShown: false,
-        // tabBarStyle: {
-        //   backgroundColor: isAuth ? 'mediumvioletred' : 'white',
-        //   opacity: 0.95,
-        //   borderTopWidth: 0,
-        //   position: 'absolute',
-        //   left: 0,
-        //   right: 0,
-        //   bottom: 0,
-        // },
+        tabBarStyle: {
+          backgroundColor: 'white',
+          opacity: 0.97,
+          borderTopWidth: 0,
+          position: 'absolute',
+          left: 0,
+          right: 0,
+          bottom: 0,
+        },
         tabBarActiveTintColor: 'maroon',
         tabBarInactiveTintColor: 'black',
         tabBarOptions: {

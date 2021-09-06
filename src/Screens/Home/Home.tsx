@@ -16,7 +16,7 @@ import {useProfile} from '../../hook/profileHook';
 
 const screenWidth = Dimensions.get('screen').width;
 
-type ActionsUser = {
+export type ActionsUser = {
   name: string;
   info: string;
   icon: null | ImageSourcePropType;
