@@ -4,6 +4,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import authReducer from './reducers/authReducer';
 import thunkMiddleware from 'redux-thunk';
 import homeReducer from './reducers/homeReducer';
+import profileReducer from './reducers/profileReducer';
+import accountReducer from './reducers/accountsReducer';
 
 const persistConfig = {
   key: 'root',
@@ -13,6 +15,8 @@ const persistConfig = {
 let reducers = combineReducers({
   auth: authReducer,
   home: homeReducer,
+  profile: profileReducer,
+  account: accountReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);

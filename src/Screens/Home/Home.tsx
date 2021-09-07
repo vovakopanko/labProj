@@ -11,12 +11,12 @@ import {
   Platform,
 } from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
-import {useAuth} from '../../hook/authHook';
 import Video from 'react-native-video';
+import {useProfile} from '../../hook/profileHook';
 
 const screenWidth = Dimensions.get('screen').width;
 
-type ActionsUser = {
+export type ActionsUser = {
   name: string;
   info: string;
   icon: null | ImageSourcePropType;
@@ -158,7 +158,7 @@ const YourGiving = ({
 }: YourGivingImpactType) => {
   const [mute, setMute] = useState(false);
   const [fullScreen, setFullScreen] = useState(false);
-  const {name} = useAuth();
+  const {fullName} = useProfile();
   const player = useRef<Video>();
   const onHandlerMute = () => setMute(!mute);
   const onHandlerFullScreen = () => setFullScreen(!fullScreen);
@@ -221,37 +221,9 @@ const YourGiving = ({
         <Image source={photo} style={styles.blockGivingImpact_photo} />
       </View>
       <View style={styles.blockGivingImpact_info}>
-        {/* {videoContent ? (
-          <View>
-            <View style={styles.btn__MuteVideo}>
-              {!mute ? (
-                <TouchableOpacity onPress={onHandlerMute}>
-                  <Image
-                    source={require('../../assets/projectImages/play.png')}
-                    style={styles.btn__MuteVideo_size}
-                  />
-                </TouchableOpacity>
-              ) : (
-                <TouchableOpacity onPress={onHandlerMute}>
-                  <Image
-                    source={require('../../assets/projectImages/mute.png')}
-                    style={styles.btn__MuteVideo_size}
-                  />
-                </TouchableOpacity>
-              )}
-            </View>
-            <View style={styles.btn__FullScreen}>
-              <TouchableOpacity onPress={onHandlerFullScreen}>
-                <Image
-                  source={require('../../assets/projectImages/fullscreen.png')}
-                  style={styles.btn__MuteVideo_fullscreen}
-                />
-              </TouchableOpacity>
-            </View>
-          </View>
-        ) : null} */}
         <Text style={styles.blockGivingImpact_info_text}>
-          {name},{desription}
+          <Text style={styles.blockGivingImpact_nameUser}>{fullName}</Text>,{' '}
+          {desription}
         </Text>
       </View>
       <View style={styles.blockGivingImpact__shareBtn}>
@@ -271,6 +243,8 @@ const YourGiving = ({
 
 function HomeScreen({navigation}: any) {
   const [pause, setPause] = useState(true);
+
+  const {fullName} = useProfile();
   const total = arrayInfo
     .map(s => s.cash)
     .reduce((sum, current) => sum + current);
@@ -291,7 +265,6 @@ function HomeScreen({navigation}: any) {
     'November',
     'December',
   ];
-  const {name} = useAuth();
 
   const handleScroll = (event: any) => {
     const positionY = event.nativeEvent.contentOffset.y;
@@ -311,14 +284,14 @@ function HomeScreen({navigation}: any) {
             <View style={styles.homePage_greetingUser}>
               <Text style={styles.homePage_titleGreating}>
                 {currentTime.getHours() < 11
-                  ? `Good Morning ${name}`
+                  ? `Good Morning ${fullName} `
                   : currentTime.getHours() >= 11 && currentTime.getHours() < 17
-                  ? `Good Afternoon ${name}`
+                  ? `Good Afternoon ${fullName} `
                   : currentTime.getHours() >= 17 && currentTime.getHours() <= 22
-                  ? `Good Evening ${name}`
+                  ? `Good Evening ${fullName} `
                   : currentTime.getHours() > 22 && currentTime.getHours() <= 5
-                  ? `Good Night ${name}`
-                  : `Good Morning ${name}`}
+                  ? `Good Night ${fullName} `
+                  : `Good Morning ${fullName} `}
                 |{' '}
                 {'Today: ' +
                   currentTime.getDate() +
@@ -474,6 +447,9 @@ const styles = StyleSheet.create({
   },
   blockTitle_infoGivingImpact: {
     marginLeft: 10,
+  },
+  blockGivingImpact_nameUser: {
+    fontWeight: '600',
   },
   infoGivingImpact_title: {
     // fontWeight: '600',

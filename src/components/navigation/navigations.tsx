@@ -23,8 +23,6 @@ type RootDrawerStackParams = {
   Spiral: undefined;
 };
 
-const isAuth = true; // if your account autorizate
-
 const Tab = createBottomTabNavigator<RootTabStackParams>();
 const DrawerTab = createDrawerNavigator<RootDrawerStackParams>();
 
@@ -95,27 +93,24 @@ function MyTabs() {
             );
           }
         },
-        tabBarBackground: () =>
-          isAuth ? (
-            <BlurView
-              style={styles.blur}
-              blurType="light"
-              blurAmount={30}
-              reducedTransparencyFallbackColor="mediumvioletred"
-            />
-          ) : (
-            <BlurView style={styles.blur} blurType="dark" blurAmount={80} />
-          ),
+        tabBarBackground: () => (
+          <BlurView
+            style={styles.blur}
+            blurType="light"
+            blurAmount={30}
+            reducedTransparencyFallbackColor="mediumvioletred"
+          />
+        ),
         headerShown: false,
-        // tabBarStyle: {
-        //   backgroundColor: isAuth ? 'mediumvioletred' : 'white',
-        //   opacity: 0.95,
-        //   borderTopWidth: 0,
-        //   position: 'absolute',
-        //   left: 0,
-        //   right: 0,
-        //   bottom: 0,
-        // },
+        tabBarStyle: {
+          backgroundColor: 'white',
+          opacity: 0.97,
+          borderTopWidth: 0,
+          position: 'absolute',
+          left: 0,
+          right: 0,
+          bottom: 0,
+        },
         tabBarActiveTintColor: 'maroon',
         tabBarInactiveTintColor: 'black',
         tabBarOptions: {
@@ -133,16 +128,16 @@ function MyTabs() {
   );
 }
 
-export default function DrawerNavigation() {
+export default function DrawerNavigation({navigation}: any) {
   return (
     <DrawerTab.Navigator
       screenOptions={{
-        headerTintColor: isAuth ? 'white' : 'black',
+        headerTintColor: 'white',
         headerStyle: {
-          backgroundColor: isAuth ? 'mediumvioletred' : 'white',
+          backgroundColor: 'mediumvioletred',
         },
         headerTitle: () => <HeaderLogoTitle />,
-        headerRight: () => <HeaderRightBtn />,
+        headerRight: () => <HeaderRightBtn navigation={navigation} />,
       }}>
       <DrawerTab.Screen name="Spiral" component={MyTabs} />
     </DrawerTab.Navigator>

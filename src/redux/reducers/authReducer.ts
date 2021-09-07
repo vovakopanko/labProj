@@ -2,10 +2,10 @@ import {InfernActionsType} from './../reduxStore';
 const LOGIN = './redux/authRedux/LOGIN';
 const LOGOUT = './redux/authRedux/LOGOUT';
 const RETRIEVE_TOKEN = './redux/authRedux/RETRIEVE_TOKEN';
-const REGISTRATOR = './redux/authRedux/REGISTRATOR';
+// const REGISTRATOR = './redux/authRedux/REGISTRATOR';
 
 let initialState = {
-  userName: null as string | null,
+  userLogin: null as string | null,
   password: null as string | null,
   isLoading: true,
   userToken: null as string | null,
@@ -29,7 +29,7 @@ const authReducer = (
     case LOGIN: {
       return {
         ...state,
-        userName: action.id,
+        userLogin: action.id,
         userToken: action.token,
         isLoading: false,
       };
@@ -37,19 +37,19 @@ const authReducer = (
     case LOGOUT: {
       return {
         ...state,
-        userName: null,
+        userLogin: null,
         userToken: null,
         isLoading: false,
       };
     }
-    case REGISTRATOR: {
-      return {
-        ...state,
-        userName: action.id,
-        userToken: action.token,
-        isLoading: false,
-      };
-    }
+    // case REGISTRATOR: {
+    //   return {
+    //     ...state,
+    //     userName: action.id,
+    //     userToken: action.token,
+    //     isLoading: true,
+    //   };
+    // }
     default:
       return state;
   }
@@ -57,19 +57,19 @@ const authReducer = (
 
 //Actions
 export const authActions = {
-  SignIn: (userToken: string | null, userName: string | null) =>
+  SignIn: (userToken: string | null, userLogin: string | null) =>
     <const>{
       type: LOGIN,
       token: userToken,
-      id: userName,
+      id: userLogin,
     },
   SignOut: () => <const>{type: LOGOUT},
-  Registrator: (userToken: string, userName: string) =>
-    <const>{
-      type: REGISTRATOR,
-      token: userToken,
-      id: userName,
-    },
+  // Registrator: (userToken: string, userName: string) =>
+  //   <const>{
+  //     type: REGISTRATOR,
+  //     token: userToken,
+  //     id: userName,
+  //   },
   RetrieveToken: (userToken: string) =>
     <const>{type: RETRIEVE_TOKEN, token: userToken},
 };
