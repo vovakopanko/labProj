@@ -4,11 +4,18 @@ const LOGOUT = './redux/authRedux/LOGOUT';
 const RETRIEVE_TOKEN = './redux/authRedux/RETRIEVE_TOKEN';
 // const REGISTRATOR = './redux/authRedux/REGISTRATOR';
 
-let initialState = {
-  userLogin: null as string | null,
-  password: null as string | null,
+type initialState = {
+  userLogin: string | null;
+  password: string | null;
+  isLoading: boolean | null;
+  userToken: string | null;
+};
+
+let initialState: initialState = {
+  userLogin: null,
+  password: null,
   isLoading: true,
-  userToken: null as string | null,
+  userToken: null,
 };
 
 export type initialStateType = typeof initialState;
@@ -64,13 +71,7 @@ export const authActions = {
       id: userLogin,
     },
   SignOut: () => <const>{type: LOGOUT},
-  // Registrator: (userToken: string, userName: string) =>
-  //   <const>{
-  //     type: REGISTRATOR,
-  //     token: userToken,
-  //     id: userName,
-  //   },
-  RetrieveToken: (userToken: string) =>
+  RetrieveToken: (userToken: string | null) =>
     <const>{type: RETRIEVE_TOKEN, token: userToken},
 };
 

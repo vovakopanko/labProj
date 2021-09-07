@@ -23,3 +23,8 @@ export const getActionsUserWithCash = (state: AppStateType) =>
 
 export const getTypesOfPayments = (state: AppStateType) =>
   state.account.typesOfPayments;
+
+export const getUserActionsInfo = (state: AppStateType) =>
+  state.home.actionsInfo;
+
+export const getUserGiving = (state: AppStateType) => state.home.userGiving;

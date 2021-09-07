@@ -3,8 +3,6 @@ import {
   View,
   Text,
   StyleSheet,
-  ImageSourcePropType,
-  TouchableHighlight,
   Image,
   Dimensions,
   Platform,
@@ -13,111 +11,29 @@ import {
 } from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 import {useAccount} from '../../hook/accountHook';
+import ActionsUser from './ActionsUser';
 
 const screenWidth = Dimensions.get('screen').width;
 
 const AccountsScreen: FC = ({navigation}: any) => {
-  const {actionsWithCash} = useAccount();
-  const total = actionsWithCash
-    .map(s => s.cash)
-    .reduce((sum, current) => sum + current);
-  let totalCash: Array<string> = [];
-  totalCash = total.toFixed(2).split('.');
-
-  type ActionsUserType = {
-    name: string;
-    info: string;
-    icon: null | ImageSourcePropType;
-    cash: number;
-    savedCash: boolean;
-    clickDisabled: boolean;
-    navigation: any;
-  };
-
-  const ActionsUser = ({
-    name,
-    info,
-    cash,
-    navigation,
-    savedCash,
-    clickDisabled,
-    icon,
-  }: ActionsUserType) => {
-    let val: Array<string> = [];
-    val = cash.toFixed(2).split('.');
+  const {actionsWithCash, typesOfPayments} = useAccount();
+  const TotalCashUser = () => {
+    const total = actionsWithCash
+      .map(s => s.cash)
+      .reduce((sum, current) => sum + current);
+    let totalCash: Array<string> = total.toFixed(2).split('.');
     return (
-      <TouchableHighlight
-        activeOpacity={0.3}
-        underlayColor="lightgrey"
-        style={styles.actionUser_block}
-        disabled={clickDisabled}
-        onPress={() =>
-          navigation.navigate(`${name}`, {
-            info: info,
-            name: name,
-          })
-        }>
-        <View style={styles.overView_actionsUser__block}>
-          <View style={styles.overView_actionsUser}>
-            <View style={styles.actionsUser_Info}>
-              <View style={styles.actionsUser_name}>
-                <Text style={styles.actionsUser_nameTitle}>{name}</Text>
-                {icon ? (
-                  <Image source={icon} style={styles.actionsUser_icon} />
-                ) : null}
-              </View>
-              <Text style={styles.actionsUser_card}>{info}</Text>
-            </View>
-            <View style={styles.overView_providedCash}>
-              <Text style={styles.providedCash_count}>
-                $<Text>{val[0]}.</Text>
-                <Text style={styles.numberAfterPoin}>{val[1]}</Text>
-              </Text>
-              <Image
-                source={require('../../assets/projectImages/chevron.png')}
-                style={styles.actionsUser__chevron}
-              />
-            </View>
-          </View>
-          {savedCash ? (
-            <View>
-              <Text style={styles.actionsUser__savedCash_text}>
-                Savings is up 3% from last mounth
-              </Text>
-            </View>
-          ) : null}
-        </View>
-      </TouchableHighlight>
+      <Text style={styles.overView_totalCash}>
+        <Text>${totalCash[0]}.</Text>
+        <Text style={styles.numberAfterPoin}>{totalCash[1]}</Text>
+      </Text>
     );
   };
-
-  type typesOfPaymentsType = {
-    paymentName: string;
-    paymentImage: ImageSourcePropType;
-  };
-
-  const typesOfPayments: typesOfPaymentsType[] = [
-    {
-      paymentName: 'Send',
-      paymentImage: require('../../assets/projectImages/circleButtonSend.png'),
-    },
-    {
-      paymentName: 'Play',
-      paymentImage: require('../../assets/projectImages/circleButtonPay.png'),
-    },
-    {
-      paymentName: 'Transfer',
-      paymentImage: require('../../assets/projectImages/circleButtonChecking.png'),
-    },
-  ];
 
   return (
     <View style={styles.homePage}>
       <View style={styles.homePage_overView}>
-        <Text style={styles.overView_totalCash}>
-          <Text>${totalCash[0]}.</Text>
-          <Text style={styles.numberAfterPoin}>{totalCash[1]}</Text>
-        </Text>
+        <TotalCashUser />
         <Text style={styles.overView_subTitle}>Total Available cash</Text>
         <View style={styles.overView_cashActions}>
           {typesOfPayments.map((item, index) => (
@@ -188,66 +104,13 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     color: 'grey',
   },
-  overView_actionsUser__block: {
-    height: screenWidth * 0.2,
-    alignItems: 'center',
-    justifyContent: 'center',
-    // paddingTop: 15,
-    // paddingBottom: 10,
-  },
   overView_actionsUser: {
     flexDirection: 'row',
-  },
-  actionsUser_Info: {
-    alignItems: 'flex-start',
-    width: '45%',
-  },
-  actionsUser_name: {
-    flexDirection: 'row',
-  },
-  actionsUser_nameTitle: {
-    fontWeight: '400',
-    paddingLeft: 10,
-    paddingRight: 5,
-    fontFamily: 'SFProRounded-Bold',
-  },
-  actionUser_block: {
-    shadowOffset: {width: 0, height: 2},
-    shadowOpacity: 0.25,
-    marginVertical: 7,
-    marginHorizontal: 10,
-    backgroundColor: 'white',
-  },
-  actionsUser_card: {
-    fontWeight: '400',
-    paddingLeft: 10,
-    color: 'grey',
-    fontFamily: 'SFProRounded-Light',
-  },
-  actionsUser_icon: {
-    width: 13,
-    height: 13,
   },
   actionsUser__chevron: {
     width: 10,
     height: 10,
     marginLeft: 10,
-  },
-  actionsUser__savedCash_text: {
-    paddingTop: 5,
-    textAlign: 'center',
-    color: 'green',
-  },
-  overView_providedCash: {
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    width: '55%',
-    paddingRight: 10,
-    fontFamily: 'SFProRounded-Bold',
-    flexDirection: 'row',
-  },
-  providedCash_count: {
-    fontSize: 18,
   },
   blockGivingImpact: {
     backgroundColor: 'white',
