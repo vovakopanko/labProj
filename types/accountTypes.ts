@@ -1,3 +1,5 @@
+import {ImageSourcePropType} from 'react-native';
+
 export type actionsUser = {
   id: number;
   name: string;
@@ -10,7 +12,7 @@ export type actionsUser = {
 
 export type typesOfPayments = {
   paymentName: string;
-  paymentImage: string;
+  paymentImage: ImageSourcePropType;
 };
 
 export type initialStateAccount = {

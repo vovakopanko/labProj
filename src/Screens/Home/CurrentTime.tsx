@@ -2,22 +2,23 @@ import React from 'react';
 import {StyleSheet, Text} from 'react-native';
 import {useProfile} from '../../hook/profileHook';
 
+const currentTime = new Date();
+const monthNames = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
+
 const CurrentTime = () => {
-  const currentTime = new Date();
-  const monthNames = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ];
   const {fullName} = useProfile();
   return (
     <Text style={styles.homePage_titleGreating}>

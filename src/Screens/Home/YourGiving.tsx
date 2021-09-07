@@ -40,7 +40,7 @@ const YourGiving = ({
           <Text style={styles.infoGivingImpact_activity}>{subtitle}</Text>
         </View>
       </View>
-      {videoContent ? (
+      {videoContent && (
         <View>
           <Video
             source={require('../../assets/video/video.mov')}
@@ -84,7 +84,7 @@ const YourGiving = ({
             </View>
           </View>
         </View>
-      ) : null}
+      )}
       <View>
         <Image source={photo} style={styles.blockGivingImpact_photo} />
       </View>

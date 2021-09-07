@@ -1,6 +1,9 @@
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import {
+  createStackNavigator,
+  // StackNavigationProp,
+} from '@react-navigation/stack';
 import DrawerNavigation from './src/components/navigation/navigations';
 import ChekingScreen from './src/Screens/Checking/Checking';
 import SavingScreen from './src/Screens/Saving/Saving';
@@ -24,6 +27,10 @@ export type RootAppStackParams = {
   DrawScreen: undefined;
   Proffile: undefined;
 };
+// type LogScreenNavigationProp = StackNavigationProp<
+//   RootAppStackParams,
+//   keyof RootAppStackParams
+// >;
 
 const Stack = createStackNavigator<RootAppStackParams>();
 
@@ -55,12 +62,17 @@ export default function App() {
     return <LoginScreen />;
   }
 
+  // type StackType = {
+  //   route: any;
+  //   navigation: LogScreenNavigationProp;
+  // };
+
   return (
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
           headerShown: false,
-          cardStyle: {backgroundColor: 'lightgrey'},
+          cardStyle: {backgroundColor: 'whitesmoke'},
         }}>
         <Stack.Screen name="DrawScreen" component={DrawerNavigation} />
         <Stack.Screen
@@ -120,7 +132,7 @@ export default function App() {
         <Stack.Screen
           name="Goodness"
           component={GoodnessScreen}
-          options={({route, navigation}: any) => ({
+          options={({route, navigation}: StackType) => ({
             headerShown: true,
             headerTintColor: 'white',
             headerStyle: {

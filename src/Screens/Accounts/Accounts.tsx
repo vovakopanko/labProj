@@ -12,23 +12,12 @@ import {
 import {FlatList} from 'react-native-gesture-handler';
 import {useAccount} from '../../hook/accountHook';
 import ActionsUser from './ActionsUser';
+import TotalCashUser from './TotalCashUser';
 
 const screenWidth = Dimensions.get('screen').width;
 
 const AccountsScreen: FC = ({navigation}: any) => {
   const {actionsWithCash, typesOfPayments} = useAccount();
-  const TotalCashUser = () => {
-    const total = actionsWithCash
-      .map(s => s.cash)
-      .reduce((sum, current) => sum + current);
-    let totalCash: Array<string> = total.toFixed(2).split('.');
-    return (
-      <Text style={styles.overView_totalCash}>
-        <Text>${totalCash[0]}.</Text>
-        <Text style={styles.numberAfterPoin}>{totalCash[1]}</Text>
-      </Text>
-    );
-  };
 
   return (
     <View style={styles.homePage}>

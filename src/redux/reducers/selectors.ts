@@ -28,3 +28,6 @@ export const getUserActionsInfo = (state: AppStateType) =>
   state.home.actionsInfo;
 
 export const getUserGiving = (state: AppStateType) => state.home.userGiving;
+
+export const getAllTransactionsUser = (state: AppStateType) =>
+  state.checking.transactions;
