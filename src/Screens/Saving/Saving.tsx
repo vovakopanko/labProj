@@ -101,6 +101,36 @@ const styles = StyleSheet.create({
   checkingTotalCash__subtitle: {
     color: '#808080',
   },
+  savingTransactions: {
+    flex: 1,
+    width: '100%',
+    backgroundColor: '#ffffff',
+  },
+  savingTransactions__searchBlock: {
+    flexDirection: 'row',
+  },
+  savingTransactions_inputText: {
+    borderWidth: 2,
+    borderRadius: 30,
+    borderColor: '#d3d3d3',
+    padding: 5,
+    width: '60%',
+    backgroundColor: '#f8f8ff',
+  },
+  searchBlock__btnSearch: {
+    borderWidth: 2,
+    borderRadius: 30,
+    borderColor: '#d3d3d3',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: '5%',
+    marginLeft: 10,
+  },
+  searchBlock__btnSearch_title: {
+    color: '#808080',
+    fontFamily: 'SFProRounded-Light',
+    textAlign: 'center',
+  },
 });
 
 export default SavingScreen;
