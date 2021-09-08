@@ -241,11 +241,11 @@ const styles = StyleSheet.create({
     width: '35%',
     borderRadius: 30,
     marginTop: '10%',
-    backgroundColor: 'mediumvioletred',
+    backgroundColor: '#c71585',
     alignItems: 'center',
   },
   aboutUser__btn_text: {
-    color: 'white',
+    color: '#ffffff',
   },
   //-----------------------
   content__updateDataUser: {
@@ -262,14 +262,14 @@ const styles = StyleSheet.create({
   photoBlock__changeUserPhoto: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'mediumvioletred',
+    backgroundColor: '#c71585',
     height: 40,
     borderRadius: 20,
     flexDirection: 'row',
   },
   changeUserPhoto_text: {
     fontFamily: 'SFProRounded-Light',
-    color: 'white',
+    color: '#ffffff',
     fontWeight: '400',
     marginRight: 20,
     marginLeft: 20,
@@ -281,7 +281,7 @@ const styles = StyleSheet.create({
   photoBlock__takeUserPhoto: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'mediumvioletred',
+    backgroundColor: '#c71585',
     height: 40,
     borderRadius: 20,
     flexDirection: 'row',
@@ -303,13 +303,13 @@ const styles = StyleSheet.create({
     width: '40%',
     height: 20,
     borderBottomWidth: 1,
-    borderBottomColor: 'mediumvioletred',
+    borderBottomColor: '#c71585',
   },
   inputBlock__changeName_inputActive: {
     width: '40%',
     height: 20,
     borderBottomWidth: 1,
-    borderBottomColor: 'grey',
+    borderBottomColor: '#808080',
   },
   updateDataUser__btn: {
     flexDirection: 'row',
@@ -321,11 +321,11 @@ const styles = StyleSheet.create({
     margin: '2%',
     width: '35%',
     borderRadius: 30,
-    backgroundColor: 'mediumvioletred',
+    backgroundColor: '#c71585',
     alignItems: 'center',
   },
   updateDataUser__btn_text: {
-    color: 'white',
+    color: '#ffffff',
   },
 });
 

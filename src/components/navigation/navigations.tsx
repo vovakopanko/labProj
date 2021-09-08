@@ -98,12 +98,12 @@ function MyTabs() {
             style={styles.blur}
             blurType="light"
             blurAmount={30}
-            reducedTransparencyFallbackColor="mediumvioletred"
+            reducedTransparencyFallbackColor="#c71585"
           />
         ),
         headerShown: false,
         tabBarStyle: {
-          backgroundColor: 'white',
+          backgroundColor: '#ffffff',
           opacity: 0.97,
           borderTopWidth: 0,
           position: 'absolute',
@@ -111,8 +111,8 @@ function MyTabs() {
           right: 0,
           bottom: 0,
         },
-        tabBarActiveTintColor: 'maroon',
-        tabBarInactiveTintColor: 'black',
+        tabBarActiveTintColor: '#800000',
+        tabBarInactiveTintColor: '#000000',
         tabBarOptions: {
           showIcon: true,
           showLabel: false,
@@ -132,9 +132,9 @@ export default function DrawerNavigation({navigation}: any) {
   return (
     <DrawerTab.Navigator
       screenOptions={{
-        headerTintColor: 'white',
+        headerTintColor: '#ffffff',
         headerStyle: {
-          backgroundColor: 'mediumvioletred',
+          backgroundColor: '#c71585',
         },
         headerTitle: () => <HeaderLogoTitle />,
         headerRight: () => <HeaderRightBtn navigation={navigation} />,
@@ -160,6 +160,5 @@ const styles = StyleSheet.create({
   },
   blur: {
     height: 100,
-    // backgroundColor: isAuth ? 'mediumvioletred' : 'white',
   },
 });
