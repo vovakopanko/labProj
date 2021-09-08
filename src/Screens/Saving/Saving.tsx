@@ -94,6 +94,13 @@ const styles = StyleSheet.create({
     fontFamily: 'SFProRounded-Light',
     textAlign: 'center',
   },
+  checkingTotalCash: {
+    marginVertical: '5%',
+    alignItems: 'center',
+  },
+  checkingTotalCash__subtitle: {
+    color: '#808080',
+  },
 });
 
 export default SavingScreen;

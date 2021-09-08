@@ -1,0 +1,29 @@
+import React from 'react';
+import {StyleSheet, Text} from 'react-native';
+import {useSavings} from '../../hook/savingsHook';
+
+const TotalCashUser = () => {
+  const {totalCash} = useSavings();
+  let costTransaction: Array<string> = totalCash.toFixed(2).split('.');
+  return (
+    <Text style={styles.overView_totalCash}>
+      <Text>${costTransaction[0]}.</Text>
+      <Text style={styles.numberAfterPoin}>{costTransaction[1]}</Text>
+    </Text>
+  );
+};
+
+const styles = StyleSheet.create({
+  overView_totalCash: {
+    textAlign: 'center',
+    fontFamily: 'SFProRounded-Bold',
+    fontWeight: '400',
+    fontSize: 24,
+    paddingTop: 5,
+  },
+  numberAfterPoin: {
+    fontSize: 16,
+  },
+});
+
+export default TotalCashUser;

@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
   },
   loginPage__loginText: {
     borderBottomWidth: 4,
-    borderBottomColor: 'mediumvioletred',
+    borderBottomColor: '#c71585',
     marginLeft: Platform.OS === 'ios' ? '5%' : '5%',
     width: Platform.OS === 'ios' ? '16%' : '16%',
   },
@@ -198,13 +198,13 @@ const styles = StyleSheet.create({
     height: 50,
     fontSize: 16,
     borderBottomWidth: 1,
-    borderBottomColor: 'grey',
+    borderBottomColor: '#808080',
   },
   inputActive: {
     height: 50,
     fontSize: 20,
     borderBottomWidth: 1,
-    borderBottomColor: 'mediumvioletred',
+    borderBottomColor: '#c71585',
   },
   keyboardAV__passwordInput: {
     top: Platform.OS === 'ios' ? '8%' : '8%',
@@ -219,7 +219,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
   },
   forgotBtn__text: {
-    color: 'mediumvioletred',
+    color: '#c71585',
     fontWeight: 'bold',
   },
   keyboardAV__loginBtnBlock: {
@@ -231,13 +231,13 @@ const styles = StyleSheet.create({
   },
   loginBtnBlock__info: {
     fontSize: 14,
-    color: 'grey',
+    color: '#808080',
   },
   loginBtnBlock__disabled: {
     width: Platform.OS === 'ios' ? '80%' : '80%',
     borderRadius: 20,
     height: 40,
-    backgroundColor: 'grey',
+    backgroundColor: '#808080',
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: Platform.OS === 'ios' ? '3%' : '3%',
@@ -246,17 +246,17 @@ const styles = StyleSheet.create({
     width: Platform.OS === 'ios' ? '80%' : '80%',
     borderRadius: 20,
     height: 40,
-    backgroundColor: 'mediumvioletred',
+    backgroundColor: '#c71585',
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: Platform.OS === 'ios' ? '3%' : '3%',
   },
   numberAttemps__text: {
     alignSelf: 'center',
-    color: 'grey',
+    color: '#808080',
   },
   loginBtnBlock__attempts: {
-    color: 'red',
+    color: '#ff0000',
   },
   keyboardAV__loginWays: {
     flex: 1,
@@ -267,7 +267,7 @@ const styles = StyleSheet.create({
 
   loginPage__BtnText: {
     fontSize: 15,
-    color: 'white',
+    color: '#ffffff',
   },
 
   loginWays__userDefinitionBtn: {
@@ -281,7 +281,7 @@ const styles = StyleSheet.create({
     width: Platform.OS === 'ios' ? '40%' : '40%',
     height: 30,
     borderRadius: 20,
-    borderColor: 'grey',
+    borderColor: '#808080',
     borderWidth: 1,
     paddingVertical: 5,
     paddingHorizontal: 30,
@@ -291,7 +291,7 @@ const styles = StyleSheet.create({
   touchId__BtnText: {
     left: 20,
     fontSize: 11,
-    color: 'grey',
+    color: '#808080',
     alignItems: 'center',
   },
   touchId__BtnIcon: {
@@ -302,7 +302,7 @@ const styles = StyleSheet.create({
     width: Platform.OS === 'ios' ? '40%' : '40%',
     height: 30,
     borderRadius: 20,
-    borderColor: 'grey',
+    borderColor: '#808080',
     borderWidth: 1,
     paddingVertical: 5,
     paddingHorizontal: 30,
@@ -312,7 +312,7 @@ const styles = StyleSheet.create({
   faceId__BtnText: {
     left: 25,
     fontSize: 11,
-    color: 'grey',
+    color: '#808080',
     alignItems: 'center',
   },
   faceId__BtnIcon: {

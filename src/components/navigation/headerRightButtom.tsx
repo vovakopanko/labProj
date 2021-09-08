@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'lightgrey',
+    backgroundColor: '#d3d3d3',
   },
   signOut__actionBtn: {
     flex: 1,
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
   signOut__actionBtn_close: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'grey',
+    backgroundColor: '#808080',
     height: '20%',
     width: 150,
     borderRadius: 20,
@@ -140,17 +140,17 @@ const styles = StyleSheet.create({
   signOut__actionBtn_exit: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'mediumvioletred',
+    backgroundColor: '#c71585',
     height: '20%',
     width: 150,
     borderRadius: 20,
   },
   actionBtn_closeBtn_text: {
     fontFamily: 'SFProRounded-Light',
-    color: 'white',
+    color: '#ffffff',
   },
   actionBtn_exitBtn_text: {
     fontFamily: 'SFProRounded-Light',
-    color: 'white',
+    color: '#ffffff',
   },
 });

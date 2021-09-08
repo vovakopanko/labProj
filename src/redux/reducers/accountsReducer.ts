@@ -1,6 +1,7 @@
+import {initialStateAccount} from './../../../types/accountTypes';
 import {InfernActionsType} from './../reduxStore';
 
-let initialState = {
+let initialState: initialStateAccount = {
   actionsUser: [
     {
       id: 1,
