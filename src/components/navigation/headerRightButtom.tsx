@@ -1,3 +1,4 @@
+import {StackNavigationProp} from '@react-navigation/stack';
 import React, {FC} from 'react';
 import {
   Image,
@@ -7,10 +8,16 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import {RootStackParamList} from '../../../types';
 import {useAuth} from '../../hook/authHook';
 import {useProfile} from '../../hook/profileHook';
 
-const HeaderRightBtn: FC = ({navigation}: any) => {
+type ProfileNavigationProp = StackNavigationProp<RootStackParamList>;
+interface Props {
+  navigation: ProfileNavigationProp;
+}
+
+const HeaderRightBtn: FC<Props> = ({navigation}: any) => {
   const [isSignOutOpen, setIsSignOutOpen] = React.useState(false);
   const {logout} = useAuth();
   const {fullName, userPhoto} = useProfile();

@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 
 interface HeaderTitle {
-  title: string;
+  title: string | null;
   subtitle: string | null;
 }
 

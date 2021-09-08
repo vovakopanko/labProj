@@ -1,11 +1,6 @@
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {
-  NavigationParams,
-  NavigationScreenProp,
-  NavigationState,
-} from 'react-navigation';
 import DrawerNavigation from './src/components/navigation/navigations';
 import ChekingScreen from './src/Screens/Checking/Checking';
 import SavingScreen from './src/Screens/Saving/Saving';
@@ -21,32 +16,26 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import HeaderLeftBtn from './src/components/navigation/headerLeftBtn';
 import ProfileScreen from './src/Screens/Profile/Profile';
 import {useProfile} from './src/hook/profileHook';
-// import {RootStackParamList} from './types';
-// import {RouteProp} from '@react-navigation/native';
 
-export type RootAppStackParams = {
-  Checking: undefined;
-  Saving: undefined;
-  Goodness: undefined;
-  DrawScreen: undefined;
-  Proffile: undefined;
+export type RootAppStackParamsList = {
+  [RootAppStackParams.Checking]: undefined;
+  [RootAppStackParams.Saving]: undefined;
+  [RootAppStackParams.Goodness]: undefined;
+  [RootAppStackParams.DrawScreen]: undefined;
+  [RootAppStackParams.Proffile]: {info: null | string; name: null | string};
 };
 
-export interface Props {
-  navigation: NavigationScreenProp<NavigationState, NavigationParams>;
+export enum RootAppStackParams {
+  Checking = 'Checking',
+  Saving = 'Saving',
+  Goodness = 'Goodness',
+  DrawScreen = 'DrawScreen',
+  Proffile = 'Proffile',
 }
 
-type stackProfile = {
-  route: any;
-  navigation: any;
-}
+export const Stack = createStackNavigator<RootAppStackParamsList>();
 
-// export type RootRouteProps<RouteName extends keyof RootStackParamList> =
-//   RouteProp<RootAppStackParams, RouteName>;
-
-const Stack = createStackNavigator<RootAppStackParams>();
-
-const App: React.FC<Props> = () => {
+const App: React.FC = () => {
   const {userToken, isLoading, retriveUserToken} = useAuth();
   const {fullName} = useProfile();
 
@@ -74,10 +63,6 @@ const App: React.FC<Props> = () => {
   if (userToken !== 'iTechArt2021') {
     return <LoginScreen />;
   }
-  // type CheckingProp = {
-  //   route: RouteProp<{params: {name: string; info: string}}, 'params'>;
-  //   navigation: any;
-  // };
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -85,9 +70,12 @@ const App: React.FC<Props> = () => {
           headerShown: false,
           cardStyle: {backgroundColor: '#f5f5f5'},
         }}>
-        <Stack.Screen name="DrawScreen" component={DrawerNavigation} />
         <Stack.Screen
-          name="Checking"
+          name={RootAppStackParams.DrawScreen}
+          component={DrawerNavigation}
+        />
+        <Stack.Screen
+          name={RootAppStackParams.Checking}
           component={ChekingScreen}
           options={({route, navigation}: any) => ({
             headerShown: true,
@@ -106,7 +94,7 @@ const App: React.FC<Props> = () => {
           })}
         />
         <Stack.Screen
-          name="Saving"
+          name={RootAppStackParams.Saving}
           component={SavingScreen}
           options={({route, navigation}: any) => ({
             headerShown: true,
@@ -125,9 +113,9 @@ const App: React.FC<Props> = () => {
           })}
         />
         <Stack.Screen
-          name="Proffile"
+          name={RootAppStackParams.Proffile}
           component={ProfileScreen}
-          options={({route, navigation}: stackProfile) => ({
+          options={({route, navigation}: any) => ({
             headerShown: true,
             headerTintColor: '#ffffff',
             headerStyle: {
@@ -141,7 +129,7 @@ const App: React.FC<Props> = () => {
           })}
         />
         <Stack.Screen
-          name="Goodness"
+          name={RootAppStackParams.Goodness}
           component={GoodnessScreen}
           options={({route, navigation}: any) => ({
             headerShown: true,
