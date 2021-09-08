@@ -46,3 +46,9 @@ export const getTotalInterestGained = (state: AppStateType) =>
 
 export const getGoodnessPoints = (state: AppStateType) =>
   state.saving.goodnessPoints;
+
+export const getLastDataTransactions = (state: AppStateType) =>
+  state.saving.date;
+
+export const getTransactionsRawsUser = (state: AppStateType) =>
+  state.saving.transactionsRaws;

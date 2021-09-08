@@ -17,7 +17,7 @@ type initialStateSavings = {
 
 let initialState: initialStateSavings = {
   graph: require('../../assets/projectImages/savingsGraphV2.png'),
-  totalInterestGained: 50,
+  totalInterestGained: 50.0,
   goodnessPoints: 600,
   date: 'jul 11',
   transactionsRaws: [
@@ -40,6 +40,16 @@ let initialState: initialStateSavings = {
       title: 'Transfer',
       subtitle: 'from checjing (...5340) | Jul 11',
       cash: 800.65,
+    },
+    {
+      title: 'Transfer',
+      subtitle: 'Jul 11',
+      cash: 180.0,
+    },
+    {
+      title: 'Transfer',
+      subtitle: 'from checjing (...4372) | Jul 11',
+      cash: 320.0,
     },
   ],
 };

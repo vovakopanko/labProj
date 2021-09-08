@@ -21,7 +21,7 @@ const TransactionsUser = ({date, data}: TransactionsUserType) => {
         <Text style={styles.transactionsData__date_text}>{date}</Text>
       </View>
       {data.map(d => (
-        <View style={styles.transactionsData__raws}>
+        <View style={styles.transactionsData__raws} key={d.cost}>
           <View style={styles.transactionsData__raws_leftSide}>
             <View>
               {d.specialDeposit && (

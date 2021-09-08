@@ -53,7 +53,7 @@ const LoginScreen: FC = () => {
     setTimeout(() => {
       setCounterInput(prev => prev - 1);
       //Add disabled button
-    }, 1000);
+    }, 500);
     loginHandler(loginData.userName, loginData.password);
   };
 
