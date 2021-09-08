@@ -5,6 +5,7 @@ import {TouchableOpacity} from 'react-native';
 const HeaderLeftBtn: FC = ({navigation}: any) => {
   return (
     <TouchableOpacity onPress={() => navigation.goBack()}>
+      {/* <TouchableOpacity onPress={() => navigation.navigate('Home')}> */}
       <Image
         style={styles.btnBack}
         source={require('./../../assets/projectImages/back.png')}
@@ -14,7 +15,11 @@ const HeaderLeftBtn: FC = ({navigation}: any) => {
 };
 
 const styles = StyleSheet.create({
-  btnBack: {width: 20, height: 20, marginLeft: 10},
+  btnBack: {
+    width: 20,
+    height: 20,
+    marginLeft: 10,
+  },
 });
 
 export default HeaderLeftBtn;

@@ -88,8 +88,8 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   transactionsData__raws: {
-    backgroundColor: 'white',
-    borderBottomColor: 'lightgrey',
+    backgroundColor: '#ffffff',
+    borderBottomColor: '#d3d3d3',
     borderBottomWidth: 1,
     width: '100%',
     flexDirection: 'row',
@@ -109,13 +109,13 @@ const styles = StyleSheet.create({
   },
   transactionsData__raws_titleSpec: {
     fontWeight: '500',
-    color: 'green',
+    color: '#008000',
   },
   transactionsData__raws_subtitle: {
-    color: 'grey',
+    color: '#808080',
   },
   transactionsData__raws_special: {
-    color: 'green',
+    color: '#008000',
   },
   transactionsData__raws_rightSide: {
     width: '40%',
@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
   rightSide__cashSpecial: {
     textAlign: 'right',
     fontSize: 18,
-    color: 'green',
+    color: '#008000',
   },
   rightSide__cost: {
     fontSize: 15,

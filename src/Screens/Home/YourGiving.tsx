@@ -112,7 +112,7 @@ const YourGiving = ({
 // type Font = 'SFProRounded-Regular' | 'SFProRounded-Bold' | 'SFProRounded-Light';
 const styles = StyleSheet.create({
   blockGivingImpact: {
-    backgroundColor: 'white',
+    backgroundColor: '#ffffff',
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.25,
     fontFamily: 'SFProRounded-Bold',
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
   },
   infoGivingImpact_activity: {
     // fontSize: 12,
-    color: 'grey',
+    color: '#808080',
     fontFamily: 'SFProRounded-Light',
   },
   backgroundVideo: {
@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
   },
   blockGivingImpact__shareBtn: {alignItems: 'center', marginBottom: 10},
   blockGivingImpact__shareBtn_dimensions: {
-    backgroundColor: 'mediumvioletred',
+    backgroundColor: '#c71585',
     flexDirection: 'row',
     width: screenWidth * 0.6,
     alignItems: 'center',
@@ -189,7 +189,7 @@ const styles = StyleSheet.create({
     height: 40,
   },
   blockGivingImpact__shareBtn_icon: {width: 15, height: 15, marginRight: 10},
-  blockGivingImpact__shareBtn_text: {color: 'white'},
+  blockGivingImpact__shareBtn_text: {color: '#ffffff'},
 });
 
 export default YourGiving;

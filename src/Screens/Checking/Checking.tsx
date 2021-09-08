@@ -2,22 +2,23 @@ import React, {FC} from 'react';
 import {View, Text, StyleSheet, Alert, TouchableOpacity} from 'react-native';
 import {FlatList, TextInput} from 'react-native-gesture-handler';
 import {useCheking} from '../../hook/checkingHook';
+import TotalCashUser from './TotalCashUser';
 import TransactionsUser from './TransactiomsUser';
 
-type typeP = {
-  title: string;
-  subtitle: string;
-  cost: number;
-  deposit: boolean;
-  specialDeposit: boolean;
-};
+// type typeP = {
+//   title: string;
+//   subtitle: string;
+//   cost: number;
+//   deposit: boolean;
+//   specialDeposit: boolean;
+// };
 
 const ChekingScreen: FC = () => {
   const {userTransactions} = useCheking();
   return (
     <View style={styles.content}>
       <View style={styles.checkingTotalCash}>
-        <Text style={styles.checkingTotalCash__sum}>$1.500.20</Text>
+        <TotalCashUser />
         <Text style={styles.checkingTotalCash__subtitle}>
           Total avaliable cash
         </Text>
@@ -40,6 +41,7 @@ const ChekingScreen: FC = () => {
       <View style={styles.checkingTotalCash__transactionsData}>
         <FlatList
           data={userTransactions}
+          showsVerticalScrollIndicator={false}
           renderItem={({item}) => (
             <TransactionsUser date={item.date} data={item.data} />
           )}
@@ -55,14 +57,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   checkingTotalCash: {
-    marginVertical: '8%',
+    marginVertical: '5%',
     alignItems: 'center',
   },
   checkingTotalCash__sum: {
     fontSize: 24,
   },
+  checkingTotalCash__sum_textAfterPoin: {
+    fontSize: 18,
+  },
   checkingTotalCash__subtitle: {
-    color: 'grey',
+    color: '#808080',
   },
   checkingSearch__searchBlock: {
     flexDirection: 'row',
@@ -70,27 +75,30 @@ const styles = StyleSheet.create({
   searchBlock__inputText: {
     borderWidth: 2,
     borderRadius: 30,
-    borderColor: 'lightgrey',
+    borderColor: '#d3d3d3',
     padding: 5,
     width: '60%',
-    backgroundColor: 'ghostwhite',
+    backgroundColor: '#f8f8ff',
   },
   searchBlock__btnSearch: {
     borderWidth: 2,
     borderRadius: 30,
-    borderColor: 'lightgrey',
+    borderColor: '#d3d3d3',
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: '5%',
     marginLeft: 10,
   },
   searchBlock__btnSearch_title: {
-    color: 'grey',
+    color: '#808080',
     fontFamily: 'SFProRounded-Light',
     textAlign: 'center',
   },
   checkingTotalCash__transactionsData: {
     width: '85%',
+    marginTop: 10,
+    flex: 1,
+    paddingBottom: 30,
   },
 });
 

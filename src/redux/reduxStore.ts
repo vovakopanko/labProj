@@ -7,6 +7,7 @@ import homeReducer from './reducers/homeReducer';
 import profileReducer from './reducers/profileReducer';
 import accountReducer from './reducers/accountsReducer';
 import checkingReducer from './reducers/checkingReducer';
+import savingReducer from './reducers/savingReducer';
 
 const persistConfig = {
   key: 'root',
@@ -19,6 +20,7 @@ let reducers = combineReducers({
   profile: profileReducer,
   account: accountReducer,
   checking: checkingReducer,
+  saving: savingReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);

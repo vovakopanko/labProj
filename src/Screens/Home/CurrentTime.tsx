@@ -45,7 +45,7 @@ const CurrentTime = () => {
 const styles = StyleSheet.create({
   homePage_titleGreating: {
     fontFamily: 'SFProRounded-Regular',
-    color: 'grey',
+    color: '#808080',
   },
 });
 

@@ -49,7 +49,7 @@ const ActionsUser = ({
   return (
     <TouchableHighlight
       activeOpacity={0.3}
-      underlayColor="lightgrey"
+      underlayColor="#d3d3d3"
       style={styles.actionUser_block}
       disabled={clickDisabled}
       onPress={() =>
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     marginVertical: 7,
     marginHorizontal: 10,
-    backgroundColor: 'white',
+    backgroundColor: '#ffffff',
   },
   overView_actionsUser: {
     flexDirection: 'row',
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
   actionsUser_card: {
     fontWeight: '400',
     paddingLeft: 10,
-    color: 'grey',
+    color: '#808080',
     fontFamily: 'SFProRounded-Light',
   },
   actionsUser_icon: {
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
   actionsUser__savedCash_text: {
     paddingTop: 5,
     textAlign: 'center',
-    color: 'green',
+    color: '#008000',
   },
 });
 

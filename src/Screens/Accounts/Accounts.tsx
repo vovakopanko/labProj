@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
   },
   overView_subTitle: {
     textAlign: 'center',
-    color: 'grey',
+    color: '#808080',
     fontSize: 12,
     marginBottom: 20,
   },
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
   cashActions_text: {
     textAlign: 'center',
     paddingTop: 10,
-    color: 'grey',
+    color: '#808080',
   },
   overView_actionsUser: {
     flexDirection: 'row',
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   blockGivingImpact: {
-    backgroundColor: 'white',
+    backgroundColor: '#ffffff',
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.25,
     fontFamily: 'SFProRounded-Bold',
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
   },
   infoGivingImpact_title: {},
   infoGivingImpact_activity: {
-    color: 'grey',
+    color: '#808080',
     fontFamily: 'SFProRounded-Light',
   },
   blockTitle_avatar: {
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
   },
   blockGivingImpact__shareBtn: {alignItems: 'center', marginBottom: 10},
   blockGivingImpact__shareBtn_dimensions: {
-    backgroundColor: 'mediumvioletred',
+    backgroundColor: '#c71585',
     flexDirection: 'row',
     width: screenWidth * 0.6,
     alignItems: 'center',
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
     height: 40,
   },
   blockGivingImpact__shareBtn_icon: {width: 15, height: 15, marginRight: 10},
-  blockGivingImpact__shareBtn_text: {color: 'white'},
+  blockGivingImpact__shareBtn_text: {color: '#ffffff'},
   backgroundVideo: {
     width: '100%',
     height: Platform.OS === 'ios' ? 220 : '40%',

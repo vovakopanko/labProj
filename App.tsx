@@ -1,9 +1,11 @@
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
 import {
-  createStackNavigator,
-  // StackNavigationProp,
-} from '@react-navigation/stack';
+  NavigationParams,
+  NavigationScreenProp,
+  NavigationState,
+} from 'react-navigation';
 import DrawerNavigation from './src/components/navigation/navigations';
 import ChekingScreen from './src/Screens/Checking/Checking';
 import SavingScreen from './src/Screens/Saving/Saving';
@@ -19,6 +21,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import HeaderLeftBtn from './src/components/navigation/headerLeftBtn';
 import ProfileScreen from './src/Screens/Profile/Profile';
 import {useProfile} from './src/hook/profileHook';
+// import {RootStackParamList} from './types';
+// import {RouteProp} from '@react-navigation/native';
 
 export type RootAppStackParams = {
   Checking: undefined;
@@ -27,16 +31,25 @@ export type RootAppStackParams = {
   DrawScreen: undefined;
   Proffile: undefined;
 };
-// type LogScreenNavigationProp = StackNavigationProp<
-//   RootAppStackParams,
-//   keyof RootAppStackParams
-// >;
+
+export interface Props {
+  navigation: NavigationScreenProp<NavigationState, NavigationParams>;
+}
+
+type stackProfile = {
+  route: any;
+  navigation: any;
+}
+
+// export type RootRouteProps<RouteName extends keyof RootStackParamList> =
+//   RouteProp<RootAppStackParams, RouteName>;
 
 const Stack = createStackNavigator<RootAppStackParams>();
 
-export default function App() {
+const App: React.FC<Props> = () => {
   const {userToken, isLoading, retriveUserToken} = useAuth();
   const {fullName} = useProfile();
+
   useEffect(() => {
     setTimeout(async () => {
       let token;
@@ -61,18 +74,16 @@ export default function App() {
   if (userToken !== 'iTechArt2021') {
     return <LoginScreen />;
   }
-
-  // type StackType = {
-  //   route: any;
-  //   navigation: LogScreenNavigationProp;
+  // type CheckingProp = {
+  //   route: RouteProp<{params: {name: string; info: string}}, 'params'>;
+  //   navigation: any;
   // };
-
   return (
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
           headerShown: false,
-          cardStyle: {backgroundColor: 'whitesmoke'},
+          cardStyle: {backgroundColor: '#f5f5f5'},
         }}>
         <Stack.Screen name="DrawScreen" component={DrawerNavigation} />
         <Stack.Screen
@@ -80,9 +91,9 @@ export default function App() {
           component={ChekingScreen}
           options={({route, navigation}: any) => ({
             headerShown: true,
-            headerTintColor: 'white',
+            headerTintColor: '#ffffff',
             headerStyle: {
-              backgroundColor: 'mediumvioletred',
+              backgroundColor: '#c71585',
             },
             headerTitle: () => (
               <HeaderAppTitle
@@ -99,9 +110,9 @@ export default function App() {
           component={SavingScreen}
           options={({route, navigation}: any) => ({
             headerShown: true,
-            headerTintColor: 'white',
+            headerTintColor: '#ffffff',
             headerStyle: {
-              backgroundColor: 'mediumvioletred',
+              backgroundColor: '#c71585',
             },
             headerTitle: () => (
               <HeaderAppTitle
@@ -116,11 +127,11 @@ export default function App() {
         <Stack.Screen
           name="Proffile"
           component={ProfileScreen}
-          options={({route, navigation}: any) => ({
+          options={({route, navigation}: stackProfile) => ({
             headerShown: true,
-            headerTintColor: 'white',
+            headerTintColor: '#ffffff',
             headerStyle: {
-              backgroundColor: 'mediumvioletred',
+              backgroundColor: '#c71585',
             },
             headerTitle: () => (
               <HeaderAppTitle title={fullName} subtitle={route.params.info} />
@@ -132,11 +143,11 @@ export default function App() {
         <Stack.Screen
           name="Goodness"
           component={GoodnessScreen}
-          options={({route, navigation}: StackType) => ({
+          options={({route, navigation}: any) => ({
             headerShown: true,
-            headerTintColor: 'white',
+            headerTintColor: '#ffffff',
             headerStyle: {
-              backgroundColor: 'mediumvioletred',
+              backgroundColor: '#c71585',
             },
             headerTitle: () => (
               <HeaderAppTitle
@@ -151,8 +162,10 @@ export default function App() {
       </Stack.Navigator>
     </NavigationContainer>
   );
-}
+};
 
 const styles = StyleSheet.create({
   isLoading: {flex: 1, justifyContent: 'center', alignItems: 'center'},
 });
+
+export default App;

@@ -23,12 +23,12 @@ const styles = StyleSheet.create({
     fontFamily: 'SFProRounded-Light',
   },
   title: {
-    color: 'white',
+    color: '#ffffff',
     fontSize: 16,
     fontWeight: 'bold',
   },
   subtitle: {
-    color: 'white',
+    color: '#ffffff',
     fontSize: 10,
   },
 });

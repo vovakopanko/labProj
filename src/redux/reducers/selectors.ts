@@ -29,5 +29,14 @@ export const getUserActionsInfo = (state: AppStateType) =>
 
 export const getUserGiving = (state: AppStateType) => state.home.userGiving;
 
+export const getCheckingCash = (state: AppStateType) =>
+  state.home.actionsInfo[0].cash;
+
 export const getAllTransactionsUser = (state: AppStateType) =>
   state.checking.transactions;
+
+export const getSavingCash = (state: AppStateType) =>
+  state.home.actionsInfo[1].cash;
+
+export const getGraphTransactionsUser = (state: AppStateType) =>
+  state.saving.graph;

@@ -37,7 +37,7 @@ const CurrentActions = ({name, info, cash, navigation, icon}: ActionsUser) => {
   return (
     <TouchableHighlight
       activeOpacity={0.3}
-      underlayColor="lightgrey"
+      underlayColor="#d3d3d3"
       onPress={() =>
         navigation.navigate(`${name}`, {
           info: info,
@@ -62,7 +62,7 @@ const CurrentActions = ({name, info, cash, navigation, icon}: ActionsUser) => {
 
 const styles = StyleSheet.create({
   overView_actionsUser: {
-    borderBottomColor: 'lightgrey',
+    borderBottomColor: '#d3d3d3',
     borderBottomWidth: 1,
     paddingTop: 10,
     paddingBottom: 10,
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
   actionsUser_card: {
     fontWeight: '400',
     paddingLeft: 10,
-    color: 'grey',
+    color: '#808080',
     fontFamily: 'SFProRounded-Light',
   },
   overView_providedCash: {

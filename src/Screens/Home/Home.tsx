@@ -68,13 +68,13 @@ const styles = StyleSheet.create({
   },
   homePage_titleGreating: {
     fontFamily: 'SFProRounded-Regular',
-    color: 'grey',
+    color: '#808080',
   },
   homePage_greetingUser: {
     marginBottom: 10,
   },
   homePage_overView: {
-    backgroundColor: 'white',
+    backgroundColor: '#ffffff',
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.25,
     marginBottom: 20,
@@ -89,12 +89,12 @@ const styles = StyleSheet.create({
   overView_subTitle: {
     textAlign: 'center',
     // fontWeight: '200',
-    color: 'grey',
+    color: '#808080',
     fontSize: 12,
     marginBottom: 20,
   },
   overView_actionsUser: {
-    borderBottomColor: 'lightgrey',
+    borderBottomColor: '#d3d3d3',
     borderBottomWidth: 1,
     paddingTop: 10,
     paddingBottom: 10,
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
   actionsUser_card: {
     fontWeight: '400',
     paddingLeft: 10,
-    color: 'grey',
+    color: '#808080',
     fontFamily: 'SFProRounded-Light',
   },
   actionsUser_icon: {
