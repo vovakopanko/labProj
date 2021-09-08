@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f8f8ff',
   },
   searchBlock__btnSearch: {
-    borderWidth: 2,
+    borderWidth: 3,
     borderRadius: 30,
     borderColor: '#d3d3d3',
     justifyContent: 'center',
