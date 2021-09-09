@@ -9,7 +9,20 @@ import {
   getIsLoadingSelector,
 } from '../redux/reducers/selectors';
 
-export const useAuth = (): any => {
+type UserTokens = string | null;
+type userName = string | null;
+
+interface useAuth {
+  login: (userTokens: UserTokens, userName: userName) => void;
+  logout: () => void;
+  retriveUserToken: (userCurrentToken: UserTokens) => void;
+  registrator: (userCurrentToken: UserTokens) => void;
+  userToken: UserTokens;
+  name: userName;
+  isLoading: boolean | null;
+}
+
+export const useAuth = (): useAuth => {
   const dispatch = useDispatch();
 
   const userToken = useSelector(getUserTokenSelector);
@@ -17,7 +30,7 @@ export const useAuth = (): any => {
   const isLoading = useSelector(getIsLoadingSelector);
 
   const login = useCallback(
-    async (userTokens: string | null, userName: string | null) => {
+    async (userTokens: UserTokens, userName: userName) => {
       dispatch(authActions.SignIn(userTokens, userName));
     },
     [],
@@ -28,11 +41,11 @@ export const useAuth = (): any => {
     await AsyncStorage.removeItem('userToken');
   }, []);
 
-  const retriveUserToken = useCallback(async (userCurrentToken: string) => {
+  const retriveUserToken = useCallback(async (userCurrentToken: UserTokens) => {
     dispatch(authActions.RetrieveToken(userCurrentToken));
   }, []);
 
-  const registrator = useCallback(async (userCurrentToken: string) => {
+  const registrator = useCallback(async (userCurrentToken: UserTokens) => {
     dispatch(authActions.Registrator(userCurrentToken));
   }, []);
 

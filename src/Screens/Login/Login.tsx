@@ -36,24 +36,23 @@ const LoginScreen: FC = () => {
     userName: string | null,
     password: string | null,
   ) => {
-    let userToken = null;
-    registrator(userToken);
+    let userToken: string | null = null;
+    registrator(null);
     if (userName === 'User' && password === '12345') {
       try {
         userToken = 'iTechArt2021';
         await AsyncStorage.setItem('userToken', userToken);
       } catch (e) {
-        console.log(e);
+        console.warn(e);
       }
+    } else {
+      setCounterInput(prev => prev - 1);
     }
     registrator(userToken);
     login(userToken, userName);
   };
 
   const LoginCounter = () => {
-    setTimeout(() => {
-      setCounterInput(prev => prev - 1);
-    }, 1000);
     loginHandler(loginData.userName, loginData.password);
   };
 

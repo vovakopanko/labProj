@@ -1,35 +1,15 @@
-export type SingInStackParamList = {
-  Login: undefined;
-  ForgotPassword: undefined;
-  RecoveryCode: undefined;
-  CreateNewPassword: undefined;
-  PasswordChanged: undefined;
+export type RootAppStackParamsList = {
+  [RootAppStackParams.Checking]: undefined;
+  [RootAppStackParams.Saving]: undefined;
+  [RootAppStackParams.Goodness]: undefined;
+  [RootAppStackParams.DrawScreen]: undefined;
+  [RootAppStackParams.Proffile]: {info: null | string; name: null | string};
 };
 
-export type SingUpStackParamList = {
-  Registration: undefined;
-  CreatePassword: undefined;
-  RecoveryCode: undefined;
-  Welcome: undefined;
-};
-
-export type StepperStackParamList = {
-  RootScreen: undefined;
-  Stepper: undefined;
-  GreatJob: undefined;
-};
-
-export type RootStackParamList = {
-  Dashboard: undefined;
-  SignUp: undefined;
-  SignIn: undefined;
-  ToolkitSetup: undefined;
-  Onboarding: undefined;
-} & SingInStackParamList &
-  SingUpStackParamList &
-  StepperStackParamList;
-
-export interface ICFormDataPassword {
-  password: string;
-  confirmPassword: string;
+export enum RootAppStackParams {
+  Checking = 'Checking',
+  Saving = 'Saving',
+  Goodness = 'Goodness',
+  DrawScreen = 'DrawScreen',
+  Proffile = 'Proffile',
 }
