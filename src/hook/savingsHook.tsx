@@ -1,4 +1,6 @@
+import {ImageSourcePropType} from 'react-native';
 import {useSelector} from 'react-redux';
+import {transactionsRaws} from '../redux/reducers/savingReducer';
 import {
   getGoodnessPoints,
   getGraphTransactionsUser,
@@ -8,7 +10,17 @@ import {
   getTransactionsRawsUser,
 } from '../redux/reducers/selectors';
 
-export const useSavings = () => {
+interface useSavings {
+  transactionsRaws: transactionsRaws[];
+  totalCash: number | null;
+  data: string;
+  graph: ImageSourcePropType;
+  goodnessPoints: number;
+  totalInterestGained: number;
+}
+
+export const useSavings = (): useSavings => {
+  // eslint-disable-next-line no-shadow
   const transactionsRaws = useSelector(getTransactionsRawsUser);
   const totalCash = useSelector(getSavingCash);
   const data = useSelector(getLastDataTransactions);

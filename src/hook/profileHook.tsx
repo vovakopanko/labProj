@@ -9,7 +9,16 @@ import {
   getPhotoUserSelector,
 } from '../redux/reducers/selectors';
 
-export const useProfile = (): any => {
+interface useProfile {
+  fullName: string | null;
+  dateBirth: string | null;
+  userPhoto: string | null;
+  updateUserInfo: (fullNameUser: string, dateBirthUser: string) => void;
+  getUserName: (userCurrentName: string) => void;
+  updateUserPhoto: (photoUser: string) => void;
+}
+
+export const useProfile = (): useProfile => {
   const dispatch = useDispatch();
 
   const fullName = useSelector(getFullNameUserSelector);
@@ -19,12 +28,6 @@ export const useProfile = (): any => {
   const updateUserInfo = useCallback(
     async (fullNameUser: string, dateBirthUser: string) => {
       dispatch(profileActions.SetUserInfo(fullNameUser, dateBirthUser));
-      // try {
-      //   await AsyncStorage.setItem('userName', fullNameUser);
-      //   await AsyncStorage.setItem('userDateBirth', dateBirthUser);
-      // } catch (e) {
-      //   console.log(e);
-      // }
     },
     [],
   );
@@ -35,17 +38,11 @@ export const useProfile = (): any => {
 
   const updateUserPhoto = useCallback(async (photoUser: string) => {
     dispatch(profileActions.SetNewPhoto(photoUser));
-    // try {
-    //   await AsyncStorage.setItem('userPhoto', photoUser);
-    // } catch (e) {
-    //   console.error(e);
-    // }
   }, []);
 
   return {
     updateUserInfo,
     updateUserPhoto,
-    // getDataUser,
     fullName,
     userPhoto,
     dateBirth,
