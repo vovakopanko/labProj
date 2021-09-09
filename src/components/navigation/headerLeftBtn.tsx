@@ -1,8 +1,15 @@
+import {StackNavigationProp} from '@react-navigation/stack';
 import React, {FC} from 'react';
 import {Image, StyleSheet} from 'react-native';
 import {TouchableOpacity} from 'react-native';
+import {RootStackParamList} from '../../../types';
 
-const HeaderLeftBtn: FC = ({navigation}: any) => {
+type ChevronNavigationProp = StackNavigationProp<RootStackParamList>;
+interface Props {
+  navigation: ChevronNavigationProp;
+}
+
+const HeaderLeftBtn: FC<Props> = ({navigation}) => {
   return (
     <TouchableOpacity onPress={() => navigation.goBack()}>
       {/* <TouchableOpacity onPress={() => navigation.navigate('Home')}> */}
