@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
+import React, {FC, useState} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
+import {HomeProps} from '../../../types';
 import {useHome} from '../../hook/homeHook';
 import CurrentActions from './CurrentActions';
 import CurrentTime from './CurrentTime';
@@ -8,7 +9,7 @@ import HandleScroll from './HandleScroll';
 import TotalCashUser from './TotalCashUser';
 import YourGiving from './YourGiving';
 
-function HomeScreen({navigation}: any) {
+const HomeScreen: FC<HomeProps> = ({navigation}) => {
   const [pause, setPause] = useState(true);
   const {actionsInfo, userGiving} = useHome();
   return (
@@ -58,7 +59,7 @@ function HomeScreen({navigation}: any) {
       />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   homePage: {

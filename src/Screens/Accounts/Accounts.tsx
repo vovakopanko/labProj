@@ -10,13 +10,14 @@ import {
   Alert,
 } from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
+import {AccountProps} from '../../../types';
 import {useAccount} from '../../hook/accountHook';
 import ActionsUser from './ActionsUser';
 import TotalCashUser from './TotalCashUser';
 
 const screenWidth = Dimensions.get('screen').width;
 
-const AccountsScreen: FC = ({navigation}: any) => {
+const AccountsScreen: FC<AccountProps> = ({navigation}) => {
   const {actionsWithCash, typesOfPayments} = useAccount();
 
   return (

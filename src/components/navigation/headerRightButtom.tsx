@@ -8,11 +8,11 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {RootStackParamList} from '../../../types';
+import {RootAppStackParamsList} from '../../../types';
 import {useAuth} from '../../hook/authHook';
 import {useProfile} from '../../hook/profileHook';
 
-type ProfileNavigationProp = StackNavigationProp<RootStackParamList>;
+type ProfileNavigationProp = StackNavigationProp<RootAppStackParamsList>;
 interface Props {
   navigation: ProfileNavigationProp;
 }

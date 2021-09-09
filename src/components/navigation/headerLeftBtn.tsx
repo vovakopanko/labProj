@@ -2,9 +2,9 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import React, {FC} from 'react';
 import {Image, StyleSheet} from 'react-native';
 import {TouchableOpacity} from 'react-native';
-import {RootStackParamList} from '../../../types';
+import {RootAppStackParamsList} from '../../../types';
 
-type ChevronNavigationProp = StackNavigationProp<RootStackParamList>;
+type ChevronNavigationProp = StackNavigationProp<RootAppStackParamsList>;
 interface Props {
   navigation: ChevronNavigationProp;
 }

@@ -11,7 +11,7 @@ import {useProfile} from '../../hook/profileHook';
 import ImagePicker from 'react-native-image-crop-picker';
 import DateTimePicker from './DateTimePicker';
 
-type DataType = Record<string, string | undefined>;
+type DataType = Record<string, string>;
 
 const ProfileScreen: FC = () => {
   const {fullName, dateBirth, updateUserInfo, updateUserPhoto, userPhoto} =
@@ -24,7 +24,7 @@ const ProfileScreen: FC = () => {
   });
   const [image, setImage] = useState(userPhoto);
 
-  const inputHandler = (text: string | undefined, nameUser: string) => {
+  const inputHandler = (nameUser: string, text: string) => {
     setInfoUserData({...infoUserData, [nameUser]: text});
   };
   const [open, setOpen] = useState(false);

@@ -8,7 +8,7 @@ type dataTransactionse = {
   specialDeposit: boolean;
 };
 
-type transactionOneDay = {
+export type transactionOneDay = {
   date: string;
   data: dataTransactionse[];
 };

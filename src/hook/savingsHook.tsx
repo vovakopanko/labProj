@@ -12,7 +12,7 @@ import {
 
 interface useSavings {
   transactionsRaws: transactionsRaws[];
-  totalCash: number | null;
+  totalCash: number;
   data: string;
   graph: ImageSourcePropType;
   goodnessPoints: number;

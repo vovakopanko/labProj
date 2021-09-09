@@ -4,12 +4,10 @@ const GET_USER_NAME = 'redux_ProfileRedux_getUserName';
 const SET_NEW_PHOTO = 'redux_ProfileRedux_setNewPhoto';
 
 let initialState = {
-  fullName: 'User' as string | null,
-  dateBirth: 'undefined' as string | null,
+  fullName: 'User' as string,
+  dateBirth: 'undefined' as string,
   photoUser:
-    'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/768px-User_icon_2.svg.png' as
-      | string
-      | null,
+    'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/768px-User_icon_2.svg.png' as string,
 };
 
 export type initialStateType = typeof initialState;
@@ -43,15 +41,14 @@ const profileReducer = (
 
 //Actions
 export const profileActions = {
-  SetUserInfo: (fullName: string | null, dateBirth: string | null) =>
+  SetUserInfo: (fullName: string, dateBirth: string) =>
     <const>{
       type: SET_USER_INFO,
       fullName,
       dateBirth,
     },
-  SetNewPhoto: (photoUser: string | null) =>
-    <const>{type: SET_NEW_PHOTO, photoUser},
-  getUserName: (fullName: string | null) =>
+  SetNewPhoto: (photoUser: string) => <const>{type: SET_NEW_PHOTO, photoUser},
+  getUserName: (fullName: string) =>
     <const>{
       type: GET_USER_NAME,
       fullName,

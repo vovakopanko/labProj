@@ -1,18 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {useCallback} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-// import AsyncStorage from '@react-native-async-storage/async-storage';
 import {profileActions} from '../redux/reducers/profileReducer';
 import {
   getDateBirthSelector,
   getFullNameUserSelector,
   getPhotoUserSelector,
 } from '../redux/reducers/selectors';
-
 interface useProfile {
-  fullName: string | null;
-  dateBirth: string | null;
-  userPhoto: string | null;
+  fullName: string;
+  dateBirth: string;
+  userPhoto: string;
   updateUserInfo: (fullNameUser: string, dateBirthUser: string) => void;
   getUserName: (userCurrentName: string) => void;
   updateUserPhoto: (photoUser: string) => void;

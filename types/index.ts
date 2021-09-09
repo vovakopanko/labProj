@@ -1,3 +1,5 @@
+import {StackNavigationProp} from '@react-navigation/stack';
+
 export type RootAppStackParamsList = {
   [RootAppStackParams.Checking]: undefined;
   [RootAppStackParams.Saving]: undefined;
@@ -12,4 +14,28 @@ export enum RootAppStackParams {
   Goodness = 'Goodness',
   DrawScreen = 'DrawScreen',
   Proffile = 'Proffile',
+}
+
+export type NavigationProp = StackNavigationProp<RootAppStackParamsList>;
+export interface AccountProps {
+  navigation: NavigationProp;
+}
+export interface HomeProps {
+  navigation: NavigationProp;
+}
+
+export interface GivingProps {
+  navigation: NavigationProp;
+}
+
+export interface PaymentsProps {
+  navigation: NavigationProp;
+}
+
+export interface CardsProps {
+  navigation: NavigationProp;
+}
+
+export interface CheckingProps {
+  navigation: NavigationProp;
 }

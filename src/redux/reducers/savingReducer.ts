@@ -1,7 +1,7 @@
 import {ImageSourcePropType} from 'react-native';
 import {InfernActionsType} from './../reduxStore';
 
-type transactionsRaws = {
+export type transactionsRaws = {
   title: string;
   subtitle: string;
   cash: number;

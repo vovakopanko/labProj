@@ -5,14 +5,6 @@ import {useCheking} from '../../hook/checkingHook';
 import TotalCashUser from './TotalCashUser';
 import TransactionsUser from './TransactiomsUser';
 
-// type typeP = {
-//   title: string;
-//   subtitle: string;
-//   cost: number;
-//   deposit: boolean;
-//   specialDeposit: boolean;
-// };
-
 const ChekingScreen: FC = () => {
   const {userTransactions} = useCheking();
   return (
