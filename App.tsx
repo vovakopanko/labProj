@@ -8,7 +8,7 @@ import GoodnessScreen from './src/Screens/Goodness/Goodness';
 import HeaderAppTitle from './src/components/navigation/headerTitle';
 import HeaderRightBtn from './src/components/navigation/headerRightButtom';
 import LoginScreen from './src/Screens/Login/Login';
-import {ActivityIndicator, View} from 'react-native';
+import {ActivityIndicator, Platform, StatusBar, View} from 'react-native';
 import {useEffect} from 'react';
 import {StyleSheet} from 'react-native';
 import {useAuth} from './src/hook/authHook';
@@ -16,6 +16,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import HeaderLeftBtn from './src/components/navigation/headerLeftBtn';
 import ProfileScreen from './src/Screens/Profile/Profile';
 import {useProfile} from './src/hook/profileHook';
+import SplashScreen from 'react-native-splash-screen';
 
 export type RootAppStackParamsList = {
   [RootAppStackParams.Checking]: undefined;
@@ -38,6 +39,9 @@ export const Stack = createStackNavigator<RootAppStackParamsList>();
 const App: React.FC = () => {
   const {userToken, isLoading, retriveUserToken} = useAuth();
   const {fullName} = useProfile();
+  useEffect(() => {
+    SplashScreen.hide();
+  }, []);
 
   useEffect(() => {
     setTimeout(async () => {
@@ -65,6 +69,7 @@ const App: React.FC = () => {
   }
   return (
     <NavigationContainer>
+      <StatusBar barStyle="dark-content" />
       <Stack.Navigator
         screenOptions={{
           headerShown: false,
