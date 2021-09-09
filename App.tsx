@@ -8,7 +8,7 @@ import GoodnessScreen from './src/Screens/Goodness/Goodness';
 import HeaderAppTitle from './src/components/navigation/headerTitle';
 import HeaderRightBtn from './src/components/navigation/headerRightButtom';
 import LoginScreen from './src/Screens/Login/Login';
-import {ActivityIndicator, Platform, StatusBar, View} from 'react-native';
+import {ActivityIndicator, StatusBar, View} from 'react-native';
 import {useEffect} from 'react';
 import {StyleSheet} from 'react-native';
 import {useAuth} from './src/hook/authHook';
@@ -53,7 +53,7 @@ const App: React.FC = () => {
         console.log(e);
       }
       retriveUserToken(token);
-    }, 1000);
+    }, 0);
   }, [retriveUserToken]);
 
   if (isLoading) {

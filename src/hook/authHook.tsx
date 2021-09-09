@@ -6,6 +6,7 @@ import {authActions} from '../redux/reducers/authReducer';
 import {
   getUserTokenSelector,
   getUserNameSelector,
+  getIsLoadingSelector,
 } from '../redux/reducers/selectors';
 
 export const useAuth = (): any => {
@@ -13,6 +14,7 @@ export const useAuth = (): any => {
 
   const userToken = useSelector(getUserTokenSelector);
   const name = useSelector(getUserNameSelector);
+  const isLoading = useSelector(getIsLoadingSelector);
 
   const login = useCallback(
     async (userTokens: string | null, userName: string | null) => {
@@ -30,11 +32,17 @@ export const useAuth = (): any => {
     dispatch(authActions.RetrieveToken(userCurrentToken));
   }, []);
 
+  const registrator = useCallback(async (userCurrentToken: string) => {
+    dispatch(authActions.Registrator(userCurrentToken));
+  }, []);
+
   return {
     login,
     logout,
     retriveUserToken,
     userToken,
     name,
+    registrator,
+    isLoading,
   };
 };

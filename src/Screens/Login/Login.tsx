@@ -26,7 +26,7 @@ const LoginScreen: FC = () => {
     password: null,
   });
   const [counterInput, setCounterInput] = useState(3);
-  const {login} = useAuth();
+  const {login, registrator} = useAuth();
 
   const inputHandler = (text: string, name: string) => {
     setLoginData({...loginData, [name]: text});
@@ -37,6 +37,7 @@ const LoginScreen: FC = () => {
     password: string | null,
   ) => {
     let userToken = null;
+    registrator(userToken);
     if (userName === 'User' && password === '12345') {
       try {
         userToken = 'iTechArt2021';
@@ -45,15 +46,14 @@ const LoginScreen: FC = () => {
         console.log(e);
       }
     }
+    registrator(userToken);
     login(userToken, userName);
   };
 
   const LoginCounter = () => {
-    // setCounterInput(prev => prev - 1);
     setTimeout(() => {
       setCounterInput(prev => prev - 1);
-      //Add disabled button
-    }, 500);
+    }, 1000);
     loginHandler(loginData.userName, loginData.password);
   };
 

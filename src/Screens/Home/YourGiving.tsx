@@ -44,7 +44,6 @@ const YourGiving = ({
         <View>
           <Video
             source={require('../../assets/video/video.mov')}
-            onTouchStart={() => setFullScreen(fullScreen!)}
             fullscreen={fullScreen}
             repeat={true}
             paused={pause}

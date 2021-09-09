@@ -8,8 +8,8 @@ import {
   TextInput,
 } from 'react-native';
 import {useProfile} from '../../hook/profileHook';
-import DatePicker from 'react-native-date-picker';
 import ImagePicker from 'react-native-image-crop-picker';
+import DateTimePicker from './DateTimePicker';
 
 type DataType = Record<string, string | undefined>;
 
@@ -22,15 +22,12 @@ const ProfileScreen: FC = () => {
     userName: fullName,
     bithdayDate: dateBirth,
   });
-  //clicker
-  const [date, setDate] = useState(new Date());
-  const [open, setOpen] = useState(false);
   const [image, setImage] = useState(userPhoto);
 
   const inputHandler = (text: string | undefined, nameUser: string) => {
     setInfoUserData({...infoUserData, [nameUser]: text});
   };
-
+  const [open, setOpen] = useState(false);
   const openDatePicker = () => setOpen(true);
 
   const applyUpdateUserInfo = () => {
@@ -38,12 +35,10 @@ const ProfileScreen: FC = () => {
     setUpdate(!update);
     setNameActive(false);
     updateUserPhoto(image);
-    // setDateActive(false);
   };
   const canselUpdateUserInfo = () => {
     setUpdate(!update);
     setNameActive(false);
-    // setDateActive(false);
   };
 
   const updatePhotoFromLibrary = () => {
@@ -67,7 +62,6 @@ const ProfileScreen: FC = () => {
     });
   };
 
-  const dateMounth = Number(date.getMonth() + 1); // because picker don't right saw Date Mounth
   return (
     <View>
       {update ? (
@@ -152,29 +146,10 @@ const ProfileScreen: FC = () => {
               <TouchableOpacity onPress={openDatePicker}>
                 <Text>{infoUserData.bithdayDate}</Text>
               </TouchableOpacity>
-              <DatePicker
-                onDateChange={() =>
-                  inputHandler(
-                    `${date.getDate()} / ${date.getMonth()} / ${date.getFullYear()}`,
-                    'bithdayDate',
-                  )
-                }
-                modal
+              <DateTimePicker
+                inputHandler={inputHandler}
                 open={open}
-                date={date}
-                mode="date"
-                onConfirm={userDate => {
-                  setOpen(false);
-                  setDate(userDate);
-                  inputHandler(
-                    `${date.getDate()} / ${dateMounth} / ${date.getFullYear()}`,
-                    'bithdayDate',
-                  );
-                }}
-                onCancel={() => {
-                  setOpen(false);
-                }}
-                confirmText="Change Date"
+                setOpen={setOpen}
               />
             </View>
           </View>
@@ -247,7 +222,6 @@ const styles = StyleSheet.create({
   aboutUser__btn_text: {
     color: '#ffffff',
   },
-  //-----------------------
   content__updateDataUser: {
     justifyContent: 'center',
     alignItems: 'center',
