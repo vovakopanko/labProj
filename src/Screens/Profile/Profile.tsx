@@ -18,20 +18,25 @@ const ProfileScreen: FC = () => {
     useProfile();
   const [update, setUpdate] = useState(true);
   const [nameActive, setNameActive] = useState(false);
-  const [infoUserData, setInfoUserData] = useState<DataType>({
-    userName: fullName,
-    bithdayDate: dateBirth,
-  });
+  const [userName, setUserName] = useState(fullName);
+  const [bithdayDate, setBithdayDate] = useState(dateBirth);
+  //
+  // const [infoUserData, setInfoUserData] = useState<DataType>({
+  //   userName: fullName,
+  //   bithdayDate: dateBirth,
+  // });
   const [image, setImage] = useState(userPhoto);
-
-  const inputHandler = (nameUser: string, text: string) => {
-    setInfoUserData({...infoUserData, [nameUser]: text});
-  };
+  // console.log(
+  //   `Profile Test ${infoUserData.userName}, ${infoUserData.bithdayDate}`,
+  // );
+  // const inputHandler = (nameUser: string, text: string) => {
+  //   setInfoUserData({...infoUserData, [nameUser]: text});
+  // };
   const [open, setOpen] = useState(false);
   const openDatePicker = () => setOpen(true);
 
   const applyUpdateUserInfo = () => {
-    updateUserInfo(infoUserData.userName, infoUserData.bithdayDate);
+    updateUserInfo(userName, bithdayDate);
     setUpdate(!update);
     setNameActive(false);
     updateUserPhoto(image);
@@ -45,7 +50,6 @@ const ProfileScreen: FC = () => {
     ImagePicker.openPicker({
       multiple: false,
     }).then(images => {
-      console.log(images);
       if (images.sourceURL) {
         setImage(images.sourceURL);
       }
@@ -74,14 +78,14 @@ const ProfileScreen: FC = () => {
             <View style={styles.userName__title}>
               <Text>YourName :</Text>
             </View>
-            <Text style={styles.userName__data}>{infoUserData.userName}</Text>
+            <Text style={styles.userName__data}>{userName}</Text>
           </View>
           <View style={styles.userBirthDate__block}>
             <View style={styles.userBirthDate__title}>
               <Text>Data Bithday :</Text>
             </View>
 
-            <Text style={styles.userBirthDate__date}>{dateBirth}</Text>
+            <Text style={styles.userBirthDate__date}>{bithdayDate}</Text>
           </View>
           <View style={styles.aboutUser__btn}>
             <TouchableOpacity
@@ -135,8 +139,8 @@ const ProfileScreen: FC = () => {
                 onBlur={() => {
                   setNameActive(false);
                 }}
-                onChangeText={userName => inputHandler(userName, 'userName')}
-                value={infoUserData.userName}
+                onChangeText={newName => setUserName(newName)}
+                value={userName}
               />
             </View>
             <View style={styles.inputBlock__changeName}>
@@ -144,10 +148,10 @@ const ProfileScreen: FC = () => {
                 <Text>Date Bithday:</Text>
               </View>
               <TouchableOpacity onPress={openDatePicker}>
-                <Text>{infoUserData.bithdayDate}</Text>
+                <Text>{bithdayDate}</Text>
               </TouchableOpacity>
               <DateTimePicker
-                inputHandler={inputHandler}
+                setBithdayDate={setBithdayDate}
                 open={open}
                 setOpen={setOpen}
               />

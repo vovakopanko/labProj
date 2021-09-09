@@ -12,7 +12,6 @@ interface useProfile {
   dateBirth: string;
   userPhoto: string;
   updateUserInfo: (fullNameUser: string, dateBirthUser: string) => void;
-  getUserName: (userCurrentName: string) => void;
   updateUserPhoto: (photoUser: string) => void;
 }
 
@@ -26,13 +25,11 @@ export const useProfile = (): useProfile => {
   const updateUserInfo = useCallback(
     async (fullNameUser: string, dateBirthUser: string) => {
       dispatch(profileActions.SetUserInfo(fullNameUser, dateBirthUser));
+      //test
+      console.log(`Hooc: ${fullNameUser}, ${dateBirthUser}`);
     },
     [],
   );
-
-  const getUserName = useCallback(async (userCurrentName: string) => {
-    dispatch(profileActions.getUserName(userCurrentName));
-  }, []);
 
   const updateUserPhoto = useCallback(async (photoUser: string) => {
     dispatch(profileActions.SetNewPhoto(photoUser));
@@ -44,6 +41,5 @@ export const useProfile = (): useProfile => {
     fullName,
     userPhoto,
     dateBirth,
-    getUserName,
   };
 };

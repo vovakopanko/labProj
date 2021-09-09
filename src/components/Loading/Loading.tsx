@@ -10,7 +10,11 @@ const Loading = () => {
 };
 
 const styles = StyleSheet.create({
-  isLoading: {flex: 1, justifyContent: 'center', alignItems: 'center'},
+  isLoading: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
 
 export default Loading;
