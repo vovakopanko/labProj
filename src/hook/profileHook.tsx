@@ -25,8 +25,6 @@ export const useProfile = (): useProfile => {
   const updateUserInfo = useCallback(
     async (fullNameUser: string, dateBirthUser: string) => {
       dispatch(profileActions.SetUserInfo(fullNameUser, dateBirthUser));
-      //test
-      console.log(`Hooc: ${fullNameUser}, ${dateBirthUser}`);
     },
     [],
   );

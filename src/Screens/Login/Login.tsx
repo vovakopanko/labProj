@@ -26,7 +26,7 @@ const LoginScreen: FC = () => {
     password: null,
   });
   const [counterInput, setCounterInput] = useState(3);
-  const {login, registrator} = useAuth();
+  const {login, registration} = useAuth();
 
   const inputHandler = (text: string, name: string) => {
     setLoginData({...loginData, [name]: text});
@@ -37,8 +37,11 @@ const LoginScreen: FC = () => {
     password: string | null,
   ) => {
     let userToken: string | null = null;
-    registrator(null);
-    if (userName === 'User' && password === '12345') {
+    registration(null);
+    if (
+      userName === 'uladzimir.kapanko@itechart-group.com' &&
+      password === 'password'
+    ) {
       try {
         userToken = 'iTechArt2021';
         await AsyncStorage.setItem('userToken', userToken);
@@ -48,7 +51,7 @@ const LoginScreen: FC = () => {
     } else {
       setCounterInput(prev => prev - 1);
     }
-    registrator(userToken);
+    registration(userToken);
     login(userToken, userName);
   };
 
@@ -107,7 +110,7 @@ const LoginScreen: FC = () => {
             <View style={styles.keyboardAV__loginBtnBlock}>
               {counterInput <= 2 ? (
                 <Text style={styles.loginBtnBlock__info}>
-                  Login: User , Pass: 12345
+                  Login: uladzimir.kapanko@itechart-group.com , Pass: admin
                 </Text>
               ) : null}
               {counterInput === 0 ? (

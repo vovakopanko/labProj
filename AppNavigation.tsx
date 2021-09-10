@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import DrawerNavigation from './src/components/navigation/navigations';
-import ChekingScreen from './src/Screens/Checking/Checking';
+import CheckingScreen from './src/Screens/Checking/Checking';
 import SavingScreen from './src/Screens/Saving/Saving';
 import GoodnessScreen from './src/Screens/Goodness/Goodness';
 import HeaderAppTitle from './src/components/navigation/headerTitle';
@@ -31,7 +31,7 @@ const AppNavigation: FC = () => {
         />
         <Stack.Screen
           name={RootAppStackParams.Checking}
-          component={ChekingScreen}
+          component={CheckingScreen}
           options={({route, navigation}: any) => ({
             headerShown: true,
             headerTintColor: '#ffffff',
@@ -68,7 +68,7 @@ const AppNavigation: FC = () => {
           })}
         />
         <Stack.Screen
-          name={RootAppStackParams.Proffile}
+          name={RootAppStackParams.Profile}
           component={ProfileScreen}
           options={({route, navigation}: any) => ({
             headerShown: true,

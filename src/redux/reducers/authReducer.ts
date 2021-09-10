@@ -2,7 +2,7 @@ import {InfernActionsType} from './../reduxStore';
 const LOGIN = './redux/authRedux/LOGIN';
 const LOGOUT = './redux/authRedux/LOGOUT';
 const RETRIEVE_TOKEN = './redux/authRedux/RETRIEVE_TOKEN';
-const REGISTRATOR = './redux/authRedux/REGISTRATOR';
+const REGISTRATION = './redux/authRedux/REGISTRATION';
 
 type initialState = {
   userLogin: string | null;
@@ -49,7 +49,7 @@ const authReducer = (
         isLoading: false,
       };
     }
-    case REGISTRATOR: {
+    case REGISTRATION: {
       return {
         ...state,
         userToken: action.token,
@@ -72,9 +72,9 @@ export const authActions = {
   SignOut: () => <const>{type: LOGOUT},
   RetrieveToken: (userToken: string | null) =>
     <const>{type: RETRIEVE_TOKEN, token: userToken},
-  Registrator: (userToken: string | null) =>
+  Registration: (userToken: string | null) =>
     <const>{
-      type: REGISTRATOR,
+      type: REGISTRATION,
       token: userToken,
     },
 };

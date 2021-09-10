@@ -11,7 +11,7 @@ const TotalCashUser = () => {
   return (
     <Text style={styles.overView_totalCash}>
       <Text>${totalCash[0]}.</Text>
-      <Text style={styles.numberAfterPoin}>{totalCash[1]}</Text>
+      <Text style={styles.numberAfterPoint}>{totalCash[1]}</Text>
     </Text>
   );
 };
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     paddingTop: 5,
   },
-  numberAfterPoin: {
+  numberAfterPoint: {
     fontSize: 16,
   },
 });

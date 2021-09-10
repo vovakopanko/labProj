@@ -25,7 +25,7 @@ const TotalCurrentActionCash = ({cash}: any) => {
     <View style={styles.overView_providedCash}>
       <Text style={styles.providedCash_count}>
         $<Text>{val[0]}.</Text>
-        <Text style={styles.numberAfterPoin}>{val[1]}</Text>
+        <Text style={styles.numberAfterPoint}>{val[1]}</Text>
       </Text>
       <Image
         source={require('../../assets/projectImages/chevron.png')}
@@ -72,7 +72,7 @@ const ActionsUser = ({
         {savedCash ? (
           <View>
             <Text style={styles.actionsUser__savedCash_text}>
-              Savings is up 3% from last mounth
+              Savings is up 3% from last month
             </Text>
           </View>
         ) : null}
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
   providedCash_count: {
     fontSize: 18,
   },
-  numberAfterPoin: {
+  numberAfterPoint: {
     fontSize: 16,
   },
   actionsUser__chevron: {

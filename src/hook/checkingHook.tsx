@@ -5,12 +5,12 @@ import {
   getCheckingCash,
 } from '../redux/reducers/selectors';
 
-interface useCheking {
+interface useChecking {
   userTransactions: transactionOneDay[];
   totalCash: number;
 }
 
-export const useCheking = (): useCheking => {
+export const useChecking = (): useChecking => {
   const userTransactions = useSelector(getAllTransactionsUser);
   const totalCash = useSelector(getCheckingCash);
   return {userTransactions, totalCash};

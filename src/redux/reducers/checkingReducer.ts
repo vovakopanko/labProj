@@ -13,17 +13,17 @@ export type transactionOneDay = {
   data: dataTransactionse[];
 };
 
-export type initialStateChacking = {
+export type initialStateChecking = {
   transactions: transactionOneDay[];
 };
 
-let initialState: initialStateChacking = {
+let initialState: initialStateChecking = {
   transactions: [
     {
       date: 'Jul 11',
       data: [
         {
-          title: 'Targer',
+          title: 'Target',
           subtitle: 'Closter NJ | Debit card',
           cost: 63.95,
           deposit: false,
@@ -37,7 +37,7 @@ let initialState: initialStateChacking = {
           specialDeposit: false,
         },
         {
-          title: 'Facebooc inc',
+          title: 'Facebook inc',
           subtitle: 'Pay day! Yay!',
           cost: 1200.5,
           deposit: false,
@@ -70,7 +70,7 @@ let initialState: initialStateChacking = {
           specialDeposit: false,
         },
         {
-          title: 'Sturbucks',
+          title: 'Starbucks',
           subtitle: 'Closter NJ | Debit card',
           cost: 236.52,
           deposit: false,

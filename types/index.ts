@@ -5,7 +5,7 @@ export type RootAppStackParamsList = {
   [RootAppStackParams.Saving]: undefined;
   [RootAppStackParams.Goodness]: undefined;
   [RootAppStackParams.DrawScreen]: undefined;
-  [RootAppStackParams.Proffile]: {info: null | string; name: null | string};
+  [RootAppStackParams.Profile]: {info: null | string; name: null | string};
 };
 
 export enum RootAppStackParams {
@@ -13,7 +13,7 @@ export enum RootAppStackParams {
   Saving = 'Saving',
   Goodness = 'Goodness',
   DrawScreen = 'DrawScreen',
-  Proffile = 'Proffile',
+  Profile = 'Profile',
 }
 
 export type NavigationProp = StackNavigationProp<RootAppStackParamsList>;

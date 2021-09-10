@@ -38,7 +38,7 @@ let initialState: initialStateSavings = {
     },
     {
       title: 'Transfer',
-      subtitle: 'from checjing (...5340) | Jul 11',
+      subtitle: 'from checking (...5340) | Jul 11',
       cash: 800.65,
     },
     {
@@ -48,7 +48,7 @@ let initialState: initialStateSavings = {
     },
     {
       title: 'Transfer',
-      subtitle: 'from checjing (...4372) | Jul 11',
+      subtitle: 'from checking (...4372) | Jul 11',
       cash: 320.0,
     },
   ],

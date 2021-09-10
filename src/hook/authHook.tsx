@@ -15,8 +15,8 @@ type userName = string | null;
 interface useAuth {
   login: (userTokens: UserTokens, userName: userName) => void;
   logout: () => void;
-  retriveUserToken: (userCurrentToken: UserTokens) => void;
-  registrator: (userCurrentToken: UserTokens) => void;
+  retrieveUserToken: (userCurrentToken: UserTokens) => void;
+  registration: (userCurrentToken: UserTokens) => void;
   userToken: UserTokens;
   name: userName;
   isLoading: boolean | null;
@@ -41,21 +41,24 @@ export const useAuth = (): useAuth => {
     await AsyncStorage.removeItem('userToken');
   }, []);
 
-  const retriveUserToken = useCallback(async (userCurrentToken: UserTokens) => {
-    dispatch(authActions.RetrieveToken(userCurrentToken));
-  }, []);
+  const retrieveUserToken = useCallback(
+    async (userCurrentToken: UserTokens) => {
+      dispatch(authActions.RetrieveToken(userCurrentToken));
+    },
+    [],
+  );
 
-  const registrator = useCallback(async (userCurrentToken: UserTokens) => {
-    dispatch(authActions.Registrator(userCurrentToken));
+  const registration = useCallback(async (userCurrentToken: UserTokens) => {
+    dispatch(authActions.Registration(userCurrentToken));
   }, []);
 
   return {
     login,
     logout,
-    retriveUserToken,
+    retrieveUserToken,
     userToken,
     name,
-    registrator,
+    registration,
     isLoading,
   };
 };

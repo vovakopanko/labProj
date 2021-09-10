@@ -21,7 +21,7 @@ const monthNames = [
 const CurrentTime = () => {
   const {fullName} = useProfile();
   return (
-    <Text style={styles.homePage_titleGreating}>
+    <Text style={styles.homePage_titleGreeting}>
       {currentTime.getHours() < 11
         ? `Good Morning ${fullName} `
         : currentTime.getHours() >= 11 && currentTime.getHours() < 17
@@ -43,7 +43,7 @@ const CurrentTime = () => {
 };
 
 const styles = StyleSheet.create({
-  homePage_titleGreating: {
+  homePage_titleGreeting: {
     fontFamily: 'SFProRounded-Regular',
     color: '#808080',
   },

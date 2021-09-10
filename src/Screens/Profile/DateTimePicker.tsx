@@ -2,7 +2,7 @@ import React from 'react';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
 type DateTimePicker = {
-  setBithdayDate: (nameUser: string) => void;
+  setBirthdayDate: (nameUser: string) => void;
   setOpen: any;
   open: boolean;
 };
@@ -22,14 +22,14 @@ const monthNames: string[] = [
   'December',
 ];
 
-const DateTimePicker = ({setBithdayDate, setOpen, open}: DateTimePicker) => {
+const DateTimePicker = ({setBirthdayDate, setOpen, open}: DateTimePicker) => {
   return (
     <DateTimePickerModal
       isVisible={open}
       mode="date"
       onConfirm={userDate => {
         setOpen(false);
-        setBithdayDate(
+        setBirthdayDate(
           `${userDate.getDate()} ${
             monthNames[userDate.getMonth()]
           } ${userDate.getFullYear()}`,

@@ -4,7 +4,7 @@ import {View, Text, StyleSheet} from 'react-native';
 const CardsScreen: FC = () => {
   return (
     <View style={styles.content}>
-      <Text> Here comen soon content ! </Text>
+      <Text> Here come soon content ! </Text>
     </View>
   );
 };

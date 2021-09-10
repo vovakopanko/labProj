@@ -1,18 +1,18 @@
 import React, {FC} from 'react';
 import {View, Text, StyleSheet, Alert, TouchableOpacity} from 'react-native';
 import {FlatList, TextInput} from 'react-native-gesture-handler';
-import {useCheking} from '../../hook/checkingHook';
+import {useChecking} from '../../hook/checkingHook';
 import TotalCashUser from './TotalCashUser';
-import TransactionsUser from './TransactiomsUser';
+import TransactionsUser from './TransactionsUser';
 
-const ChekingScreen: FC = () => {
-  const {userTransactions} = useCheking();
+const CheckingScreen: FC = () => {
+  const {userTransactions} = useChecking();
   return (
     <View style={styles.content}>
       <View style={styles.checkingTotalCash}>
         <TotalCashUser />
         <Text style={styles.checkingTotalCash__subtitle}>
-          Total avaliable cash
+          Total available cash
         </Text>
       </View>
       <View style={styles.checkingSearch__searchBlock}>
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
   checkingTotalCash__sum: {
     fontSize: 24,
   },
-  checkingTotalCash__sum_textAfterPoin: {
+  checkingTotalCash__sum_textAfterPoint: {
     fontSize: 18,
   },
   checkingTotalCash__subtitle: {
@@ -94,4 +94,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ChekingScreen;
+export default CheckingScreen;

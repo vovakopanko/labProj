@@ -32,7 +32,7 @@ const HeaderRightBtn: FC<Props> = ({navigation}: any) => {
   };
 
   const openUserProfile = () => {
-    navigation.navigate('Proffile', {
+    navigation.navigate('Profile', {
       info: null,
       name: fullName,
     });

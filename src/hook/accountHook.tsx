@@ -5,12 +5,12 @@ import {
   getTypesOfPayments,
 } from '../redux/reducers/selectors';
 
-interface accontHook {
+interface accountHook {
   actionsWithCash: actionsUser[];
   typesOfPayments: typesOfPayments[];
 }
 
-export const useAccount = (): accontHook => {
+export const useAccount = (): accountHook => {
   const actionsWithCash = useSelector(getActionsUserWithCash);
   // eslint-disable-next-line no-shadow
   const typesOfPayments = useSelector(getTypesOfPayments);

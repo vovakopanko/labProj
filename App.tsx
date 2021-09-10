@@ -8,7 +8,7 @@ import AppNavigation from './AppNavigation';
 import Loading from './src/components/Loading/Loading';
 
 const App: React.FC = () => {
-  const {userToken, isLoading, retriveUserToken} = useAuth();
+  const {userToken, isLoading, retrieveUserToken} = useAuth();
   useEffect(() => {
     SplashScreen.hide();
   }, []);
@@ -22,9 +22,9 @@ const App: React.FC = () => {
       } catch (e) {
         console.log(e);
       }
-      retriveUserToken(token);
+      retrieveUserToken(token);
     }, 0);
-  }, [retriveUserToken]);
+  }, [retrieveUserToken]);
 
   if (isLoading) {
     <Loading />;

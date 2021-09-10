@@ -1,14 +1,14 @@
 import React from 'react';
 import {StyleSheet, Text} from 'react-native';
-import {useCheking} from '../../hook/checkingHook';
+import {useChecking} from '../../hook/checkingHook';
 
 const TotalCashUser = () => {
-  const {totalCash} = useCheking();
+  const {totalCash} = useChecking();
   let costTransaction: Array<string> = totalCash.toFixed(2).split('.');
   return (
     <Text style={styles.overView_totalCash}>
       <Text>${costTransaction[0]}.</Text>
-      <Text style={styles.numberAfterPoin}>{costTransaction[1]}</Text>
+      <Text style={styles.numberAfterPoint}>{costTransaction[1]}</Text>
     </Text>
   );
 };
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     paddingTop: 5,
   },
-  numberAfterPoin: {
+  numberAfterPoint: {
     fontSize: 16,
   },
 });

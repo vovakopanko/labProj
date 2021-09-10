@@ -11,7 +11,7 @@ import {useProfile} from '../../hook/profileHook';
 import ImagePicker from 'react-native-image-crop-picker';
 import DateTimePicker from './DateTimePicker';
 
-type DataType = Record<string, string>;
+// type DataType = Record<string, string | null>;
 
 const ProfileScreen: FC = () => {
   const {fullName, dateBirth, updateUserInfo, updateUserPhoto, userPhoto} =
@@ -19,29 +19,29 @@ const ProfileScreen: FC = () => {
   const [update, setUpdate] = useState(true);
   const [nameActive, setNameActive] = useState(false);
   const [userName, setUserName] = useState(fullName);
-  const [bithdayDate, setBithdayDate] = useState(dateBirth);
-  //
+  const [birthdayDate, setBirthdayDate] = useState(dateBirth);
+  const [image, setImage] = useState(userPhoto);
+  const [open, setOpen] = useState(false);
   // const [infoUserData, setInfoUserData] = useState<DataType>({
   //   userName: fullName,
-  //   bithdayDate: dateBirth,
+  //   birthdayDate: dateBirth,
   // });
-  const [image, setImage] = useState(userPhoto);
   // console.log(
-  //   `Profile Test ${infoUserData.userName}, ${infoUserData.bithdayDate}`,
+  //   `Profile Test ${infoUserData.userName}, ${infoUserData.birthdayDate}`,
   // );
   // const inputHandler = (nameUser: string, text: string) => {
   //   setInfoUserData({...infoUserData, [nameUser]: text});
   // };
-  const [open, setOpen] = useState(false);
+
   const openDatePicker = () => setOpen(true);
 
   const applyUpdateUserInfo = () => {
-    updateUserInfo(userName, bithdayDate);
+    updateUserInfo(userName, birthdayDate);
     setUpdate(!update);
     setNameActive(false);
     updateUserPhoto(image);
   };
-  const canselUpdateUserInfo = () => {
+  const cancelUpdateUserInfo = () => {
     setUpdate(!update);
     setNameActive(false);
   };
@@ -76,16 +76,16 @@ const ProfileScreen: FC = () => {
           </View>
           <View style={styles.userName__block}>
             <View style={styles.userName__title}>
-              <Text>YourName :</Text>
+              <Text>Your Name :</Text>
             </View>
             <Text style={styles.userName__data}>{userName}</Text>
           </View>
           <View style={styles.userBirthDate__block}>
             <View style={styles.userBirthDate__title}>
-              <Text>Data Bithday :</Text>
+              <Text>Data Birthday :</Text>
             </View>
 
-            <Text style={styles.userBirthDate__date}>{bithdayDate}</Text>
+            <Text style={styles.userBirthDate__date}>{birthdayDate}</Text>
           </View>
           <View style={styles.aboutUser__btn}>
             <TouchableOpacity
@@ -145,13 +145,13 @@ const ProfileScreen: FC = () => {
             </View>
             <View style={styles.inputBlock__changeName}>
               <View style={styles.inputBlock__changeName_text}>
-                <Text>Date Bithday:</Text>
+                <Text>Date Birthday:</Text>
               </View>
               <TouchableOpacity onPress={openDatePicker}>
-                <Text>{bithdayDate}</Text>
+                <Text>{birthdayDate}</Text>
               </TouchableOpacity>
               <DateTimePicker
-                setBithdayDate={setBithdayDate}
+                setBirthdayDate={setBirthdayDate}
                 open={open}
                 setOpen={setOpen}
               />
@@ -165,9 +165,9 @@ const ProfileScreen: FC = () => {
               <Text style={styles.updateDataUser__btn_text}>Apply Update</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={canselUpdateUserInfo}
+              onPress={cancelUpdateUserInfo}
               style={styles.updateDataUser__btn_design}>
-              <Text style={styles.updateDataUser__btn_text}> Cansel </Text>
+              <Text style={styles.updateDataUser__btn_text}> Cancel </Text>
             </TouchableOpacity>
           </View>
         </View>

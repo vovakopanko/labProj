@@ -21,7 +21,7 @@ const SavingScreen: FC = () => {
         <View style={styles.checkingTotalCash}>
           <TotalCashUser />
           <Text style={styles.checkingTotalCash__subtitle}>
-            Total avaliable cash
+            Total available cash
           </Text>
         </View>
       </View>
@@ -61,24 +61,27 @@ const SavingScreen: FC = () => {
       </View>
       <View style={styles.savingTransactions__allTransaction}>
         <View>
-          <View style={styles.allTransaction__generalInfo}>
-            <Text style={styles.allTransaction__generalInfo_title}>
-              End day balance - {data}
-            </Text>
-            <Text style={styles.allTransaction__generalInfo_value}>$5.000</Text>
-          </View>
-          <View>
-            <FlatList
-              data={transactionsRaws}
-              renderItem={({item}) => (
-                <TransactionsUser
-                  title={item.title}
-                  subtitle={item.subtitle}
-                  cash={item.cash}
-                />
-              )}
-            />
-          </View>
+          <FlatList
+            showsVerticalScrollIndicator={false}
+            ListHeaderComponent={
+              <View style={styles.allTransaction__generalInfo}>
+                <Text style={styles.allTransaction__generalInfo_title}>
+                  End day balance - {data}
+                </Text>
+                <Text style={styles.allTransaction__generalInfo_value}>
+                  $5.000
+                </Text>
+              </View>
+            }
+            data={transactionsRaws}
+            renderItem={({item}) => (
+              <TransactionsUser
+                title={item.title}
+                subtitle={item.subtitle}
+                cash={item.cash}
+              />
+            )}
+          />
         </View>
       </View>
     </View>
@@ -159,6 +162,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '85%',
     backgroundColor: '#ffffff',
+    marginBottom: 20,
   },
   allTransaction__generalInfo: {
     paddingVertical: 12,

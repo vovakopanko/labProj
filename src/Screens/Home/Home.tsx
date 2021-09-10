@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     paddingTop: 10,
   },
-  homePage_titleGreating: {
+  homePage_titleGreeting: {
     fontFamily: 'SFProRounded-Regular',
     color: '#808080',
   },
