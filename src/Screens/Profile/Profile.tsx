@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Image,
   TextInput,
+  Platform,
 } from 'react-native';
 import {useProfile} from '../../hook/profileHook';
 import ImagePicker from 'react-native-image-crop-picker';
@@ -52,6 +53,8 @@ const ProfileScreen: FC = () => {
     }).then(images => {
       if (images.sourceURL) {
         setImage(images.sourceURL);
+      } else if (images.path) {
+        setImage(images.path);
       }
     });
   };
@@ -62,7 +65,9 @@ const ProfileScreen: FC = () => {
       height: 400,
       cropping: true,
     }).then(images => {
-      console.log(images);
+      if (images.path) {
+        setImage(images.path);
+      }
     });
   };
 
@@ -125,7 +130,6 @@ const ProfileScreen: FC = () => {
               <View style={styles.inputBlock__changeName_text}>
                 <Text>Your Name:</Text>
               </View>
-
               <TextInput
                 style={
                   nameActive
@@ -279,15 +283,17 @@ const styles = StyleSheet.create({
   },
   inputBlock__changeName_input: {
     width: '40%',
-    height: 20,
+    height: Platform.OS === 'ios' ? 20 : 40,
     borderBottomWidth: 1,
     borderBottomColor: '#c71585',
+    marginTop: Platform.OS === 'ios' ? 0 : -10,
   },
   inputBlock__changeName_inputActive: {
     width: '40%',
-    height: 20,
+    height: Platform.OS === 'ios' ? 20 : 40,
     borderBottomWidth: 1,
     borderBottomColor: '#808080',
+    marginTop: Platform.OS === 'ios' ? 0 : -10,
   },
   updateDataUser__btn: {
     flexDirection: 'row',

@@ -5,14 +5,14 @@ const RETRIEVE_TOKEN = './redux/authRedux/RETRIEVE_TOKEN';
 const REGISTRATION = './redux/authRedux/REGISTRATION';
 
 type initialState = {
-  userLogin: string | null;
+  userLogin: string | undefined;
   password: string | null;
   isLoading: boolean | null;
   userToken: string | null;
 };
 
 let initialState: initialState = {
-  userLogin: null,
+  userLogin: undefined,
   password: null,
   isLoading: false,
   userToken: null,
@@ -44,7 +44,7 @@ const authReducer = (
     case LOGOUT: {
       return {
         ...state,
-        userLogin: null,
+        userLogin: undefined,
         userToken: null,
         isLoading: false,
       };
@@ -63,7 +63,7 @@ const authReducer = (
 
 //Actions
 export const authActions = {
-  SignIn: (userToken: string | null, userLogin: string | null) =>
+  SignIn: (userToken: string | null, userLogin: string | undefined) =>
     <const>{
       type: LOGIN,
       token: userToken,

@@ -20,7 +20,7 @@ const YourGiving = ({
   subtitle,
   logo,
   photo,
-  desription,
+  description,
   videoContent,
   pause,
 }: YourGivingImpactType) => {
@@ -48,6 +48,7 @@ const YourGiving = ({
             repeat={true}
             paused={pause}
             muted={mute}
+            posterResizeMode="stretch"
             ref={ref => {
               if (ref) {
                 player.current = ref;
@@ -90,7 +91,7 @@ const YourGiving = ({
       <View style={styles.blockGivingImpact_info}>
         <Text style={styles.blockGivingImpact_info_text}>
           <Text style={styles.blockGivingImpact_nameUser}>{fullName}</Text>,{' '}
-          {desription}
+          {description}
         </Text>
       </View>
       <View style={styles.blockGivingImpact__shareBtn}>
@@ -140,8 +141,8 @@ const styles = StyleSheet.create({
     fontFamily: 'SFProRounded-Light',
   },
   backgroundVideo: {
-    width: '100%',
-    height: Platform.OS === 'ios' ? 220 : '40%',
+    width: Platform.OS === 'ios' ? '100%' : '100%',
+    height: Platform.OS === 'ios' ? 220 : 220,
   },
   btn__MuteVideo: {
     position: 'absolute',

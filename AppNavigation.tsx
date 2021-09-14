@@ -5,7 +5,7 @@ import CheckingScreen from './src/Screens/Checking/Checking';
 import SavingScreen from './src/Screens/Saving/Saving';
 import GoodnessScreen from './src/Screens/Goodness/Goodness';
 import HeaderAppTitle from './src/components/navigation/headerTitle';
-import HeaderRightBtn from './src/components/navigation/headerRightButtom';
+import HeaderRightBtn from './src/components/navigation/headerRightBtn';
 import HeaderLeftBtn from './src/components/navigation/headerLeftBtn';
 import ProfileScreen from './src/Screens/Profile/Profile';
 import {createStackNavigator} from '@react-navigation/stack';

@@ -10,7 +10,7 @@ import {
 } from '../redux/reducers/selectors';
 
 type UserTokens = string | null;
-type userName = string | null;
+type userName = string | undefined;
 
 interface useAuth {
   login: (userTokens: UserTokens, userName: userName) => void;

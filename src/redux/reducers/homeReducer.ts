@@ -40,7 +40,7 @@ let initialState = {
       subtitle: 'St Jude * 3 hrs ago',
       logo: require('./../../assets/projectImages/avatar.png'),
       photo: require('./../../assets/projectImages/rectangle2.png'),
-      desription:
+      description:
         'Your donation helped 2 amazing kids get much needed cancer surgery, thanks for being amazing!',
       videoContent: false,
     },
@@ -50,7 +50,7 @@ let initialState = {
       subtitle: 'St Jude * 5 hrs ago',
       logo: require('../../assets/projectImages/avatar.png'),
       photo: require('../../assets/video/video.mov'),
-      desription:
+      description:
         'Your donation helped group amazing kids get much needed cancer surgery, thanks for being amazing!',
       videoContent: true,
     },
@@ -60,7 +60,7 @@ let initialState = {
       subtitle: 'St Jude * 2 days ago',
       logo: require('../../assets/projectImages/avatar.png'),
       photo: require('../../assets/projectImages/rectangle.png'),
-      desription:
+      description:
         'Your donation helped 5 amazing kids get much needed cancer surgery, thanks for being amazing!',
       videoContent: false,
     },

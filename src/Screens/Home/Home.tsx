@@ -1,5 +1,5 @@
 import React, {FC, useState} from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, View, Text, Platform} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 import {HomeProps} from '../../../types';
 import {useHome} from '../../hook/homeHook';
@@ -50,7 +50,7 @@ const HomeScreen: FC<HomeProps> = ({navigation}) => {
             subtitle={item.subtitle}
             logo={item.logo}
             photo={item.photo}
-            desription={item.desription}
+            description={item.description}
             videoContent={item.videoContent}
             pause={pause}
           />
@@ -66,6 +66,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginHorizontal: 20,
     paddingTop: 10,
+    paddingBottom: Platform.OS === 'ios' ? 0 : '9%',
   },
   homePage_titleGreeting: {
     fontFamily: 'SFProRounded-Regular',

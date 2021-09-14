@@ -7,9 +7,8 @@ import AccountsScreen from '../../Screens/Accounts/Accounts';
 import GivingScreen from '../../Screens/Giving/Giving';
 import PaymentsScreen from '../../Screens/Payments/Payments';
 import CardsScreen from '../../Screens/Cards/Cards';
-import HeaderRightBtn from './headerRightButtom';
+import HeaderRightBtn from './headerRightBtn';
 import HeaderLogoTitle from './headerLogoTitle';
-import {BlurView} from '@react-native-community/blur';
 
 type RootTabStackParams = {
   Home: undefined;
@@ -93,14 +92,6 @@ function MyTabs() {
             );
           }
         },
-        tabBarBackground: () => (
-          <BlurView
-            style={styles.blur}
-            blurType="light"
-            blurAmount={30}
-            reducedTransparencyFallbackColor="#c71585"
-          />
-        ),
         headerShown: false,
         tabBarStyle: {
           backgroundColor: '#ffffff',
@@ -132,10 +123,17 @@ export default function DrawerNavigation({navigation}: any) {
   return (
     <DrawerTab.Navigator
       screenOptions={{
+        headerShown: true,
         headerTintColor: '#ffffff',
         headerStyle: {
           backgroundColor: '#c71585',
         },
+        drawerStyle: {
+          backgroundColor: 'white',
+          width: 240,
+        },
+        drawerActiveTintColor: '#ffffff',
+        drawerActiveBackgroundColor: '#c71585',
         headerTitle: () => <HeaderLogoTitle />,
         headerRight: () => <HeaderRightBtn navigation={navigation} />,
       }}>

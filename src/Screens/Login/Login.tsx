@@ -16,14 +16,14 @@ import {useAuth} from '../../hook/authHook';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const {width, height} = Dimensions.get('screen');
-type loginDataType = Record<string, string | null>;
+type loginDataType = Record<string, string | undefined>;
 
 const LoginScreen: FC = () => {
   const [emailActive, setEmailActive] = useState(false);
   const [passwordActive, setPasswordActive] = useState(false);
   const [loginData, setLoginData] = useState<loginDataType>({
-    userName: ' ',
-    password: null,
+    userName: '',
+    password: '',
   });
   const [counterInput, setCounterInput] = useState(3);
   const {login, registration} = useAuth();
@@ -33,13 +33,13 @@ const LoginScreen: FC = () => {
   };
 
   const loginHandler = async (
-    userName: string | null,
-    password: string | null,
+    userName: string | undefined,
+    password: string | undefined,
   ) => {
     let userToken: string | null = null;
     registration(null);
     if (
-      userName === 'uladzimir.kapanko@itechart-group.com' &&
+      userName === 'Uladzimir.kapanko@itechart-group.com' &&
       password === 'password'
     ) {
       try {
@@ -58,7 +58,6 @@ const LoginScreen: FC = () => {
   const LoginCounter = () => {
     loginHandler(loginData.userName, loginData.password);
   };
-
   return (
     <SafeAreaView>
       <ScrollView>
@@ -83,8 +82,9 @@ const LoginScreen: FC = () => {
                     setEmailActive(false);
                   }}
                   maxLength={50}
-                  clearTextOnFocus={true}
+                  clearTextOnFocus={false}
                   keyboardType="email-address"
+                  value={loginData.userName}
                 />
               </View>
               <View style={styles.keyboardAV__passwordInput}>
@@ -101,6 +101,7 @@ const LoginScreen: FC = () => {
                     setPasswordActive(false);
                   }}
                   clearTextOnFocus={true}
+                  value={loginData.password}
                 />
                 <TouchableOpacity style={styles.keyboardAV__forgotBtn}>
                   <Text style={styles.forgotBtn__text}>FORGOT PASSWORD</Text>
@@ -121,7 +122,7 @@ const LoginScreen: FC = () => {
                 </TouchableOpacity>
               ) : (
                 <TouchableOpacity
-                  style={styles.loginBtnBlock__dinamic}
+                  style={styles.loginBtnBlock__dynamic}
                   onPress={LoginCounter}>
                   <Text style={styles.loginPage__BtnText}>LOGIN</Text>
                 </TouchableOpacity>
@@ -146,14 +147,18 @@ const LoginScreen: FC = () => {
                     source={require('./../../assets/projectImages/touchId.png')}
                     style={styles.touchId__BtnIcon}
                   />
-                  <Text style={styles.touchId__BtnText}>Touch ID</Text>
+                  <View style={styles.touchId}>
+                    <Text style={styles.touchId__BtnText}>Touch ID</Text>
+                  </View>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.userDefinitionBtn__faceId}>
                   <Image
                     source={require('./../../assets/projectImages/faceId.png')}
                     style={styles.faceId__BtnIcon}
                   />
-                  <Text style={styles.faceId__BtnText}>Face ID</Text>
+                  <View style={styles.faceId}>
+                    <Text style={styles.faceId__BtnText}>Face ID</Text>
+                  </View>
                 </TouchableOpacity>
               </View>
             </View>
@@ -170,6 +175,14 @@ const styles = StyleSheet.create({
   loginPage: {
     width,
     height,
+  },
+  touchId: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  faceId: {
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   loginPage__loginText: {
     borderBottomWidth: 4,
@@ -244,7 +257,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: Platform.OS === 'ios' ? '3%' : '3%',
   },
-  loginBtnBlock__dinamic: {
+  loginBtnBlock__dynamic: {
     width: Platform.OS === 'ios' ? '80%' : '80%',
     borderRadius: 20,
     height: 40,
@@ -253,7 +266,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: Platform.OS === 'ios' ? '3%' : '3%',
   },
-  numberAttemps__text: {
+  numberAttempts__text: {
     alignSelf: 'center',
     color: '#808080',
   },

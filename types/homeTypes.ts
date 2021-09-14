@@ -22,7 +22,7 @@ export type ArrayYourGivingImpactType = {
   subtitle: string;
   logo: ImageSourcePropType;
   photo: ImageSourcePropType;
-  desription: string;
+  description: string;
   videoContent: boolean;
 };
 
@@ -31,7 +31,7 @@ export type YourGivingImpactType = {
   subtitle: string;
   logo: ImageSourcePropType;
   photo: ImageSourcePropType;
-  desription: string;
+  description: string;
   videoContent: boolean;
   pause: boolean;
 };
