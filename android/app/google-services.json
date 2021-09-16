@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "776563751459",
+    "project_id": "labprojspiral",
+    "storage_bucket": "labprojspiral.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:776563751459:android:9e0edf3a611030e42b0f96",
+        "android_client_info": {
+          "package_name": "com.labproj"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "776563751459-0gcqhg19feq19t0osro25c4hqtmdfjfh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMZEoS6adwgG-VmuQjWlCQGPdrIYei3rI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "776563751459-0gcqhg19feq19t0osro25c4hqtmdfjfh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
