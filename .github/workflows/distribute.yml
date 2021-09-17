@@ -16,7 +16,8 @@ jobs:
           ruby-version: '2.6'
 
       - name: Install bundle
-        cd android && run: |
+         run: | 
+          cd android
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
       
