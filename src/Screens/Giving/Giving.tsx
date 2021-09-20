@@ -4,7 +4,7 @@ import {View, Text, StyleSheet} from 'react-native';
 const GivingScreen: FC = () => {
   return (
     <View style={styles.content}>
-      <Text> Here come soon content ! </Text>
+      <Text> Here come soon content !</Text>
     </View>
   );
 };
